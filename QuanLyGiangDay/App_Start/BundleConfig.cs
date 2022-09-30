@@ -27,7 +27,8 @@ namespace QuanLyGiangDay
                       "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/theme/css").Include(
-                      "~/Content/css/sb-admin-2.min.css"
+                      "~/Content/css/sb-admin-2.min.css",
+                      "~/Content/vendor/datatables/dataTables.bootstrap4.css"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/theme/js").Include(
@@ -35,7 +36,7 @@ namespace QuanLyGiangDay
                       "~/Content/vendor/vendor/jquery-easing/jquery.easing.min.js",
                       "~/Content/vendor/js/sb-admin-2.min.js",
                       "~/Content/vendor/datatables/jquery.dataTables.min.js",
-                      "~/Content/demo/datatables-demo.js"));
+                      "~/Content/vendor/datatables/dataTables.bootstrap4.js"));
 
         }
     }

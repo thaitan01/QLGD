@@ -1,0 +1,66 @@
+﻿.btn-primary-add {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.import {
+    margin-left: -16px !important;
+    padding-top: 9px !important;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    background: rgb(196, 157, 4, 0.7) !important;
+    border: 1px solid rgb(196, 157, 4, 0.7) !important;
+}
+
+.import:hover {
+    background: rgb(196, 157, 4, 1) !important;
+}
+
+.herder-display {
+    font-size: 21px;
+    margin-top: -7px;
+    cursor: pointer;
+}
+
+.herder-display:hover {
+    color: #4e73df;
+}
+
+.icon-primary-add {
+    width: 20%;
+}
+
+.button-index-qlgiv {
+    background: white;
+    margin-bottom: 10px;
+    margin-top: -10px;
+}
+
+.body-display-index-qlgiv {
+    background: white;
+    padding: 10px;
+}
+
+td,
+th {
+    border-left: 0px !important;
+    border-right: 0px !important;
+}
+
+.table-body-display-index-qlgiv {
+    border-left: 0px !important;
+}
+
+.body-action-item-table {
+    position: relative !important;
+}
+
+.action-item-table {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+}

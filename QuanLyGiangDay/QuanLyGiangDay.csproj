@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PhanCongGDController.cs" />
+    <Compile Include="Controllers\QuanLyGiaoVienController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -190,6 +191,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\icon\_add.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -1881,6 +1883,13 @@
     <Content Include="Content\vendor\jquery\jquery.min.js" />
     <Content Include="Content\vendor\jquery\jquery.slim.js" />
     <Content Include="Content\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="Content\_share\css\QuanLyGiaoVien\Create.css" />
+    <Content Include="Content\_share\css\QuanLyGiaoVien\Index.css" />
+    <Content Include="Content\_share\css\QuanLyGiaoVien\Update.css" />
+    <Content Include="Content\_share\css\_style.css" />
+    <Content Include="Content\_share\js\QuanLyGiaoVien\Create.js" />
+    <Content Include="Content\_share\js\QuanLyGiaoVien\Index.js" />
+    <Content Include="Content\_share\js\_js_master.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -2076,6 +2085,7 @@
     <Content Include="Models\EF\QLGDContext.edmx.diagram">
       <DependentUpon>QLGDContext.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\_share\scss\IndexQLGV.scss" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2102,6 +2112,12 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\PhanCongGD\Index.cshtml" />
+    <Content Include="Views\QuanLyGiaoVien\Create.cshtml" />
+    <Content Include="Views\QuanLyGiaoVien\Delete.cshtml" />
+    <Content Include="Views\QuanLyGiaoVien\Details.cshtml" />
+    <Content Include="Views\QuanLyGiaoVien\Edit.cshtml" />
+    <Content Include="Views\QuanLyGiaoVien\Index.cshtml" />
+    <Content Include="Views\PhanCongGD\PhanCongGDPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

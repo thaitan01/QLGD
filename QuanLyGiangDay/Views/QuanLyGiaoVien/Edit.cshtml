@@ -1,0 +1,116 @@
+﻿@model QuanLyGiangDay.Models.EF.GiaoVien
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = null;
+}
+<div class="update-gv">
+    <!--<form action="/QuanLyGiaoVien/Edit/GV01" method="post">
+    @* <input name="__RequestVerificationToken" type="hidden"
+        value="zmWA-7M9n3SZkFdguOJjnSsoEC3Zd22902DK-bB44IsCXxr7UYwstLuMaPzqamuwM0pK0Ushf5CpE3OdbKmXGfUMkSw9TGcaNKd2ZnguWrM1">
+    *@
+    @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="form-group c-form-group  c-form-group c-form-group ">
+                <label class="control-label col-md-5" for="MaGV">Mã Giáo Viên</label>
+                <div class="col-md-7">
+                    <input class="form-control c-form-control  c-form-control c-form-control  text-box single-line" id="MaGV" name="MaGV" type="text">
+                    <span class="field-validation-valid text-danger" data-valmsg-for="TenGV"
+                        data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="form-group c-form-group  c-form-group c-form-group ">
+                <label class="control-label col-md-5" for="TenGV">tên Giáo Viên</label>
+                <div class="col-md-7">
+                    <input class="form-control c-form-control  c-form-control c-form-control  text-box single-line" id="TenGV" name="TenGV" type="text">
+                    <span class="field-validation-valid text-danger" data-valmsg-for="TenGV"
+                        data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group c-form-group  c-form-group c-form-group ">
+                <label class="control-label col-md-5" for="MaLoaiGV">Loại Giáo Viên</label>
+                <div class="col-md-7">
+                    <select class="form-control c-form-control  c-form-control c-form-control " id="MaLoaiGV" name="MaLoaiGV">
+                        <option value="CH        ">Giáo viên cơ hữu</option>
+                        <option selected="selected" value="MG        ">Giáo viên mời giảng</option>
+                    </select>
+                    <span class="field-validation-valid text-danger" data-valmsg-for="MaLoaiGV"
+                        data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group c-form-group  c-form-group c-form-group ">
+                <label class="control-label col-md-5" for="Email">Email</label>
+                <div class="col-md-7">
+                    <input class="form-control c-form-control  c-form-control c-form-control  text-box single-line" id="Email" name="Email"
+                        type="email">
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Email"
+                        data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group c-form-group  c-form-group c-form-group ">
+                <label class="control-label col-md-5" for="Sdt">Số Điện Thoại</label>
+                <div class="col-md-7">
+                    <input class="form-control c-form-control  c-form-control c-form-control  text-box single-line" id="Sdt" name="Sdt" type="number"
+                        value="">
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Sdt"
+                        data-valmsg-replace="true"></span>
+                </div>
+            </div>
+        </div>
+    </form> -->
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group c-form-group ">
+                <label class="control-label col-md-2">Mã Giáo Viên</label>
+                @* @Html.LabelFor("Mã Giáo Viên", htmlAttributes: new { @class = "control-label col-md-2" }) *@
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MaGV, new { htmlAttributes = new { @class = "form-control c-form-control " } })
+                    @Html.ValidationMessageFor(model => model.MaGV, "", new { @class = "text-danger" })
+                </div>
+            </div>  
+
+            <div class="form-group c-form-group ">
+                <label class="control-label col-md-2">Tên Giáo Viên</label>
+                @* @Html.LabelFor("Tên Giáo Viên", htmlAttributes: new { @class = "control-label col-md-2" }) *@
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TenGV, new { htmlAttributes = new { @class = "form-control c-form-control " } })
+                    @Html.ValidationMessageFor(model => model.TenGV, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group c-form-group ">
+                <label class="control-label col-md-2">Loại Giáo Viên</label>
+                @* @Html.LabelFor("Loại Giáo Viên", "MaLoaiGV", htmlAttributes: new { @class = "control-label col-md-2" *@
+            @* }) *@
+                <div class="col-md-10">
+                    @Html.DropDownList("MaLoaiGV", null, htmlAttributes: new { @class = "form-control c-form-control " })
+                    @Html.ValidationMessageFor(model => model.MaLoaiGV, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group c-form-group ">
+                <label class="control-label col-md-2">Email</label>
+                @* @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" }) *@
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control c-form-control " } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group c-form-group ">
+                <label class="control-label col-md-2">Số Điện Thoại</label>
+                @* @Html.LabelFor("Số Điện Thoại", htmlAttributes: new { @class = "control-label col-md-2" }) *@
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Sdt, new { htmlAttributes = new { @class = "form-control c-form-control " } })
+                    @Html.ValidationMessageFor(model => model.Sdt, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    }
+</div>

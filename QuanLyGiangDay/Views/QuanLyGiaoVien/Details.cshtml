@@ -1,0 +1,51 @@
+﻿@model QuanLyGiangDay.Models.EF.GiaoVien
+
+@{
+    ViewBag.Title = "Details";
+    Layout = null;
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GiaoVien</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenGV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenGV)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sdt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sdt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoaiGV.TenLoaiGV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiGV.TenLoaiGV)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaGV }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

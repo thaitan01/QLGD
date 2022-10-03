@@ -1,0 +1,8 @@
+.update-gv {
+    width: 1075px;
+    margin: 10px;
+    border: 1px solid rgb(0, 0, 0, 0.2);
+    padding: 30px 10px 10px 10px;
+    border-radius: 6px;
+    box-shadow: 0px 0px 15px rgb(0 0 0 / 20%);
+}

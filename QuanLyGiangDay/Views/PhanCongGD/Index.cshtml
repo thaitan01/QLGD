@@ -18,8 +18,8 @@
                     <label for="" class="form-control">Ngoài giờ
                         <input type="checkbox" aria-label="Search" aria-describedby="basic-addon2" style="margin-left: 4px;margin-top: 5px;">
                     </label>
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">
+                    <div class="input-group-append" style="margin: 0px">
+                        <button class="btn-primary" type="button" style="width: 41px">
                             <i class="fas fa-search fa-sm"></i>
                         </button>
                     </div>
@@ -27,7 +27,7 @@
             </div>
             <div class="float-right" style="padding-bottom: 10px; padding-right: 28px; z-index: 99; position: relative;">
                 <div>
-                    <button type="button" class="btn btn-primary" onclick="getSach()">Phân công</button>&nbsp;
+                    <button type="button" class="btn btn-primary" onclick="getPhanCongGD()">Phân công</button>&nbsp;
                 </div>
             </div>
             <div class="col-md-12">
@@ -58,9 +58,9 @@
         </div>
     </div>
 </div>
-<div class="modal fade" role="dialog" id="sachModal" aria-labelledby="sachModalLebel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content" id="sachModalBody">
+<div class="modal fade" role="dialog" id="phanCongGDModal" aria-labelledby="phanCongGDModalLebel" aria-hidden="true">
+    <div class="modal-dialog" style="overflow-y: initial !important" role="document">
+        <div class="modal-content" id="phanCongGDModalBody">
 
         </div>
     </div>
@@ -86,6 +86,9 @@
         $(document).ready(function () {
             $("#dateTuNgay").datepicker();
             $("#dateDenNgay").datepicker();
+            $('.datepicker').datepicker({
+                format: 'dd/mm/yyyy'
+            });
             PhanCongGDDatatable();
         });
 
@@ -150,18 +153,25 @@
                     {
                         "render": function (data, type, full, row) {
                             var id = full.MaLHMH.trim();
-                            return "<a href='#' class='btn-xs btn-xs-primary' onclick=getSach('" + id + "'); ><span class='fa fa-edit'></a>";
+                            return "<a href='#' class='btn-xs btn-xs-primary' onclick=getPhanCongGD('" + id + "'); ><span class='fa fa-edit'></a>";
                         },
                         "orderable": false
                     },
                     {
                         "render": function (data, type, full, row) {
                             var id = full.MaLHMH.trim();
-                            return "<a href='#' class='btn-xs btn-xs-danger' style='color: #e74a3b;' onclick=deleteSach('" + id + "'); ><span class='fa fa-trash'></a>";
+                            return "<a href='#' class='btn-xs btn-xs-danger' style='color: #e74a3b;' onclick=deletePhanCongGD('" + id + "'); ><span class='fa fa-trash'></a>";
                         },
                         "orderable": false
                     }
                 ]
+            });
+        }
+
+        function getPhanCongGD(id) {
+            $.get("/PhanCongGD/GetPhanCongGDPartial", { id: id }, function (res) {
+                $("#phanCongGDModalBody").html(res);
+                $("#phanCongGDModal").modal("show");
             });
         }
 

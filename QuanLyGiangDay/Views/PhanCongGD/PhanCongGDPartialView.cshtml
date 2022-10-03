@@ -1,0 +1,126 @@
+﻿@model QuanLyGiangDay.Models.EF.LopHocMonHoc
+
+<form name="sachForm">
+    @Html.AntiForgeryToken();
+    <div class="modal-header" style="background-color: #4e73df">
+        <h4 class="modal-title">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span>@(Model.MaLHMH != "" ? "Cập nhật phân công" : "Cập nhật phân công")</span>
+        </h4>
+    </div>
+    <div class="modal-body" style="height: 80vh; overflow-y: auto; ">
+        @Html.HiddenFor(c => c.MaLHMH)
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label">Lớp</label>
+                    </div>
+                    <div class="col-md-12">
+                        @Html.DropDownList("MaLop", (IEnumerable<SelectListItem>)ViewData["LopDropdown"], new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.MaLop, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label">Môn học</label>
+                    </div>
+                    <div class="col-md-12">
+                        @Html.DropDownList("MaMH", (IEnumerable<SelectListItem>)ViewData["MonHocDropdown"], new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.MaMH, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label">Giáo viên</label>
+                    </div>
+                    <div class="col-md-12">
+                        @Html.DropDownList("MaGio", (IEnumerable<SelectListItem>)ViewData["GiaoVienDropdown"], new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.MaGV, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label">Giờ học</label>
+                    </div>
+                    <div class="col-md-12">
+                        @Html.DropDownList("MaGio", (IEnumerable<SelectListItem>)ViewData["GioHocDropdown"], new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.MaLop, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label">Ngày dạy dự kiến</label>
+                    </div>
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(model => model.NgayDayDuKien, new { @type = "date", @class = "form-control datepicker", @Value = Model.NgayDayDuKien.HasValue ? Model.NgayDayDuKien.Value : DateTime.Now })
+                        @Html.ValidationMessageFor(model => model.NgayDayDuKien, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label">Ngày bắt đầu</label>
+                    </div>
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(model => model.NgayBD, new { @type = "date", @class = "form-control datepicker", @Value = Model.NgayBD.HasValue ? Model.NgayBD.Value : DateTime.Now })
+                        @Html.ValidationMessageFor(model => model.NgayBD, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label">Là ngoài giờ</label>
+                    </div>
+                    <div class="col-md-12">
+                        @{
+                            var checkboxAttributes = Model.NgoaiGio ?? false ?
+                                (object)new { @class = "mySpecialClass", @checked = "checked" } :
+                                (object)new { @class = "mySpecialClass" };
+                        }
+                        @Html.CheckBox("MyBoolValue", checkboxAttributes)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.LabelFor(x => x.MoTa, new { htmlAttributes = new { @class = "control-label" } })
+                    </div>
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(x => x.MoTa, new { maxlength = 500, @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary pull-left" onclick="savePhanCongGD()">Lưu</button>
+        <button type="button" class="btn btn-sm btn-danger pull-left" data-dismiss="modal">Đóng</button>
+    </div>
+
+</form>

@@ -131,6 +131,40 @@ namespace QuanLyGiangDay.Controllers
             }
             return result;
         }
+
+        public ActionResult GetPhanCongGDPartial(string id)
+        {
+            var lhmh = id != null ? _context.LopHocMonHocs.Find(id.Trim()) : new LopHocMonHoc();
+            SelectList lophocs;
+            if (id != "")
+                lophocs = new SelectList(_context.LopHocs.ToList(), "MaLop", "TenLop", lhmh.MaLop);
+            else
+                lophocs = new SelectList(_context.LopHocs.ToList(), "MaLop", "TenLop");
+            ViewData["LopDropdown"] = lophocs;
+
+            SelectList monhocs;
+            if (id != "")
+                monhocs = new SelectList(_context.MonHocs.ToList(), "MaMH", "TenMon", lhmh.MaLop);
+            else
+                monhocs = new SelectList(_context.MonHocs.ToList(), "MaMH", "TenMon");
+            ViewData["MonHocDropdown"] = monhocs;
+
+            SelectList giaoviens;
+            if (id != "")
+                giaoviens = new SelectList(_context.GiaoViens.ToList(), "MaGV", "TenGV", lhmh.MaGV);
+            else
+                giaoviens = new SelectList(_context.GiaoViens.ToList(), "MaGV", "TenGV");
+            ViewData["GiaoVienDropdown"] = giaoviens;
+
+            SelectList giohocs;
+            if (id != "")
+                giohocs = new SelectList(_context.GioHocs.ToList(), "MaGio", "TenGio", lhmh.MaGio);
+            else
+                giohocs = new SelectList(_context.GioHocs.ToList(), "MaGio", "TenGio");
+            ViewData["GioHocDropdown"] = giohocs;
+
+            return PartialView("PhanCongGDPartialView", lhmh);
+        }
     }
 
     public class PhanCongGDModel

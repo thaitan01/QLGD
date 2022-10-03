@@ -23,7 +23,7 @@ namespace QuanLyGiangDay.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
+			//Test 01
             return View();
         }
     }

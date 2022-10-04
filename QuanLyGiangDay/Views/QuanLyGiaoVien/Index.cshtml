@@ -4,6 +4,9 @@
     ViewBag.Title = "Quản Lý Giáo Viên";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section AddToHead{
+    <link href="@Url.Content("~/Content/_share/css/QuanLyGiaoVien/Index.css")" rel="stylesheet" type="text/css" />
+}
 <div class="display-qlgv">
     <div class="herder-display">
         <p class="tile-dispaly">
@@ -107,3 +110,4 @@
     </div>
 </div>
 <script src="~/Content/_share/js/QuanLyGiaoVien/Index.js"></script>
+<script src="~/Content/demo/datatables-demo.js"></script>

@@ -4,6 +4,9 @@
     ViewBag.Title = "Edit";
     Layout = null;
 }
+@section AddToHead{
+    <link href="@Url.Content("~/Content/_share/css/QuanLyGiaoVien/Update.css")" rel="stylesheet" type="text/css" />
+}
 <div class="update-gv">
     <!--<form action="/QuanLyGiaoVien/Edit/GV01" method="post">
     @* <input name="__RequestVerificationToken" type="hidden"
@@ -73,7 +76,7 @@
                     @Html.EditorFor(model => model.MaGV, new { htmlAttributes = new { @class = "form-control c-form-control " } })
                     @Html.ValidationMessageFor(model => model.MaGV, "", new { @class = "text-danger" })
                 </div>
-            </div>  
+            </div>
 
             <div class="form-group c-form-group ">
                 <label class="control-label col-md-2">Tên Giáo Viên</label>
@@ -87,7 +90,7 @@
             <div class="form-group c-form-group ">
                 <label class="control-label col-md-2">Loại Giáo Viên</label>
                 @* @Html.LabelFor("Loại Giáo Viên", "MaLoaiGV", htmlAttributes: new { @class = "control-label col-md-2" *@
-            @* }) *@
+                @* }) *@
                 <div class="col-md-10">
                     @Html.DropDownList("MaLoaiGV", null, htmlAttributes: new { @class = "form-control c-form-control " })
                     @Html.ValidationMessageFor(model => model.MaLoaiGV, "", new { @class = "text-danger" })

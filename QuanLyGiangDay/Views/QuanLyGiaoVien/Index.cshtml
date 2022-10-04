@@ -5,7 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section AddToHead{
-    <link href="@Url.Content("~/Content/_share/css/QuanLyGiaoVien/Index.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/_share/css/QuanLyGiaoVien/Index.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/_share/css/QuanLyGiaoVien/Create.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/_share/css/QuanLyGiaoVien/Update.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/_share/css/QuanLyGiaoVien/Details.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/_share/css/QuanLyGiaoVien/Delete.css")" rel="stylesheet" type="text/css" />
 }
 <div class="display-qlgv">
     <div class="herder-display">
@@ -26,7 +30,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-hover table-body-display-index-qlgiv" id="dataTable"
-                       width="100%" cellspacing="0">
+                    width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>
@@ -62,15 +66,15 @@
                                     @Html.DisplayFor(modelItem => item.LoaiGV.TenLoaiGV)
                                     <label id="@item.MaGV.Trim()" class="action-item-table" style="display: none;">
                                         <p data-id="@item.MaGV.Trim()"
-                                           class="c-btn-item btn-success btn-circle button-update-gv">
+                                        class="c-btn-item btn-success btn-circle button-update-gv">
                                             <i class="fa fa-edit"></i>
                                         </p>
                                         <p data-id="@item.MaGV.Trim()"
-                                           class="c-btn-item btn-info btn-circle button-detail-gv">
+                                        class="c-btn-item btn-info btn-circle button-detail-gv">
                                             <i class="fas fa-info-circle"></i>
                                         </p>
                                         <p data-id="@item.MaGV.Trim()"
-                                           class="c-btn-item btn-danger btn-circle button-delete-gv">
+                                        class="c-btn-item btn-danger btn-circle button-delete-gv">
                                             <i class="fas fa-trash"></i>
                                         </p>
                                         @item.MaGV.Trim()
@@ -88,7 +92,7 @@
     </div>
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">

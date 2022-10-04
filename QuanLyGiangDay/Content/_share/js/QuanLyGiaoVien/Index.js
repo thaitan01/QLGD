@@ -47,18 +47,12 @@ window.onload = function () {
             document.getElementById(trTableHover[i].dataset.id).style.display = "none";
         })
     }
-    //
-    document.getElementById("dataTable_previous").getElementsByTagName("a")[0].text = "Về Trước"
-    document.getElementById("dataTable_next").getElementsByTagName("a")[0].text = "Về Sau"
-    //
     document.getElementById("dataTable_filter").getElementsByTagName("label")[0]
         .getElementsByTagName("input")[0].placeholder = "Nhập nọi dung  cần tìm";
     document.getElementById("dataTable_filter").getElementsByTagName("label")[0]
         .getElementsByTagName("input")[0].style.width = "400px";
     document.getElementById("dataTable_filter").getElementsByTagName("label")[0]
         .getElementsByTagName("input")[0].style.height = "40px";
-    // console.log(document.getElementById("dataTable_filter").getElementsByTagName("label"));
-    // document.getElementById("dataTable_filter").getElementsByTagName("label")[0].innerText = "sss";
 };
 /**
  * Call and add data madal add

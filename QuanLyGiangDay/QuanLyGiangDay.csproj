@@ -180,7 +180,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QLGDContext.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\EF\sysdiagram.cs">
+    <Compile Include="Models\EF\sysdiagrams.cs">
       <DependentUpon>QLGDContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EF\TaiKhoan.cs">
@@ -2079,6 +2079,7 @@
     <Content Include="Content\scss\_navs.scss" />
     <Content Include="Content\scss\_utilities.scss" />
     <Content Include="Content\scss\_variables.scss" />
+    <Content Include="Content\_share\scss\IndexQLGV.scss" />
     <EntityDeploy Include="Models\EF\QLGDContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>QLGDContext.Designer.cs</LastGenOutput>
@@ -2086,7 +2087,6 @@
     <Content Include="Models\EF\QLGDContext.edmx.diagram">
       <DependentUpon>QLGDContext.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\_share\scss\IndexQLGV.scss" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

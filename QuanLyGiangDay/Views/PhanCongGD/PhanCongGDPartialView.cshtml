@@ -1,6 +1,6 @@
 ﻿@model QuanLyGiangDay.Models.EF.LopHocMonHoc
 
-<form name="sachForm">
+<form name="phanCongGDForm">
     @Html.AntiForgeryToken();
     <div class="modal-header" style="background-color: #4e73df">
         <h4 class="modal-title">
@@ -43,7 +43,7 @@
                         <label class="control-label">Giáo viên</label>
                     </div>
                     <div class="col-md-12">
-                        @Html.DropDownList("MaGio", (IEnumerable<SelectListItem>)ViewData["GiaoVienDropdown"], new { @class = "form-control" })
+                        @Html.DropDownList("MaGV", (IEnumerable<SelectListItem>)ViewData["GiaoVienDropdown"], new { @class = "form-control" })
                         @Html.ValidationMessageFor(x => x.MaGV, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -57,20 +57,7 @@
                     </div>
                     <div class="col-md-12">
                         @Html.DropDownList("MaGio", (IEnumerable<SelectListItem>)ViewData["GioHocDropdown"], new { @class = "form-control" })
-                        @Html.ValidationMessageFor(x => x.MaLop, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <div class="col-md-4">
-                        <label class="control-label">Ngày dạy dự kiến</label>
-                    </div>
-                    <div class="col-md-12">
-                        @Html.EditorFor(model => model.NgayDayDuKien, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.NgayDayDuKien, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(x => x.MaGio, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -84,6 +71,19 @@
                     <div class="col-md-12">
                         @Html.EditorFor(model => model.NgayBD, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.NgayBD, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label">Ngày kết thúc</label>
+                    </div>
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.NgayKT, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NgayKT, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>

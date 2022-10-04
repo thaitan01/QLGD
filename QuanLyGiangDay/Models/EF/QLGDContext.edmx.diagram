@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1cd0a5d7ca2c4b259ecebe614ecfc47b" Name="Diagram1">
+      <Diagram DiagramId="b14eddff4e7941f8a0c95ab224007127" Name="Diagram1">
         <EntityTypeShape EntityType="quanlygiaovienModel.CTDT" Width="1.5" PointX="1.5" PointY="20.5" IsExpanded="true" />
         <EntityTypeShape EntityType="quanlygiaovienModel.GiaoVien" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="quanlygiaovienModel.GioHoc" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
@@ -14,7 +14,7 @@
         <EntityTypeShape EntityType="quanlygiaovienModel.LopHoc" Width="1.5" PointX="0.75" PointY="17.375" IsExpanded="true" />
         <EntityTypeShape EntityType="quanlygiaovienModel.LopHocMonHoc" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="quanlygiaovienModel.MonHoc" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="quanlygiaovienModel.sysdiagram" Width="1.5" PointX="8.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlygiaovienModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="quanlygiaovienModel.TaiKhoan" Width="1.5" PointX="8" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="quanlygiaovienModel.VaiTro" Width="1.5" PointX="5.75" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="quanlygiaovienModel.MonHocHocKy" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />

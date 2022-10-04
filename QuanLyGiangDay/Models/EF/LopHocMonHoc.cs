@@ -11,7 +11,8 @@ namespace QuanLyGiangDay.Models.EF
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class LopHocMonHoc
     {
         public string MaLHMH { get; set; }
@@ -19,11 +20,15 @@ namespace QuanLyGiangDay.Models.EF
         public string MaMH { get; set; }
         public string MaGio { get; set; }
         public string MoTa { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> NgayDayDuKien { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> NgayBD { get; set; }
         public Nullable<bool> NgoaiGio { get; set; }
         public string MaGV { get; set; }
-    
+
         public virtual GiaoVien GiaoVien { get; set; }
         public virtual GioHoc GioHoc { get; set; }
         public virtual LopHoc LopHoc { get; set; }

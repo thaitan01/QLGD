@@ -54,3 +54,7 @@ function changTab(...param) {
         });
     }
 }
+//tab
+$(document).ready(function () {
+    console.log(document.getElementById("tabs"));
+});

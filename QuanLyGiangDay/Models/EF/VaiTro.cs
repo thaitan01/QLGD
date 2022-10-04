@@ -17,7 +17,7 @@ namespace QuanLyGiangDay.Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public VaiTro()
         {
-            this.TaiKhoans = new HashSet<TaiKhoan>();
+            this.TaiKhoan = new HashSet<TaiKhoan>();
         }
     
         public string MaVT { get; set; }
@@ -25,6 +25,6 @@ namespace QuanLyGiangDay.Models.EF
         public string MoTa { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TaiKhoan> TaiKhoans { get; set; }
+        public virtual ICollection<TaiKhoan> TaiKhoan { get; set; }
     }
 }

@@ -3,10 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Dynamic;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using QuanLyGiangDay.Models.EF;
 
@@ -19,7 +17,7 @@ namespace QuanLyGiangDay.Controllers
         // GET: LopHocs
         public ActionResult Index()
         {
-            var lopHocs = db.LopHocs.Include(l => l.CTDT);
+            var lopHocs = db.LopHoc.Include(l => l.CTDT);
             return View(lopHocs.ToList());
         }
 
@@ -30,7 +28,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LopHoc lopHoc = db.LopHocs.Find(id);
+            LopHoc lopHoc = db.LopHoc.Find(id);
             if (lopHoc == null)
             {
                 return HttpNotFound();
@@ -46,14 +44,14 @@ namespace QuanLyGiangDay.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
            
-            var result = db.LopHocs.Where(l => l.MaLop == id)
+            var result = db.LopHoc.Where(l => l.MaLop == id)
                                    .Join(
-                                        db.LopHocMonHocs,
+                                        db.LopHocMonHoc,
                                         lh => lh.MaLop,
                                         lhmh => lhmh.MaLop,
                                         (lh, lhmh) => new { LH = lh, LHMH = lhmh })
                                    .Join(
-                                        db.MonHocHocKies,
+                                        db.MonHocHocKy,
                                         lh => lh.LHMH.MaMH,
                                         mhhk => mhhk.MaMH,
                                         (lh, mhhk) => new { LH = lh, MHHk = mhhk })
@@ -79,13 +77,13 @@ namespace QuanLyGiangDay.Controllers
         // GET: LopHocs/Create
         public ActionResult Create()
         {
-            ViewBag.MaCTDT = new SelectList(db.CTDTs, "MaCTDT", "TenCTDT");
+            ViewBag.MaCTDT = new SelectList(db.CTDT, "MaCTDT", "TenCTDT");
             return View();
         }
 
         public ActionResult _PartialCreate()
         {
-            ViewBag.MaCTDT = new SelectList(db.CTDTs, "MaCTDT", "TenCTDT");
+            ViewBag.MaCTDT = new SelectList(db.CTDT, "MaCTDT", "TenCTDT");
             return PartialView("_PartialCreate");
         }
 
@@ -98,12 +96,12 @@ namespace QuanLyGiangDay.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.LopHocs.Add(lopHoc);
+                db.LopHoc.Add(lopHoc);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MaCTDT = new SelectList(db.CTDTs, "MaCTDT", "TenCTDT", lopHoc.MaCTDT);
+            ViewBag.MaCTDT = new SelectList(db.CTDT, "MaCTDT", "TenCTDT", lopHoc.MaCTDT);
             return View(lopHoc);
         }
 
@@ -113,7 +111,7 @@ namespace QuanLyGiangDay.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.LopHocs.Add(lopHoc);
+                db.LopHoc.Add(lopHoc);
                 db.SaveChanges();
                 return Json(new { Success = true });
             }
@@ -129,12 +127,12 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LopHoc lopHoc = db.LopHocs.Find(id);
+            LopHoc lopHoc = db.LopHoc.Find(id);
             if (lopHoc == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.MaCTDT = new SelectList(db.CTDTs, "MaCTDT", "TenCTDT", lopHoc.MaCTDT);
+            ViewBag.MaCTDT = new SelectList(db.CTDT, "MaCTDT", "TenCTDT", lopHoc.MaCTDT);
             return View(lopHoc);
         }
 
@@ -144,12 +142,12 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LopHoc lopHoc = db.LopHocs.Find(id);
+            LopHoc lopHoc = db.LopHoc.Find(id);
             if (lopHoc == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.MaCTDT = new SelectList(db.CTDTs, "MaCTDT", "TenCTDT", lopHoc.MaCTDT);
+            ViewBag.MaCTDT = new SelectList(db.CTDT, "MaCTDT", "TenCTDT", lopHoc.MaCTDT);
             return PartialView("_PartialEdit", lopHoc);
         }
 
@@ -166,7 +164,7 @@ namespace QuanLyGiangDay.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.MaCTDT = new SelectList(db.CTDTs, "MaCTDT", "TenCTDT", lopHoc.MaCTDT);
+            ViewBag.MaCTDT = new SelectList(db.CTDT, "MaCTDT", "TenCTDT", lopHoc.MaCTDT);
             return View(lopHoc);
         }
 
@@ -190,7 +188,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LopHoc lopHoc = db.LopHocs.Find(id);
+            LopHoc lopHoc = db.LopHoc.Find(id);
             if (lopHoc == null)
             {
                 return HttpNotFound();
@@ -203,8 +201,8 @@ namespace QuanLyGiangDay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            LopHoc lopHoc = db.LopHocs.Find(id);
-            db.LopHocs.Remove(lopHoc);
+            LopHoc lopHoc = db.LopHoc.Find(id);
+            db.LopHoc.Remove(lopHoc);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -213,8 +211,8 @@ namespace QuanLyGiangDay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult _PartialDeleteConfirmed(string id)
         {
-            LopHoc lopHoc = db.LopHocs.Find(id);
-            db.LopHocs.Remove(lopHoc);
+            LopHoc lopHoc = db.LopHoc.Find(id);
+            db.LopHoc.Remove(lopHoc);
             db.SaveChanges();
             return Json(new { Success = true });
         }
@@ -225,7 +223,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LopHoc lopHoc = db.LopHocs.Find(id);
+            LopHoc lopHoc = db.LopHoc.Find(id);
             if (lopHoc == null)
             {
                 return HttpNotFound();

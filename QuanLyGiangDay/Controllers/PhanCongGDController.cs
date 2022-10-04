@@ -28,14 +28,14 @@ namespace QuanLyGiangDay.Controllers
                 string orderDir = Request.Form.GetValues("order[0][dir]")[0];
                 int startRec = Convert.ToInt32(Request.Form.GetValues("start")[0]);
                 int pageSize = Convert.ToInt32(Request.Form.GetValues("length")[0]);
-                var data = _context.LopHocMonHocs
+                var data = _context.LopHocMonHoc
                             .Join(
-                                _context.GiaoViens,
+                                _context.GiaoVien,
                                 lhmh => lhmh.MaGV,
                                 gv => gv.MaGV,
                                 (lhmh, gv) => new { LHMH = lhmh, GV = gv })
                             .Join(
-                                _context.MonHocs,
+                                _context.MonHoc,
                                 lhmh => lhmh.LHMH.MaMH,
                                 mh => mh.MaMH,
                                 (lhmh, mh) => new { LHMH = lhmh, MH = mh})
@@ -46,7 +46,7 @@ namespace QuanLyGiangDay.Controllers
                                 c.MH.TenMon,
                                 c.LHMH.LHMH.MaGio,
                                 c.LHMH.LHMH.MoTa,
-                                c.LHMH.LHMH.NgayDayDuKien,
+                                c.LHMH.LHMH.NgayKT,
                                 c.LHMH.LHMH.NgayBD,
                                 c.LHMH.LHMH.NgoaiGio,
                                 c.LHMH.GV.TenGV
@@ -79,8 +79,8 @@ namespace QuanLyGiangDay.Controllers
                                                                                                        : data.OrderBy(p => p.MoTa).ToList();
                             break;
                         case "5":
-                            data = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.NgayDayDuKien).ToList()
-                                                                                                       : data.OrderBy(p => p.NgayDayDuKien).ToList();
+                            data = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.NgayKT).ToList()
+                                                                                                       : data.OrderBy(p => p.NgayKT).ToList();
                             break;
                         case "6":
                             data = orderDir.Equals("DESC", StringComparison.CurrentCultureIgnoreCase) ? data.OrderByDescending(p => p.NgayBD).ToList()
@@ -111,7 +111,7 @@ namespace QuanLyGiangDay.Controllers
                     MaMH = x.TenMon,
                     MaGio = x.MaGio,
                     MoTa = x.MoTa,
-                    NgayDayDuKien = x.NgayDayDuKien.Value.ToString("d/M/yyyy"),
+                    NgayKT = x.NgayKT.Value.ToString("d/M/yyyy"),
                     NgayBD = x.NgayBD.Value.ToString("d/M/yyyy"),
                     NgoaiGio = x.NgoaiGio == true ? "T" : "F",
                     MaGV = x.TenGV,
@@ -134,36 +134,58 @@ namespace QuanLyGiangDay.Controllers
 
         public ActionResult GetPhanCongGDPartial(string id)
         {
-            var lhmh = id != null ? _context.LopHocMonHocs.Find(id.Trim()) : new LopHocMonHoc();
+            var lhmh = id != null ? _context.LopHocMonHoc.Find(id.Trim()) : new LopHocMonHoc();
             SelectList lophocs;
             if (id != "")
-                lophocs = new SelectList(_context.LopHocs.ToList(), "MaLop", "TenLop", lhmh.MaLop);
+                lophocs = new SelectList(_context.LopHoc.ToList(), "MaLop", "TenLop", lhmh.MaLop);
             else
-                lophocs = new SelectList(_context.LopHocs.ToList(), "MaLop", "TenLop");
+                lophocs = new SelectList(_context.LopHoc.ToList(), "MaLop", "TenLop");
             ViewData["LopDropdown"] = lophocs;
 
             SelectList monhocs;
             if (id != "")
-                monhocs = new SelectList(_context.MonHocs.ToList(), "MaMH", "TenMon", lhmh.MaLop);
+                monhocs = new SelectList(_context.MonHoc.ToList(), "MaMH", "TenMon", lhmh.MaLop);
             else
-                monhocs = new SelectList(_context.MonHocs.ToList(), "MaMH", "TenMon");
+                monhocs = new SelectList(_context.MonHoc.ToList(), "MaMH", "TenMon");
             ViewData["MonHocDropdown"] = monhocs;
 
             SelectList giaoviens;
             if (id != "")
-                giaoviens = new SelectList(_context.GiaoViens.ToList(), "MaGV", "TenGV", lhmh.MaGV);
+                giaoviens = new SelectList(_context.GiaoVien.ToList(), "MaGV", "TenGV", lhmh.MaGV);
             else
-                giaoviens = new SelectList(_context.GiaoViens.ToList(), "MaGV", "TenGV");
+                giaoviens = new SelectList(_context.GiaoVien.ToList(), "MaGV", "TenGV");
             ViewData["GiaoVienDropdown"] = giaoviens;
 
             SelectList giohocs;
             if (id != "")
-                giohocs = new SelectList(_context.GioHocs.ToList(), "MaGio", "TenGio", lhmh.MaGio);
+                giohocs = new SelectList(_context.GioHoc.ToList(), "MaGio", "TenGio", lhmh.MaGio);
             else
-                giohocs = new SelectList(_context.GioHocs.ToList(), "MaGio", "TenGio");
+                giohocs = new SelectList(_context.GioHoc.ToList(), "MaGio", "TenGio");
             ViewData["GioHocDropdown"] = giohocs;
 
             return PartialView("PhanCongGDPartialView", lhmh);
+        }
+
+        public ActionResult SavePhanCongGD(LopHocMonHoc lhmh)
+        {
+            if (ModelState.IsValid)
+            {
+                if (lhmh.MaLHMH != null)
+                {
+                    _context.Entry(lhmh).State = System.Data.Entity.EntityState.Modified;
+                }
+                else
+                {
+                    var countOfRows = _context.LopHocMonHoc.Count();
+                    var lastRow = _context.LopHocMonHoc.OrderBy(c => c.MaLHMH).Skip(countOfRows - 1).FirstOrDefault();
+                    int nextId = Convert.ToInt32(lastRow.MaLHMH.Substring(4));
+                    lhmh.MaLHMH = "LHMH" + (nextId + 1);
+                    _context.LopHocMonHoc.Add(lhmh);
+                }
+                _context.SaveChanges();
+                return Json(new { Message = "Lưu dữ liệu thành công!" }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { Message = "Đã xãy ra lỗi trong quá trình lưu dữ liệu!" }, JsonRequestBehavior.AllowGet);
         }
     }
 
@@ -174,7 +196,7 @@ namespace QuanLyGiangDay.Controllers
         public string MaMH { get; set; }
         public string MaGio { get; set; }
         public string MoTa { get; set; }
-        public string NgayDayDuKien { get; set; }
+        public string NgayKT { get; set; }
         public string NgayBD { get; set; }
         public string NgoaiGio { get; set; }
         public string MaGV { get; set; }

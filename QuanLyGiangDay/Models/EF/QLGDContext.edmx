@@ -73,7 +73,7 @@
           <Property Name="MaMH" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="MaGio" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="MoTa" Type="nvarchar" MaxLength="50" />
-          <Property Name="NgayDayDuKien" Type="datetime" />
+          <Property Name="NgayKT" Type="datetime" />
           <Property Name="NgayBD" Type="datetime" />
           <Property Name="NgoaiGio" Type="bit" />
           <Property Name="MaGV" Type="nchar" MaxLength="10" />
@@ -304,7 +304,7 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
           <Property Name="MaCTDT" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="TenCTDT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MoTa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="LopHocs" Relationship="Self.FK_LopHoc_CTDT" FromRole="CTDT" ToRole="LopHoc" />
+          <NavigationProperty Name="LopHoc" Relationship="Self.FK_LopHoc_CTDT" FromRole="CTDT" ToRole="LopHoc" />
         </EntityType>
         <EntityType Name="GiaoVien">
           <Key>
@@ -316,7 +316,7 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="Sdt" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="LoaiGV" Relationship="Self.FK_GiaoVien_LoaiGV" FromRole="GiaoVien" ToRole="LoaiGV" />
-          <NavigationProperty Name="LopHocMonHocs" Relationship="Self.FK_LopHocMonHoc_GiaoVien" FromRole="GiaoVien" ToRole="LopHocMonHoc" />
+          <NavigationProperty Name="LopHocMonHoc" Relationship="Self.FK_LopHocMonHoc_GiaoVien" FromRole="GiaoVien" ToRole="LopHocMonHoc" />
         </EntityType>
         <EntityType Name="GioHoc">
           <Key>
@@ -325,7 +325,7 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
           <Property Name="MaGio" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="TenGio" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MoTa" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="LopHocMonHocs" Relationship="Self.FK_LopHocMonHoc_GioHoc" FromRole="GioHoc" ToRole="LopHocMonHoc" />
+          <NavigationProperty Name="LopHocMonHoc" Relationship="Self.FK_LopHocMonHoc_GioHoc" FromRole="GioHoc" ToRole="LopHocMonHoc" />
         </EntityType>
         <EntityType Name="HocKy">
           <Key>
@@ -333,7 +333,7 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
           </Key>
           <Property Name="MaHK" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="TenHK" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="MonHocHocKies" Relationship="Self.FK_MonHocHocKy_HocKy" FromRole="HocKy" ToRole="MonHocHocKy" />
+          <NavigationProperty Name="MonHocHocKy" Relationship="Self.FK_MonHocHocKy_HocKy" FromRole="HocKy" ToRole="MonHocHocKy" />
         </EntityType>
         <EntityType Name="LoaiGV">
           <Key>
@@ -342,7 +342,7 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
           <Property Name="MaLoaiGV" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="TenLoaiGV" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="MoTa" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="GiaoViens" Relationship="Self.FK_GiaoVien_LoaiGV" FromRole="LoaiGV" ToRole="GiaoVien" />
+          <NavigationProperty Name="GiaoVien" Relationship="Self.FK_GiaoVien_LoaiGV" FromRole="LoaiGV" ToRole="GiaoVien" />
         </EntityType>
         <EntityType Name="Log">
           <Key>
@@ -362,7 +362,7 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
           <Property Name="TenLop" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MoTa" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CTDT" Relationship="Self.FK_LopHoc_CTDT" FromRole="LopHoc" ToRole="CTDT" />
-          <NavigationProperty Name="LopHocMonHocs" Relationship="Self.FK_LopHocMonHoc_LopHoc" FromRole="LopHoc" ToRole="LopHocMonHoc" />
+          <NavigationProperty Name="LopHocMonHoc" Relationship="Self.FK_LopHocMonHoc_LopHoc" FromRole="LopHoc" ToRole="LopHocMonHoc" />
         </EntityType>
         <EntityType Name="LopHocMonHoc">
           <Key>
@@ -373,7 +373,7 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
           <Property Name="MaMH" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="MaGio" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="MoTa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NgayDayDuKien" Type="DateTime" Precision="3" />
+          <Property Name="NgayKT" Type="DateTime" Precision="3" />
           <Property Name="NgayBD" Type="DateTime" Precision="3" />
           <Property Name="NgoaiGio" Type="Boolean" />
           <Property Name="MaGV" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
@@ -390,10 +390,10 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
           <Property Name="TenMon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MoTa" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="SoGio" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="LopHocMonHocs" Relationship="Self.FK_LopHocMonHoc_MonHoc" FromRole="MonHoc" ToRole="LopHocMonHoc" />
-          <NavigationProperty Name="MonHocHocKies" Relationship="Self.FK_MonHocHocKy_MonHoc" FromRole="MonHoc" ToRole="MonHocHocKy" />
+          <NavigationProperty Name="LopHocMonHoc" Relationship="Self.FK_LopHocMonHoc_MonHoc" FromRole="MonHoc" ToRole="LopHocMonHoc" />
+          <NavigationProperty Name="MonHocHocKy" Relationship="Self.FK_MonHocHocKy_MonHoc" FromRole="MonHoc" ToRole="MonHocHocKy" />
         </EntityType>
-        <EntityType Name="sysdiagram">
+        <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
@@ -422,7 +422,7 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
           <Property Name="MaVT" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="TenVT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MoTa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TaiKhoans" Relationship="Self.FK_TaiKhoan_VaiTro" FromRole="VaiTro" ToRole="TaiKhoan" />
+          <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_TaiKhoan_VaiTro" FromRole="VaiTro" ToRole="TaiKhoan" />
         </EntityType>
         <EntityType Name="MonHocHocKy">
           <Key>
@@ -544,54 +544,54 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="quanlygiaovienEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CTDTs" EntityType="Self.CTDT" />
-          <EntitySet Name="GiaoViens" EntityType="Self.GiaoVien" />
-          <EntitySet Name="GioHocs" EntityType="Self.GioHoc" />
-          <EntitySet Name="HocKies" EntityType="Self.HocKy" />
-          <EntitySet Name="LoaiGVs" EntityType="Self.LoaiGV" />
-          <EntitySet Name="Logs" EntityType="Self.Log" />
-          <EntitySet Name="LopHocs" EntityType="Self.LopHoc" />
-          <EntitySet Name="LopHocMonHocs" EntityType="Self.LopHocMonHoc" />
-          <EntitySet Name="MonHocs" EntityType="Self.MonHoc" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="TaiKhoans" EntityType="Self.TaiKhoan" />
-          <EntitySet Name="VaiTroes" EntityType="Self.VaiTro" />
-          <EntitySet Name="MonHocHocKies" EntityType="Self.MonHocHocKy" />
+          <EntitySet Name="CTDT" EntityType="Self.CTDT" />
+          <EntitySet Name="GiaoVien" EntityType="Self.GiaoVien" />
+          <EntitySet Name="GioHoc" EntityType="Self.GioHoc" />
+          <EntitySet Name="HocKy" EntityType="Self.HocKy" />
+          <EntitySet Name="LoaiGV" EntityType="Self.LoaiGV" />
+          <EntitySet Name="Log" EntityType="Self.Log" />
+          <EntitySet Name="LopHoc" EntityType="Self.LopHoc" />
+          <EntitySet Name="LopHocMonHoc" EntityType="Self.LopHocMonHoc" />
+          <EntitySet Name="MonHoc" EntityType="Self.MonHoc" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" />
+          <EntitySet Name="VaiTro" EntityType="Self.VaiTro" />
+          <EntitySet Name="MonHocHocKy" EntityType="Self.MonHocHocKy" />
           <AssociationSet Name="FK_LopHoc_CTDT" Association="Self.FK_LopHoc_CTDT">
-            <End Role="CTDT" EntitySet="CTDTs" />
-            <End Role="LopHoc" EntitySet="LopHocs" />
+            <End Role="CTDT" EntitySet="CTDT" />
+            <End Role="LopHoc" EntitySet="LopHoc" />
           </AssociationSet>
           <AssociationSet Name="FK_GiaoVien_LoaiGV" Association="Self.FK_GiaoVien_LoaiGV">
-            <End Role="LoaiGV" EntitySet="LoaiGVs" />
-            <End Role="GiaoVien" EntitySet="GiaoViens" />
+            <End Role="LoaiGV" EntitySet="LoaiGV" />
+            <End Role="GiaoVien" EntitySet="GiaoVien" />
           </AssociationSet>
           <AssociationSet Name="FK_LopHocMonHoc_GiaoVien" Association="Self.FK_LopHocMonHoc_GiaoVien">
-            <End Role="GiaoVien" EntitySet="GiaoViens" />
-            <End Role="LopHocMonHoc" EntitySet="LopHocMonHocs" />
+            <End Role="GiaoVien" EntitySet="GiaoVien" />
+            <End Role="LopHocMonHoc" EntitySet="LopHocMonHoc" />
           </AssociationSet>
           <AssociationSet Name="FK_LopHocMonHoc_GioHoc" Association="Self.FK_LopHocMonHoc_GioHoc">
-            <End Role="GioHoc" EntitySet="GioHocs" />
-            <End Role="LopHocMonHoc" EntitySet="LopHocMonHocs" />
+            <End Role="GioHoc" EntitySet="GioHoc" />
+            <End Role="LopHocMonHoc" EntitySet="LopHocMonHoc" />
           </AssociationSet>
           <AssociationSet Name="FK_MonHocHocKy_HocKy" Association="Self.FK_MonHocHocKy_HocKy">
-            <End Role="HocKy" EntitySet="HocKies" />
-            <End Role="MonHocHocKy" EntitySet="MonHocHocKies" />
+            <End Role="HocKy" EntitySet="HocKy" />
+            <End Role="MonHocHocKy" EntitySet="MonHocHocKy" />
           </AssociationSet>
           <AssociationSet Name="FK_LopHocMonHoc_LopHoc" Association="Self.FK_LopHocMonHoc_LopHoc">
-            <End Role="LopHoc" EntitySet="LopHocs" />
-            <End Role="LopHocMonHoc" EntitySet="LopHocMonHocs" />
+            <End Role="LopHoc" EntitySet="LopHoc" />
+            <End Role="LopHocMonHoc" EntitySet="LopHocMonHoc" />
           </AssociationSet>
           <AssociationSet Name="FK_LopHocMonHoc_MonHoc" Association="Self.FK_LopHocMonHoc_MonHoc">
-            <End Role="MonHoc" EntitySet="MonHocs" />
-            <End Role="LopHocMonHoc" EntitySet="LopHocMonHocs" />
+            <End Role="MonHoc" EntitySet="MonHoc" />
+            <End Role="LopHocMonHoc" EntitySet="LopHocMonHoc" />
           </AssociationSet>
           <AssociationSet Name="FK_MonHocHocKy_MonHoc" Association="Self.FK_MonHocHocKy_MonHoc">
-            <End Role="MonHoc" EntitySet="MonHocs" />
-            <End Role="MonHocHocKy" EntitySet="MonHocHocKies" />
+            <End Role="MonHoc" EntitySet="MonHoc" />
+            <End Role="MonHocHocKy" EntitySet="MonHocHocKy" />
           </AssociationSet>
           <AssociationSet Name="FK_TaiKhoan_VaiTro" Association="Self.FK_TaiKhoan_VaiTro">
-            <End Role="VaiTro" EntitySet="VaiTroes" />
-            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+            <End Role="VaiTro" EntitySet="VaiTro" />
+            <End Role="TaiKhoan" EntitySet="TaiKhoan" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -600,7 +600,7 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="quanlygiaovienModelStoreContainer" CdmEntityContainer="quanlygiaovienEntities">
-          <EntitySetMapping Name="CTDTs">
+          <EntitySetMapping Name="CTDT">
             <EntityTypeMapping TypeName="quanlygiaovienModel.CTDT">
               <MappingFragment StoreEntitySet="CTDT">
                 <ScalarProperty Name="MaCTDT" ColumnName="MaCTDT" />
@@ -609,7 +609,7 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="GiaoViens">
+          <EntitySetMapping Name="GiaoVien">
             <EntityTypeMapping TypeName="quanlygiaovienModel.GiaoVien">
               <MappingFragment StoreEntitySet="GiaoVien">
                 <ScalarProperty Name="MaGV" ColumnName="MaGV" />
@@ -620,7 +620,7 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="GioHocs">
+          <EntitySetMapping Name="GioHoc">
             <EntityTypeMapping TypeName="quanlygiaovienModel.GioHoc">
               <MappingFragment StoreEntitySet="GioHoc">
                 <ScalarProperty Name="MaGio" ColumnName="MaGio" />
@@ -629,7 +629,7 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="HocKies">
+          <EntitySetMapping Name="HocKy">
             <EntityTypeMapping TypeName="quanlygiaovienModel.HocKy">
               <MappingFragment StoreEntitySet="HocKy">
                 <ScalarProperty Name="MaHK" ColumnName="MaHK" />
@@ -637,7 +637,7 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LoaiGVs">
+          <EntitySetMapping Name="LoaiGV">
             <EntityTypeMapping TypeName="quanlygiaovienModel.LoaiGV">
               <MappingFragment StoreEntitySet="LoaiGV">
                 <ScalarProperty Name="MaLoaiGV" ColumnName="MaLoaiGV" />
@@ -646,7 +646,7 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Logs">
+          <EntitySetMapping Name="Log">
             <EntityTypeMapping TypeName="quanlygiaovienModel.Log">
               <MappingFragment StoreEntitySet="Log">
                 <ScalarProperty Name="MaLog" ColumnName="MaLog" />
@@ -656,7 +656,7 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LopHocs">
+          <EntitySetMapping Name="LopHoc">
             <EntityTypeMapping TypeName="quanlygiaovienModel.LopHoc">
               <MappingFragment StoreEntitySet="LopHoc">
                 <ScalarProperty Name="MaLop" ColumnName="MaLop" />
@@ -666,7 +666,7 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LopHocMonHocs">
+          <EntitySetMapping Name="LopHocMonHoc">
             <EntityTypeMapping TypeName="quanlygiaovienModel.LopHocMonHoc">
               <MappingFragment StoreEntitySet="LopHocMonHoc">
                 <ScalarProperty Name="MaLHMH" ColumnName="MaLHMH" />
@@ -674,14 +674,14 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
                 <ScalarProperty Name="MaMH" ColumnName="MaMH" />
                 <ScalarProperty Name="MaGio" ColumnName="MaGio" />
                 <ScalarProperty Name="MoTa" ColumnName="MoTa" />
-                <ScalarProperty Name="NgayDayDuKien" ColumnName="NgayDayDuKien" />
+                <ScalarProperty Name="NgayKT" ColumnName="NgayKT" />
                 <ScalarProperty Name="NgayBD" ColumnName="NgayBD" />
                 <ScalarProperty Name="NgoaiGio" ColumnName="NgoaiGio" />
                 <ScalarProperty Name="MaGV" ColumnName="MaGV" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MonHocs">
+          <EntitySetMapping Name="MonHoc">
             <EntityTypeMapping TypeName="quanlygiaovienModel.MonHoc">
               <MappingFragment StoreEntitySet="MonHoc">
                 <ScalarProperty Name="MaMH" ColumnName="MaMH" />
@@ -692,7 +692,7 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="quanlygiaovienModel.sysdiagram">
+            <EntityTypeMapping TypeName="quanlygiaovienModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -702,7 +702,7 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TaiKhoans">
+          <EntitySetMapping Name="TaiKhoan">
             <EntityTypeMapping TypeName="quanlygiaovienModel.TaiKhoan">
               <MappingFragment StoreEntitySet="TaiKhoan">
                 <ScalarProperty Name="MaTK" ColumnName="MaTK" />
@@ -714,7 +714,7 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VaiTroes">
+          <EntitySetMapping Name="VaiTro">
             <EntityTypeMapping TypeName="quanlygiaovienModel.VaiTro">
               <MappingFragment StoreEntitySet="VaiTro">
                 <ScalarProperty Name="MaVT" ColumnName="MaVT" />
@@ -723,7 +723,7 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MonHocHocKies">
+          <EntitySetMapping Name="MonHocHocKy">
             <EntityTypeMapping TypeName="quanlygiaovienModel.MonHocHocKy">
               <MappingFragment StoreEntitySet="MonHocHocKy">
                 <ScalarProperty Name="MaMH" ColumnName="MaMH" />
@@ -746,7 +746,7 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

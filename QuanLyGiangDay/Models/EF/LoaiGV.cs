@@ -17,7 +17,7 @@ namespace QuanLyGiangDay.Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LoaiGV()
         {
-            this.GiaoViens = new HashSet<GiaoVien>();
+            this.GiaoVien = new HashSet<GiaoVien>();
         }
     
         public string MaLoaiGV { get; set; }
@@ -25,6 +25,6 @@ namespace QuanLyGiangDay.Models.EF
         public string MoTa { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GiaoVien> GiaoViens { get; set; }
+        public virtual ICollection<GiaoVien> GiaoVien { get; set; }
     }
 }

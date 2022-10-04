@@ -17,8 +17,8 @@ namespace QuanLyGiangDay.Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MonHoc()
         {
-            this.LopHocMonHocs = new HashSet<LopHocMonHoc>();
-            this.MonHocHocKies = new HashSet<MonHocHocKy>();
+            this.LopHocMonHoc = new HashSet<LopHocMonHoc>();
+            this.MonHocHocKy = new HashSet<MonHocHocKy>();
         }
     
         public string MaMH { get; set; }
@@ -27,8 +27,8 @@ namespace QuanLyGiangDay.Models.EF
         public Nullable<decimal> SoGio { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LopHocMonHoc> LopHocMonHocs { get; set; }
+        public virtual ICollection<LopHocMonHoc> LopHocMonHoc { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MonHocHocKy> MonHocHocKies { get; set; }
+        public virtual ICollection<MonHocHocKy> MonHocHocKy { get; set; }
     }
 }

@@ -33,7 +33,7 @@
             <div class="col-md-12">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="danhSachGridView" width="100%" cellspacing="0">
+                        <table class="table table-bordered table-hover" id="danhSachGridView" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -41,8 +41,8 @@
                                     <th>Môn học</th>
                                     <th>Giờ học</th>
                                     <th>Mô tả</th>
-                                    <th>Ngày dạy dự kiến</th>
-                                    <th>Ngày bắt đầu thực tế</th>
+                                    <th>Ngày kết thúc</th>
+                                    <th>Ngày bắt đầu</th>
                                     <th>Là ngoài giờ</th>
                                     <th>Giáo viên</th>
                                     <th>Cập nhật</th>
@@ -68,7 +68,7 @@
 <div class="modal fade" role="dialog" id="messageModal" aria-labelledby="messageLebel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" id="messageBody">
-            <div class="modal-header" style="background-color: #636273">
+            <div class="modal-header" style="background-color: #4e73df">
                 <h4 class="modal-title">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </h4>
@@ -135,8 +135,8 @@
                     { "data": "MaMH", "name": "MaMH", "autoWidth": true },
                     { "data": "MaGio", "name": "MaGio", "autoWidth": true },
                     { "data": "MoTa", "name": "MoTa", "autoWidth": true },
-                    { "data": "NgayDayDuKien", "name": "NgayDayDuKien", "autoWidth": true },
                     { "data": "NgayBD", "name": "NgayBD", "autoWidth": true },
+                    { "data": "NgayKT", "name": "NgayKT", "autoWidth": true },
                     {
                         "data": "NgoaiGio", "name": "NgoaiGio", "autoWidth": true,
                         "render": function (data, type, full, row) {
@@ -173,6 +173,25 @@
                 $("#phanCongGDModalBody").html(res);
                 $("#phanCongGDModal").modal("show");
             });
+        }
+
+        function savePhanCongGD() {
+            var modal = $("#phanCongGDModal");
+            var form = $("form[name='phanCongGDForm']");
+            form.validate();
+            if (!form.valid()) {
+                return;
+            } else {
+                var data = form.serialize();
+                $.post("/PhanCongGD/SavePhanCongGD", data, function (res) {
+                    if (res) {
+                        modal.modal("hide");
+                        $("#lblMessage").html(res.Message);
+                        $("#messageModal").modal("show");
+                        dataTable.ajax.reload();
+                    }
+                });
+            }
         }
 
     </script>

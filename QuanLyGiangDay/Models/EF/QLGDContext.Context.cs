@@ -25,18 +25,18 @@ namespace QuanLyGiangDay.Models.EF
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CTDT> CTDTs { get; set; }
-        public virtual DbSet<GiaoVien> GiaoViens { get; set; }
-        public virtual DbSet<GioHoc> GioHocs { get; set; }
-        public virtual DbSet<HocKy> HocKies { get; set; }
-        public virtual DbSet<LoaiGV> LoaiGVs { get; set; }
-        public virtual DbSet<Log> Logs { get; set; }
-        public virtual DbSet<LopHoc> LopHocs { get; set; }
-        public virtual DbSet<LopHocMonHoc> LopHocMonHocs { get; set; }
-        public virtual DbSet<MonHoc> MonHocs { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
-        public virtual DbSet<VaiTro> VaiTroes { get; set; }
-        public virtual DbSet<MonHocHocKy> MonHocHocKies { get; set; }
+        public virtual DbSet<CTDT> CTDT { get; set; }
+        public virtual DbSet<GiaoVien> GiaoVien { get; set; }
+        public virtual DbSet<GioHoc> GioHoc { get; set; }
+        public virtual DbSet<HocKy> HocKy { get; set; }
+        public virtual DbSet<LoaiGV> LoaiGV { get; set; }
+        public virtual DbSet<Log> Log { get; set; }
+        public virtual DbSet<LopHoc> LopHoc { get; set; }
+        public virtual DbSet<LopHocMonHoc> LopHocMonHoc { get; set; }
+        public virtual DbSet<MonHoc> MonHoc { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<TaiKhoan> TaiKhoan { get; set; }
+        public virtual DbSet<VaiTro> VaiTro { get; set; }
+        public virtual DbSet<MonHocHocKy> MonHocHocKy { get; set; }
     }
 }

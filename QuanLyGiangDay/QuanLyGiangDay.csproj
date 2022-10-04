@@ -46,10 +46,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LopHocsController.cs" />
     <Compile Include="Controllers\PhanCongGDController.cs" />
     <Compile Include="Controllers\QuanLyGiaoVienController.cs" />
     <Compile Include="Global.asax.cs">
@@ -2097,6 +2098,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\myScript.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2118,6 +2120,15 @@
     <Content Include="Views\QuanLyGiaoVien\Edit.cshtml" />
     <Content Include="Views\QuanLyGiaoVien\Index.cshtml" />
     <Content Include="Views\PhanCongGD\PhanCongGDPartialView.cshtml" />
+    <Content Include="Views\LopHocs\Create.cshtml" />
+    <Content Include="Views\LopHocs\Delete.cshtml" />
+    <Content Include="Views\LopHocs\Details.cshtml" />
+    <Content Include="Views\LopHocs\Edit.cshtml" />
+    <Content Include="Views\LopHocs\Index.cshtml" />
+    <Content Include="Views\LopHocs\_PartialCreate.cshtml" />
+    <Content Include="Views\LopHocs\_PartialEdit.cshtml" />
+    <Content Include="Views\LopHocs\_PartialDelete.cshtml" />
+    <Content Include="Views\LopHocs\_PartialDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

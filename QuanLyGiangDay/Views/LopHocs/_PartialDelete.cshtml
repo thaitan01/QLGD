@@ -1,0 +1,53 @@
+﻿@model QuanLyGiangDay.Models.EF.LopHoc
+
+<div class="modal-header">
+
+    <button type="button" class="close" data-dismiss="modal" aria-
+            hidden="true">
+        ×
+    </button>
+
+    <h5 class="modal-title">Xóa lớp học</h5>
+</div>
+<div class="modal-body">
+    <h3>Bạn có chắc muốn xóa lớp học này không?</h3>
+    <div>
+
+        <dl class="dl-horizontal">
+            <dt>
+                Tên lớp:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenLop)
+            </dd>
+
+            <dt>
+                Mô tả:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MoTa)
+            </dd>
+
+            <dt>
+                Chương trình đào tạo:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CTDT.TenCTDT)
+            </dd>
+
+        </dl>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="modal-footer">
+            <input type="submit" value="Xóa" class="btn btn-primary" />
+            <button class="btn btn-primary" data-dismiss="modal">Đóng</button>
+        </div>
+
+
+    }

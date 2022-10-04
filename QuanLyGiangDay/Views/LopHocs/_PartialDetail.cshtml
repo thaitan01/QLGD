@@ -1,0 +1,61 @@
+﻿@model QuanLyGiangDay.Controllers.MonHocHocKyModel
+
+@* model header *@
+<div class="modal-header">
+
+    <button type="button" class="close" data-dismiss="modal" aria-
+            hidden="true">
+        ×
+    </button>
+
+    <h5 class="modal-title">Chi tiết lớp học</h5>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-body">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="danhSachLopHoc" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                Học kỳ
+                            </th>
+                            <th>
+                                Môn học
+                            </th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.MHHK)
+                        {
+                            <tr class="c-tr-body">
+                                <td>
+                                   @item.MaHK
+                                </td>
+                                <td>
+                                    @item.MaMH
+                                </td>
+                                
+                                
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        
+    </div>
+    <div class="modal-footer">
+        
+        <button class="btn btn-default btn-primary" data-dismiss="modal">Đóng</button>
+    </div>
+}
+
+
+
+

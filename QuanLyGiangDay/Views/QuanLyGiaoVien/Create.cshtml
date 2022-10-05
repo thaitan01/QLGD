@@ -5,82 +5,64 @@
     Layout = null;
 }
 <div class="create-gv c-box-show">
-    <div id="tabs">
-        <ul>
-            <li><a href="#tabs-1">Thêm Giáo Viên</a></li>
-            <li><a href="#tabs-2">Thêm Nhiều Giáo Viên</a></li>
-        </ul>
-        <div id="tabs-1">
-            <div class="body-tab">
-                <form action="/QuanLyGiaoVien/Create" id="body_add_1_table" method="post">
-                    @* <input name="__RequestVerificationToken" type="hidden"
-                        value="0Q2MEneGOMZ1jydZIWnxXCybWWlRYfdJED4S6NY760OTZjFHpN5PK58U5jZrvIe1ErxFi92twQLwdzov5vhwqZAR8Q7gJ9gNePFGM621wXQ1">
-                    *@
-                    @Html.AntiForgeryToken()
-                    <div class="form-horizontal">
-                        <div class="form-group c-form-group">
-                            <label class="control-label col-md-2" for="MaGV">Mã Giáo Viên</label>
-                            <div class="col-md-10">
-                                <input class="form-control c-form-control text-box single-line" id="MaGV" name="MaGV"
-                                    type="text" value="" placeholder="Mã số giáo viên VD: GV01...">
-                                <span class="field-validation-valid text-danger" data-valmsg-for="MaGV"
-                                    data-valmsg-replace="true"></span>
-                            </div>
-                        </div>
-
-                        <div class="form-group c-form-group ">
-                            <label class="control-label col-md-2" for="TenGV">Tên Giáo Viên</label>
-                            <div class="col-md-10">
-                                <input class="form-control c-form-control text-box single-line" id="TenGV" name="TenGV"
-                                    type="text" value="" placeholder="Tên Giáo Viên VD: Trần Văn A...">
-                                <span class="field-validation-valid text-danger" data-valmsg-for="TenGV"
-                                    data-valmsg-replace="true"></span>
-                            </div>
-                        </div>
-
-                        <div class="form-group c-form-group ">
-                            <label class="control-label col-md-2" for="MaLoaiGV">Loại Giáo Viên</label>
-                            <div class="col-md-10" id="icon-typr-gv">
-                                <select class="form-control c-form-control" id="MaLoaiGV" name="MaLoaiGV">
-                                    <option value="CH        ">Giáo viên cơ hữu</option>
-                                    <option value="MG        ">Giáo viên mời giảng</option>
-                                </select>
-                                <span class="field-validation-valid text-danger" data-valmsg-for="MaLoaiGV"
-                                    data-valmsg-replace="true"></span>
-                            </div>
-                        </div>
-
-                        <div class="form-group c-form-group ">
-                            <label class="control-label col-md-2" for="Email">Email</label>
-                            <div class="col-md-10">
-                                <input class="form-control c-form-control text-box single-line" id="Email" name="Email"
-                                    type="email" value="" placeholder="Đại chỉ email VD: Tranvana@gmail.com">
-                                <span class="field-validation-valid text-danger" data-valmsg-for="Email"
-                                    data-valmsg-replace="true"></span>
-                            </div>
-                        </div>
-
-                        <div class="form-group c-form-group ">
-                            <label class="control-label col-md-2" for="Sdt">Số Điện Thoại</label>
-                            <div class="col-md-10">
-                                <input class="form-control c-form-control text-box single-line" id="Sdt" name="Sdt"
-                                    type="number" value="" placeholder="Số điện thoại VD: 079686459">
-                                <span class="field-validation-valid text-danger" data-valmsg-for="Sdt"
-                                    data-valmsg-replace="true"></span>
-                            </div>
+    <div id="tabs-1">
+        <div class="body-tab">
+            <form action="/QuanLyGiaoVien/Create" id="body_add_1_table" method="post">
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    <div class="form-group c-form-group">
+                        <label class="control-label col-md-2" for="MaGV">Mã Giáo Viên</label>
+                        <div class="col-md-10">
+                            <input class="form-control c-form-control text-box single-line" id="MaGV" name="MaGV"
+                                type="text" value="" placeholder="Mã số giáo viên VD: GV01...">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="MaGV"
+                                data-valmsg-replace="true"></span>
                         </div>
                     </div>
-                </form>
-            </div>
-        </div>
-        <div id="tabs-2">
-            <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id
-                nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie
-                lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula
-                suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur
-                ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque
-                convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare
-                leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+
+                    <div class="form-group c-form-group ">
+                        <label class="control-label col-md-2" for="TenGV">Tên Giáo Viên</label>
+                        <div class="col-md-10">
+                            <input class="form-control c-form-control text-box single-line" id="TenGV" name="TenGV"
+                                type="text" value="" placeholder="Tên Giáo Viên VD: Trần Văn A...">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="TenGV"
+                                data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group c-form-group ">
+                        <label class="control-label col-md-2" for="MaLoaiGV">Loại Giáo Viên</label>
+                        <div class="col-md-10" id="icon-typr-gv">
+                            <select class="form-control c-form-control" id="MaLoaiGV" name="MaLoaiGV">
+                                <option value="CH        ">Giáo viên cơ hữu</option>
+                                <option value="MG        ">Giáo viên mời giảng</option>
+                            </select>
+                            <span class="field-validation-valid text-danger" data-valmsg-for="MaLoaiGV"
+                                data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group c-form-group ">
+                        <label class="control-label col-md-2" for="Email">Email</label>
+                        <div class="col-md-10">
+                            <input class="form-control c-form-control text-box single-line" id="Email" name="Email"
+                                type="email" value="" placeholder="Đại chỉ email VD: Tranvana@gmail.com">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Email"
+                                data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group c-form-group ">
+                        <label class="control-label col-md-2" for="Sdt">Số Điện Thoại</label>
+                        <div class="col-md-10">
+                            <input class="form-control c-form-control text-box single-line" id="Sdt" name="Sdt"
+                                type="number" value="" placeholder="Số điện thoại VD: 079686459">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Sdt"
+                                data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

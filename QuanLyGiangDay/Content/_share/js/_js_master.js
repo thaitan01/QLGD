@@ -5,6 +5,7 @@
  * @return {void}
  */
 function callDisplay(_id, ...seting) {
+    changLoading(true)
     try {
         $.ajax({
             url: seting[0].url,
@@ -12,10 +13,12 @@ function callDisplay(_id, ...seting) {
             type: seting[0].type,
             dataType: seting[0].dataType,
             success: function (data) {
+                changLoading(false)
                 $('#' + _id).html(data);
                 $('#' + seting[0].modal).modal('show');
             },
             error: function (e) {
+                changLoading(false)
                 $('#' + _id).html('<p>' + e + '</p>');
             },
         });
@@ -53,6 +56,19 @@ function changTab(...param) {
                 param[0].prototype.constructor(e.target.attributes.href.value)
         });
     }
+}
+/**
+ * Chang is show loading
+ * @param {boolean} _isLoading 
+ * @return {void}
+ */
+function changLoading(_isLoading) {
+    console.log(_isLoading);
+    const loading = document.getElementById("loading")
+    if (_isLoading)
+        loading.classList.add("loading")
+    else
+        loading.classList.remove("loading")
 }
 //tab
 $(document).ready(function () {

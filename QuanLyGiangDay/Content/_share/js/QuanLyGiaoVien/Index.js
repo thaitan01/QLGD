@@ -38,7 +38,6 @@ window.onload = function () {
     const trTableHover = document.getElementsByClassName("c-tr-body");
     for (let i = 0; i < trTableHover.length; i++) {
         trTableHover[i].addEventListener("mouseover", function (e) {
-            console.log(trTableHover[i].dataset.id);
             document.getElementById(trTableHover[i].dataset.id).style.display = "block";
         })
     }

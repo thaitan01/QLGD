@@ -4,31 +4,21 @@
     ViewBag.Title = "Create";
     Layout = null;
 }
-
-<div class="create-gv">
-    <!-- Tab panes -->
-    <div class="tab">
-        <div class="body-item-tab">
-            <div href="body_add_1" class="heder-tab heder-tab-active">Thêm Một Giáo Viên</div>
-            <div href="body_add_2" class="heder-tab">Thêm Nhiều Giáo Viên</div>
-        </div>
-    </div>
-    <div class="body-tab" id="body_add_1">
-        <form action="/QuanLyGiaoVien/Create" id="body_add_1_table" method="post">
-            @* <input name="__RequestVerificationToken" type="hidden"
-                value="0Q2MEneGOMZ1jydZIWnxXCybWWlRYfdJED4S6NY760OTZjFHpN5PK58U5jZrvIe1ErxFi92twQLwdzov5vhwqZAR8Q7gJ9gNePFGM621wXQ1">
-            *@
-            @Html.AntiForgeryToken()
-            <div class="form-horizontal">
-                <div class="form-group c-form-group ">
-                    <label class="control-label col-md-2" for="MaGV">Mã Giáo Viên</label>
-                    <div class="col-md-10">
-                        <input class="form-control c-form-control text-box single-line" id="MaGV" name="MaGV"
-                            type="text" value="" placeholder="Mã số giáo viên VD: GV01...">
-                        <span class="field-validation-valid text-danger" data-valmsg-for="MaGV"
-                            data-valmsg-replace="true"></span>
+<div class="create-gv c-box-show">
+    <div id="tabs-1">
+        <div class="body-tab">
+            <form action="/QuanLyGiaoVien/Create" id="body_add_1_table" method="post">
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    <div class="form-group c-form-group">
+                        <label class="control-label col-md-2" for="MaGV">Mã Giáo Viên</label>
+                        <div class="col-md-10">
+                            <input class="form-control c-form-control text-box single-line" id="MaGV" name="MaGV"
+                                type="text" value="" placeholder="Mã số giáo viên VD: GV01...">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="MaGV"
+                                data-valmsg-replace="true"></span>
+                        </div>
                     </div>
-                </div>
 
                 <div class="form-group c-form-group ">
                     <label class="control-label col-md-2" for="TenGV">Tên Giáo Viên</label>
@@ -62,18 +52,18 @@
                     </div>
                 </div>
 
-                <div class="form-group c-form-group ">
-                    <label class="control-label col-md-2" for="Sdt">Số Điện Thoại</label>
-                    <div class="col-md-10">
-                        <input class="form-control c-form-control text-box single-line" id="Sdt" name="Sdt"
-                            type="number" value="" placeholder="Số điện thoại VD: 079686459">
-                        <span class="field-validation-valid text-danger" data-valmsg-for="Sdt"
-                            data-valmsg-replace="true"></span>
+                    <div class="form-group c-form-group ">
+                        <label class="control-label col-md-2" for="Sdt">Số Điện Thoại</label>
+                        <div class="col-md-10">
+                            <input class="form-control c-form-control text-box single-line" id="Sdt" name="Sdt"
+                                type="number" value="" placeholder="Số điện thoại VD: 079686459">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Sdt"
+                                data-valmsg-replace="true"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-    <div class="body-tab none" id="body_add_2">lkhjjkhghh</div>
 </div>
 <script src="~/Content/_share/js/QuanLyGiaoVien/Create.js"></script>

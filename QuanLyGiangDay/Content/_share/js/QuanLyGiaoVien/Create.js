@@ -3,3 +3,6 @@ window.onload = function () {
         changIdForm(e)
     })
 }
+$(function () {
+    $("#tabs").tabs();
+});

@@ -1,18 +1,17 @@
-﻿/*custom modal input display start*/
+﻿/*custom */
 .modal-content {
     border: none !important;
-    width: auto !important;
 }
 
 .modal-header {
-    background: #4e73df;
-    color: white;
+    background: var(--blue);
+    color: var(--white);
     height: 48px !important;
     align-items: center !important;
 }
 
 .close {
-    color: white !important;
+    color: var(--white) !important;
     opacity: 1 !important;
     text-shadow: 0 !important;
 }
@@ -45,8 +44,6 @@
     overflow-y: hidden !important;
 }
 
-/*custom modal input display end*/
-
 .center-item {
     display: flex;
     justify-content: center;
@@ -69,12 +66,10 @@
 }
 
 ::-webkit-input-placeholder {
-    /* Edge */
     opacity: 0.5 !important;
 }
 
 :-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
     opacity: 0.5 !important;
 }
 
@@ -82,6 +77,46 @@
     opacity: 0.5;
 }
 
+.fa,
+.fas {
+    pointer-events: none;
+}
+
+select {
+    -webkit-appearance: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.ui-state-default {
+    border: 1px solid var(--white) !important;
+    background: var(--white) !important;
+}
+
+.ui-state-active {
+    color: var(--white) !important;
+    background: var(--blue) !important;
+    border: 1px solid var(--blue) !important;
+}
+
+.ui-widget-header {
+    background: var(--white) !important;
+}
+
+.ui-widget-header {
+    border: none !important;
+    border-bottom: 1px solid var(--blue) !important;
+}
+
+.ui-widget-content {
+    border: none !important;
+}
+
+/* add class */
 .c-form-control {
     height: 50px !important;
 }
@@ -93,12 +128,88 @@
 .c-tr-body:hover {
     box-shadow: -9px 0px 17px 0px rgb(58 59 69 / 15%);
     font-weight: 700;
-    color: #4e73df !important;
-    background: white !important;
+    color: var(--blue) !important;
+    background: var(--white) !important;
     cursor: default;
 }
 
-.fa,
-.fas {
-    pointer-events: none;
+.c-form-group {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.c-box-show {
+    box-shadow: 0px 0px 15px rgb(0 0 0 / 20%);
+    border-radius: 4px;
+}
+
+.c-icon-wanrning {
+    position: relative;
+    width: 100%;
+    height: 110px;
+    display: flex;
+    justify-content: center;
+}
+
+.c-icon-wanrning::before {
+    content: "";
+    background-image: url('../../../Assets/icon/warning.png');
+    background-size: 110px;
+    width: 110px;
+    height: 110px;
+    position: absolute;
+}
+
+/* loadding */
+.loading {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    opacity: 0.8;
+}
+
+.loading::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background-color: rgb(0, 0, 0);
+    opacity: 0.2;
+}
+
+.loading::after {
+    content: url('../../../Assets/svg/loading.gif');
+
+}
+
+/* srcoll */
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #ccc;
+    border-radius: 14px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--gray);
+    border-radius: 5px;
+    border: 2px solid #ccc;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--dark);
 }

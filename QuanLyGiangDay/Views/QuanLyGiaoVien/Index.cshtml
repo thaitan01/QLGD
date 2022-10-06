@@ -80,13 +80,11 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Email)
-                                    <?= item.MaGV ?>
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Sdt)
                                 </td>
                                 <td class="body-action-item-table">
-                                    @item.MaGV.Trim() ||
                                     @Html.DisplayFor(modelItem => item.LoaiGV.TenLoaiGV)
                                     <label id="@item.MaGV.Trim()" class="action-item-table" style="display: none;">
                                         <p data-id="@item.MaGV.Trim()"
@@ -101,11 +99,7 @@
                                            class="c-btn-item btn-danger btn-circle button-delete-gv">
                                             <i class="fas fa-trash"></i>
                                         </p>
-                                        @item.MaGV.Trim()
-                                        @* @Html.ActionLink("Edit", "Edit", new { id = item.MaGV }) |
-                                            @Html.ActionLink("Details", "Details", new { id = item.MaGV }) |
-                                            @Html.ActionLink("Delete", "Delete", new { id = item.MaGV }) *@
-                                    </label>
+                                     </label>
                                 </td>
                             </tr>
                         }

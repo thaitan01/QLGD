@@ -4,48 +4,37 @@
     ViewBag.Title = "Details";
     Layout = null;
 }
-
-<h2>Details</h2>
-
-<div>
-    <h4>GiaoVien</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TenGV)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TenGV)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Sdt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Sdt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LoaiGV.TenLoaiGV)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LoaiGV.TenLoaiGV)
-        </dd>
-
-    </dl>
+<style>
+    #save-t {
+        display: none;
+    }
+</style>
+<div class="infor-gv">
+    <div class="body-infor-gv c-box-show">
+        <div class="c-form-group">
+            <label class="tile-gv control-label col-md-4">Tên Giáo Viên</label>
+            <label class="col-md-8">
+                @Html.DisplayFor(model => model.TenGV)
+            </label>
+        </div>
+        <div class="c-form-group">
+            <label class="tile-gv tile-gv control-label col-md-4">Email</label>
+            <label class="col-md-8">
+                @Html.DisplayFor(model => model.Email)
+            </label>
+        </div>
+        <div class="c-form-group">
+            <label class="tile-gv tile-gv control-label col-md-4">Số Điện Thoại</label>
+            <label class="col-md-8">
+                @Html.DisplayFor(model => model.Sdt)
+            </label>
+        </div>
+        <div class="c-form-group">
+            <label class="tile-gv tile-gv control-label col-md-4">Loại Giáo Viên</label>
+            <label class="col-md-8">
+                @Html.DisplayFor(model => model.LoaiGV.TenLoaiGV)
+            </label>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MaGV }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<script src="~/Content/_share/js/QuanLyGiaoVien/Details.js"></script>

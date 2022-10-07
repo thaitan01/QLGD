@@ -80,6 +80,7 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Email)
+                                    <?= item.MaGV ?>
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Sdt)
@@ -133,3 +134,5 @@
 </div>
 <script src="~/Content/_share/js/QuanLyGiaoVien/Index.js"></script>
 <script src="~/Content/_custom/datatables.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="./script.js"></script>

@@ -19,7 +19,6 @@ async function callDisplay(_id, ...seting) {
                 $('#' + seting[0].modal).modal('show');
                 $('#save-' + seting[0].modal).click(function () {
                     const from = $("#" + $('#' + _id).find('form')[0].id);
-                    console.log(_id);
                     const dataReturn = submitForm(from.attr('method'), from.attr('action'), from.getFormData())
                     Swal.fire({
                         position: 'top-end',

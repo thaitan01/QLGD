@@ -27,7 +27,8 @@
     }
 </style>
 <div class="update-gv c-box-show">
-    @using (Html.BeginForm())
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "body_update_1_tabl" }))
     {
         @Html.AntiForgeryToken()
         <div class="form-horizontal">

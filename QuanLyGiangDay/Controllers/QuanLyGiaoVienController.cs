@@ -40,6 +40,8 @@ namespace QuanLyGiangDay.Controllers
         public ActionResult Create()
         {
             ViewBag.MaLoaiGV = new SelectList(db.LoaiGV, "MaLoaiGV", "TenLoaiGV");
+            ViewBag.ListId = from _giaovien in db.GiaoVien select _giaovien.MaGV;
+            Console.WriteLine(from _giaovien in db.GiaoVien select _giaovien.MaGV);
             return View();
         }
 

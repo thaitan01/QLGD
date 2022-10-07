@@ -3,10 +3,6 @@ window.onload = function () {
     function changIdForm(e) {
         idForm = e
     }
-
-    document.getElementById("save-t").addEventListener("click", function (e) {
-        document.getElementById(idForm + "_table").submit();
-    })
     document.getElementById("btn-call-add-gv").addEventListener("click", function () {
         callModatAddTT();
     })
@@ -46,12 +42,6 @@ window.onload = function () {
             document.getElementById(trTableHover[i].dataset.id).style.display = "none";
         })
     }
-    document.getElementById("dataTable_filter").getElementsByTagName("label")[0]
-        .getElementsByTagName("input")[0].placeholder = "Nhập nọi dung  cần tìm";
-    document.getElementById("dataTable_filter").getElementsByTagName("label")[0]
-        .getElementsByTagName("input")[0].style.width = "400px";
-    document.getElementById("dataTable_filter").getElementsByTagName("label")[0]
-        .getElementsByTagName("input")[0].style.height = "40px";
 };
 /**
  * Call and add data madal add

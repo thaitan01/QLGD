@@ -325,3 +325,7 @@ E:\Niên luận ngành 1\QuanLyGiangDay\bin\Microsoft.CodeDom.Providers.DotNetCo
 E:\Niên luận ngành 1\QuanLyGiangDay\obj\Debug\QuanLyGiangDay.csproj.CopyComplete
 E:\Niên luận ngành 1\QuanLyGiangDay\obj\Debug\QuanLyGiangDay.dll
 E:\Niên luận ngành 1\QuanLyGiangDay\obj\Debug\QuanLyGiangDay.pdb
+L:\VLVH\SRC_Main\QLGD\QuanLyGiangDay\obj\Debug\QuanLyGiangDay.csproj.AssemblyReference.cache
+L:\VLVH\SRC_Main\QLGD\QuanLyGiangDay\obj\Debug\QuanLyGiangDay.csproj.CoreCompileInputs.cache
+L:\VLVH\SRC_Main\QLGD\QuanLyGiangDay\obj\Debug\QuanLyGiangDay.dll
+L:\VLVH\SRC_Main\QLGD\QuanLyGiangDay\obj\Debug\QuanLyGiangDay.pdb

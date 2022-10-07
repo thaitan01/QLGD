@@ -32,7 +32,7 @@ window.onload = function () {
 
     }
     //
-    const trTableHover = document.getElementsByClassName("c-tr-body");
+    /*const trTableHover = document.getElementsByClassName("c-tr-body");
     for (let i = 0; i < trTableHover.length; i++) {
         trTableHover[i].addEventListener("mouseover", function (e) {
             document.getElementById(trTableHover[i].dataset.id).style.display = "block";
@@ -42,7 +42,7 @@ window.onload = function () {
         trTableHover[i].addEventListener("mouseout", function (e) {
             document.getElementById(trTableHover[i].dataset.id).style.display = "none";
         })
-    }
+    }*/
 };
 /**
  * Call and add data madal add

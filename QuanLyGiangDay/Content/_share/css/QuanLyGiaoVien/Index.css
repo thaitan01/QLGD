@@ -60,7 +60,13 @@ th {
 }
 
 .action-item-table {
-    position: absolute;
+    position: relative;
     left: 50%;
     top: 10%;
+    display: flex;
+    margin: -33px;
+    font-size: 24px;
+}
+.c-btn-item{
+    margin-left:30px
 }

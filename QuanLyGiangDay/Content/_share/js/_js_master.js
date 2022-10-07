@@ -5,7 +5,6 @@
  * @return {void}
  */
 async function callDisplay(_id, ...seting) {
-
     changLoading(true)
     try {
         await $.ajax({

@@ -19,15 +19,13 @@ async function callDisplay(_id, ...seting) {
                 $('#save-' + seting[0].modal).click(function () {
                     const from = $("#" + $('#' + _id).find('form')[0].id);
                     const dataReturn = submitForm(from.attr('method'), from.attr('action'), from.getFormData())
-                    console.log(dataReturn.Promise);
-                    // dataReturn.success(function (data) {
-                    //     Swal.fire({
-                    //         position: 'top-end',
-                    //         title: 'Thêm Giáo Viên Thành Công',
-                    //         showConfirmButton: false,
-                    //         timer: 1000
-                    //     })
-                    // });
+                    Swal.fire({
+                        position: 'top-end',
+                        title: 'Thï¿½m Giï¿½o Viï¿½n Thï¿½nh Cï¿½ng',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                    $('#' + seting[0].modal).modal('hide');
                 })
             },
             error: function (e) {

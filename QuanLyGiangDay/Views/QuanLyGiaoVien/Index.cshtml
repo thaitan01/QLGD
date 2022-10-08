@@ -69,6 +69,8 @@
                             <th>
                                 Loại Giáo Viên
                             </th>
+                            <th class="no-sorting">
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -85,9 +87,9 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Sdt)
                                 </td>
-                                <td class="body-action-item-table">
-                                    @Html.DisplayFor(modelItem => item.LoaiGV.TenLoaiGV)
-                                    <label id="@item.MaGV.Trim()" class="action-item-table">
+                                <td>
+                                        @Html.DisplayFor(modelItem => item.LoaiGV.TenLoaiGV)
+                                   @* <label id="@item.MaGV.Trim()" class="action-item-table">
                                         <p data-id="@item.MaGV.Trim()"
                                         class="c-btn-item  button-update-gv">
                                             <i class="fa fa-edit"></i>
@@ -100,7 +102,21 @@
                                         class="c-btn-item  button-delete-gv">
                                             <i class="fas fa-trash"></i>
                                         </p>
-                                    </label>
+                                    </label>*@
+                                </td>
+                                <td class="body-action-item-table">
+                                    <p data-id="@item.MaGV.Trim()"
+                                       class="c-btn-item  button-update-gv">
+                                        <i class="fa fa-edit"></i>
+                                    </p>
+                                    <p data-id="@item.MaGV.Trim()"
+                                       class="c-btn-item  button-detail-gv">
+                                        <i class="fas fa-info-circle"></i>
+                                    </p>
+                                    <p data-id="@item.MaGV.Trim()"
+                                       class="c-btn-item  button-delete-gv">
+                                        <i class="fas fa-trash"></i>
+                                    </p>
                                 </td>
                             </tr>
                         }

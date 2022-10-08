@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-md-12">
                         @Html.DropDownList("MaLop", (IEnumerable<SelectListItem>)ViewData["LopDropdown"], new { @class = "form-control" })
-                        @Html.ValidationMessageFor(x => x.MaLop, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(x => x.MaLop, "", new { @class = "text-danger", @disabled = "disabled" })
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="col-md-12">
                         @Html.DropDownList("MaMH", (IEnumerable<SelectListItem>)ViewData["MonHocDropdown"], new { @class = "form-control" })
-                        @Html.ValidationMessageFor(x => x.MaMH, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(x => x.MaMH, "", new { @class = "text-danger", @disabled = "disabled" })
                     </div>
                 </div>
             </div>
@@ -95,12 +95,7 @@
                         <label class="control-label">Là ngoài giờ</label>
                     </div>
                     <div class="col-md-12">
-                        @{
-                            var checkboxAttributes = Model.NgoaiGio ?? false ?
-                                (object)new { @checked = "checked" } :
-                                (object)new { };
-                        }
-                        @Html.CheckBox("MyBoolValue", checkboxAttributes)
+                        @Html.CheckBoxFor(m => m.NgoaiGio, new { @checked = Model.NgoaiGio })
                     </div>
                 </div>
             </div>

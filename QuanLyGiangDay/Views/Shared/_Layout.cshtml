@@ -16,12 +16,15 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js'></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/theme/css")
 </head>
 <body id="page-top">
 
+    <div id="divLoader" style="display: none" class="loader"></div>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -57,18 +60,10 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                   aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
+                <a class="nav-link collapsed" href="@Url.Action("Index", "LichGiangDay")" aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
                     <span>Lịch giảng dạy</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
-                    </div>
-                </div>
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
@@ -89,13 +84,13 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-	        <!--Tuấn Start -->
-                    <a class="nav-link collapsed" href="@Url.Action("Index", "QuanLyGiaoVien")" @*data-toggle="collapse" data-target="#collapsePages"*@
-		       aria-expanded="true" aria-controls="collapsePages">
-                        <i class="fas fa-fw fa-folder"></i>
-                        <span>Quản lý giáo viên</span>
-                    </a>
-		    <!--Tuấn End-->
+                <!--Tuấn Start -->
+                <a class="nav-link collapsed" href="@Url.Action("Index", "QuanLyGiaoVien")" @*data-toggle="collapse" data-target="#collapsePages"*@
+                   aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Quản lý giáo viên</span>
+                </a>
+                <!--Tuấn End-->
             </li>
             <div class="sidebar-heading">
                 Đào tạo
@@ -106,7 +101,7 @@
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Quản lý lớp học</span>
                 </a>
-                
+
             </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"

@@ -1,0 +1,51 @@
+﻿.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    z-index: 9000;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.radio-inline {
+    background-color: grey; border-radius: 3px; padding-left: 6px; padding-right: 6px; color: white;
+}
+
+.radio-group-sts {
+    margin: 3px 3px 3px 35px;
+}
+
+.fc-event-time, .fc-event-title {
+    padding: 0 1px;
+    white-space: nowrap;
+}
+
+.fc-event-title {
+    white-space: normal !important;
+}

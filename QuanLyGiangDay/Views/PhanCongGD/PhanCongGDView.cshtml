@@ -1,0 +1,296 @@
+﻿@model QuanLyGiangDay.Models.EF.LopHocMonHoc
+@{
+    ViewBag.Title = "Phân công giảng dạy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="float-right" style="padding-bottom: 10px; padding-right: 28px; z-index: 99; position: relative;">
+    <div>
+        <button type="button" class="btn btn-primary" style="margin: 0px !important" onclick="savePhanCongGD()">
+            <span class="fa fa-save"></span>&nbsp;&nbsp;Lưu
+        </button>
+        <button type="button" class="btn btn-danger" style="margin: 0px !important" onclick="backToPrevious()">
+            <span class="fa fa-backward"></span>&nbsp;&nbsp;Quay lại
+        </button>&nbsp;
+    </div>
+</div>
+<div class="panel-group">
+    <div class="panel panel-primary">
+        <div class="panel-heading"><h4><i class="fa fa-angle-right"></i> Phân Công Giảng Dạy</h4></div>
+        <div class="panel-body">
+            <div class="col-md-12 row">
+                @Html.HiddenFor(c => c.MaLHMH)
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label">Lớp học</label>
+                            </div>
+                            <div class="col-md-12">
+                                @Html.DropDownList("MaLop", (IEnumerable<SelectListItem>)ViewData["LopDropdown"], "--Chọn lớp học--", new { @class = "form-control", @id = "maLopHoc" })
+                                <span id="msgMaLopHoc" style="font-style: italic; color: red"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label">Môn học</label>
+                            </div>
+                            <div class="col-md-12">
+                                @Html.DropDownList("MaMH", (IEnumerable<SelectListItem>)ViewData["MonHocDropdown"], "--Chọn môn học--", new { @class = "form-control", @id = "maMonHoc" })
+                                <span id="msgMaMonHoc" style="font-style: italic; color: red"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label">Giờ học</label>
+                            </div>
+                            <div class="col-md-12">
+                                @Html.DropDownList("MaGio", (IEnumerable<SelectListItem>)ViewData["GioHocDropdown"], "--Chọn giờ học--", new { @class = "form-control", @id = "maGioHoc" })
+                                <span id="msgMaGioHoc" style="font-style: italic; color: red"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label">Ngày bắt đầu giảng dạy</label>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="text" id="dateBD" class="form-control" placeholder="Từ Ngày..." aria-label="Search" aria-describedby="basic-addon2">
+                                <span id="msgNgayBD" style="font-style: italic; color: red"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label">Ngày kết thúc giảng dạy</label>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="text" id="dateKT" class="form-control" placeholder="Từ Ngày..." aria-label="Search" aria-describedby="basic-addon2">
+                                <span id="msgNgayKT" style="font-style: italic; color: red"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label">Mô tả</label>
+                            </div>
+                            <div class="col-md-12">
+                                <textarea class="form-control" rows="2" cols="2" id="txaMoTa" maxlength="500"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label">Là ngoài giờ</label>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="checkbox" id="cbxNgoaiGio" name="cbxNgoaiGio" value="T">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-12" id="trGiaoVien" style="display:none">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label class="control-label">Phân công cho Giáo viên<br /><span style="color:red">*</span>Danh sách giáo viên có thể giảng dạy trong thời gian đã chọn</label>
+                            </div>
+                            <div class="col-md-12" id="divGV" style="overflow-y: scroll; height: 350px;">
+                                @*@Html.DropDownListFor(m => m.MaGV, new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"), "--Chọn giáo viên--", new { id = "maGV", @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.MaGV, "", new { @class = "text-danger" })*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" role="dialog" id="phanCongGDModal" aria-labelledby="phanCongGDModalLebel" aria-hidden="true">
+    <div class="modal-dialog" style="overflow-y: initial !important" role="document">
+        <div class="modal-content" id="phanCongGDModalBody">
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" role="dialog" id="messageModal" aria-labelledby="messageLebel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="messageBody">
+            <div class="modal-header" style="background-color: #4e73df">
+                <h4 class="modal-title">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span id="lblMessage"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        var dataTable;
+        function alertMessage(msg) {
+            $("#lblMessage").html(msg);
+            $("#messageModal").modal("show");
+        }
+        $(document).ready(function () {
+            $("#dateBD").datepicker();
+            $("#dateKT").datepicker();
+
+            $("#maMonHoc, #maLopHoc, #maGioHoc, #dateBD, #dateKT").change(function () {
+                var lopHoc = $('#maLopHoc').val();
+                var monHoc = $('#maMonHoc').val();
+                var gioHoc = $('#maGioHoc').val();
+                var ngayBD = $('#dateBD').val();
+                var ngayKT = $('#dateKT').val();
+                var msg = validateFilter(lopHoc, monHoc, gioHoc, ngayBD, ngayKT);
+                if (msg == "") {
+                    hideMsg("msgMaLopHoc,msgMaMonHoc,msgMaGioHoc,msgNgayBD,msgNgayKT");
+                    getGiaoVien(lopHoc, monHoc, gioHoc, ngayBD, ngayKT);
+                }
+            });
+            showMsg("msgMaLopHoc", "Mời bạn chọn lớp học.");
+        });
+
+        function validateFilter(lopHoc, monHoc, gioHoc, ngayBD, ngayKT) {
+            var msg = "";
+            if (lopHoc == "") {
+                msg = "Mời bạn chọn lớp học.";
+                if (msg != "") {
+                    showMsg("msgMaLopHoc", msg);
+                    hideMsg("msgMaMonHoc,msgMaGioHoc,msgNgayBD,msgNgayKT");
+                }
+            } else if (monHoc == "") {
+                msg = "Mời bạn chọn môn học.";
+                if (msg != "") {
+                    showMsg("msgMaMonHoc", msg);
+                    hideMsg("msgMaLopHoc,msgMaGioHoc,msgNgayBD,msgNgayKT");
+                }
+            } else if (gioHoc == "") {
+                msg = "Mời bạn chọn giờ học.";
+                if (msg != "") { 
+                    showMsg("msgMaGioHoc", msg);
+                    hideMsg("msgMaLopHoc,msgMaMonHoc,msgNgayBD,msgNgayKT");
+                }
+            } else if (ngayBD == "") {
+                msg = "Mời bạn chọn ngày bắt đầu.";
+                if (msg != "") {
+                    showMsg("msgNgayBD", msg);
+                    hideMsg("msgMaLopHoc,msgMaMonHoc,msgMaGioHoc,msgNgayKT");
+                }
+            } else if (ngayKT == "") {
+                msg = "Mời bạn chọn ngày kết thúc.";
+                if (msg != "") {
+                    showMsg("msgNgayKT", msg);
+                    hideMsg("msgMaLopHoc,msgMaMonHoc,msgMaGioHoc,msgNgayBD");
+                }
+            }
+            return msg;
+        }
+
+        function showMsg(id, mesg) {
+            $("#" + id).html(mesg);
+        }
+
+        function hideMsg(ids) {
+            var lstId = ids.split(",");
+            for (var i = 0; i < lstId.length; i++)
+                $("#" + lstId[i]).html("");
+        }
+
+        function getGiaoVien(lopHoc, monHoc, gioHoc, ngayBD, ngayKT) {
+            $("#divLoader").show();
+            $.ajax({
+                type: "GET",
+                url: '/PhanCongGD/GetGiaoVienByLopHocMonHoc',
+                data: { lopHoc: lopHoc, monHoc: monHoc, gioHoc: gioHoc, ngayBD: ngayBD, ngayKT: ngayKT },
+                success: successFunc,
+                error: errorFunc
+            });
+
+            function successFunc(data) {
+                //var select = $("#maGV");
+                //select.empty();
+                //select.append($('<option/>', {
+                //    value: 0,
+                //    text: "--Chọn giáo viên--"
+                //}));
+                //$.each(data, function (index, itemData) {
+                //    select.append($('<option/>', {
+                //        value: itemData.Value,
+                //        text: itemData.Text
+                //    }));
+                //});
+                var lstGv = "";
+                $.each(data, function (index, itemData) {
+                    lstGv += '<label class="radio-inline col-md-12" style="background-color: #ded9d9; border-radius: 3px; padding-left: 6px; padding-right: 6px; color: black; cursor: pointer;">'
+                           + '<input type="radio" name="radGV" value="'
+                           + itemData.Value + '">' + itemData.Text + '</label><br/>';
+                });
+                $("#divGV").empty();
+                $("#divGV").append(lstGv);
+                $("#trGiaoVien").show();
+                $("#divLoader").hide();
+            }
+
+            function errorFunc() {
+                alertMessage('error');
+                $("#divLoader").hide();
+            }
+        }
+
+        function savePhanCongGD() {
+            $("#divLoader").show();
+            var _obj = {};
+            _obj.MaLop = $('#maLopHoc').val();
+            _obj.MaMH = $('#maMonHoc').val();
+            _obj.MaGio = $('#maGioHoc').val();
+            _obj.NgayBD = $('#dateBD').val();
+            _obj.NgayKT = $('#dateKT').val();
+            _obj.MoTa = $('#txaMoTa').val();
+            _obj.NgoaiGio = $('#cbxNgoaiGio').is(":checked") ? true : false;
+            _obj.MaGV = $('input[name="radGV"]:checked').val();
+
+            if (_obj.MaGV == "" || _obj.MaGV == undefined) {
+                alertMessage("Mời bạn chọn Giáo viên giảng dạy.");
+            } else {
+                var msg = validateFilter(_obj.MaLop, _obj.MaMH, _obj.MaGio, _obj.NgayBD, _obj.NgayKT);
+                if (msg == "" && _obj.MaGV != "") {
+                    hideMsg("msgMaLopHoc,msgMaMonHoc,msgMaGioHoc,msgNgayBD,msgNgayKT");
+                    $.ajax({
+                        type: "POST",
+                        url: "/PhanCongGD/SavePhanCongGD",
+                        data: JSON.stringify(_obj),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (r) {
+                            var res = r.Message.split("|");
+                            $("#lblMessage").html(res[1]);
+                            $("#messageModal").modal("show");
+                            if (res[0] == "S")
+                                backToPrevious();
+                        }
+                    });
+                }
+            }
+            $("#divLoader").hide();
+        }
+
+        function backToPrevious() {
+            window.history.back();
+        }
+    </script>
+}
+
+
+

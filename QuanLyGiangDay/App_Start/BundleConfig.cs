@@ -28,10 +28,11 @@ namespace QuanLyGiangDay
 
             bundles.Add(new StyleBundle("~/Content/theme/css").Include(
                       "~/Content/css/sb-admin-2.min.css",
-                      "~/Content/vendor/datatables/dataTables.bootstrap4.css"
-                      ));
+                      "~/Content/vendor/datatables/dataTables.bootstrap4.css",
+                      "~/Content/css/common.css"));
 
             bundles.Add(new StyleBundle("~/Content/theme/js").Include(
+                      "~/Scripts/jquery.validate.min.js",
                       "~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js",
                       "~/Content/vendor/vendor/jquery-easing/jquery.easing.min.js",
                       "~/Content/vendor/js/sb-admin-2.min.js",

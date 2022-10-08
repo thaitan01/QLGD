@@ -1,5 +1,7 @@
 ﻿using QuanLyGiangDay.Models.EF;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
@@ -17,7 +19,7 @@ namespace QuanLyGiangDay.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetPhanCongGDTableData()
+        public ActionResult GetPhanCongGDTableData(string lopHoc, string monHoc, string gioHoc, string tuNgay, string denNgay, string ngoaiGio, string tatCa)
         {
             JsonResult result = new JsonResult();
             try
@@ -43,6 +45,7 @@ namespace QuanLyGiangDay.Controllers
                             {
                                 c.LHMH.LHMH.MaLHMH,
                                 c.LHMH.LHMH.MaLop,
+                                c.LHMH.LHMH.LopHoc.TenLop,
                                 c.MH.TenMon,
                                 c.LHMH.LHMH.MaGio,
                                 c.LHMH.LHMH.MoTa,
@@ -51,7 +54,36 @@ namespace QuanLyGiangDay.Controllers
                                 c.LHMH.LHMH.NgoaiGio,
                                 c.LHMH.GV.TenGV
                             }).ToList();
-                            
+
+                if(!string.IsNullOrEmpty(lopHoc))
+                {
+                    data = data.Where(x => x.TenLop.Contains(lopHoc)).ToList();
+                }
+                if (!string.IsNullOrEmpty(monHoc))
+                {
+                    data = data.Where(x => x.TenMon.Contains(monHoc)).ToList();
+                }
+                if (!string.IsNullOrEmpty(gioHoc))
+                {
+                    data = data.Where(x => x.MaGio.Contains(gioHoc)).ToList();
+                }
+                if (!string.IsNullOrEmpty(tuNgay))
+                {
+                    DateTime cTuNgay = Convert.ToDateTime(tuNgay);
+                    data = data.Where(x => x.NgayBD >= (cTuNgay)).ToList();
+                }
+                if (!string.IsNullOrEmpty(denNgay))
+                {
+                    DateTime cDenNgay = Convert.ToDateTime(denNgay);
+                    data = data.Where(x => x.NgayKT <= (cDenNgay)).ToList();
+                }
+                if (!string.IsNullOrEmpty(ngoaiGio) && !string.IsNullOrEmpty(tatCa))
+                {
+                    bool cNgoaiGio = ngoaiGio == "T" ? true : false;
+                    if ((ngoaiGio == "T" || ngoaiGio == "F") && tatCa == "F")
+                        data = data.Where(x => x.NgoaiGio.Equals(cNgoaiGio)).ToList();
+                }
+
                 int totalRecords = data.Count;
                 //Sorting
                 try
@@ -166,26 +198,108 @@ namespace QuanLyGiangDay.Controllers
             return PartialView("PhanCongGDPartialView", lhmh);
         }
 
-        public ActionResult SavePhanCongGD(LopHocMonHoc lhmh)
+        public ActionResult GetPhanCongGD()
+        {
+            SelectList lophocs = new SelectList(_context.LopHoc.ToList(), "MaLop", "TenLop");
+            ViewData["LopDropdown"] = lophocs;
+
+            SelectList monhocs = new SelectList(_context.MonHoc.ToList(), "MaMH", "TenMon");
+            ViewData["MonHocDropdown"] = monhocs;
+
+            SelectList giohocs = new SelectList(_context.GioHoc.ToList(), "MaGio", "TenGio");
+            ViewData["GioHocDropdown"] = giohocs;
+
+            return View("PhanCongGDView");
+        }
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult GetGiaoVienByLopHocMonHoc(string lopHoc, string monHoc, string gioHoc, string ngayBD, string ngayKT)
+        {
+            var giaoviens = GetAllGiaoVienByLopMon(lopHoc, monHoc, gioHoc, ngayBD, ngayKT);
+            return Json(giaoviens, JsonRequestBehavior.AllowGet);
+        }
+
+        [NonAction]
+        public IEnumerable<SelectListItem> GetAllGiaoVienByLopMon(string lopHoc, string monHoc, string gioHoc, string ngayBD, string ngayKT)
+        {
+            //generate empty list
+            var selectList = new List<SelectListItem>();
+
+            DateTime bd = Convert.ToDateTime(ngayBD);
+            DateTime kt = Convert.ToDateTime(ngayKT);
+
+            var listOfLHMH = _context.LopHocMonHoc.Where(x => x.MaLop.Trim().Equals(lopHoc.Trim()))
+                .Where(x => x.MaMH.Trim().Equals(monHoc.Trim()))
+                .Where(x => x.MaGio.Trim().Equals(gioHoc.Trim()))
+                .Where(x => x.NgayBD >= bd)
+                .Where(x => x.NgayBD <= kt)
+                .Select(x => x.MaGV).ToList();
+
+            var giaoViens = _context.GiaoVien.Where(r => !listOfLHMH.Contains(r.MaGV))
+                .Select(c => new {
+                c.MaGV,
+                c.TenGV
+            }).ToList();
+            
+            foreach (var gv in giaoViens)
+            {
+                //add elements in dropdown
+                selectList.Add(new SelectListItem
+                {
+                    Value = gv.MaGV.ToString(),
+                    Text = gv.TenGV.ToString()
+                });
+            }
+            return selectList;
+        }
+
+        public ActionResult SavePhanCongGD(LopHocMonHoc _obj)
         {
             if (ModelState.IsValid)
             {
-                if (lhmh.MaLHMH != null)
+                if (_obj.MaLHMH != null)
                 {
-                    _context.Entry(lhmh).State = System.Data.Entity.EntityState.Modified;
+                    _context.Entry(_obj).State = System.Data.Entity.EntityState.Modified;
                 }
                 else
                 {
-                    var countOfRows = _context.LopHocMonHoc.Count();
-                    var lastRow = _context.LopHocMonHoc.OrderBy(c => c.MaLHMH).Skip(countOfRows - 1).FirstOrDefault();
-                    int nextId = Convert.ToInt32(lastRow.MaLHMH.Substring(4));
-                    lhmh.MaLHMH = "LHMH" + (nextId + 1);
-                    _context.LopHocMonHoc.Add(lhmh);
+                    var isExist = _context.LopHocMonHoc.Where(x => x.MaLop == _obj.MaLop)
+                       .Where(x => x.MaMH == _obj.MaMH)
+                       .Where(x => x.MaGio == _obj.MaGio);
+                    if (isExist != null)
+                    {
+                        return Json(new { Message = "E|Lớp học đã được phân công trước đó!" }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        var countOfRows = _context.LopHocMonHoc.Count();
+                        var lastRow = _context.LopHocMonHoc.OrderBy(c => c.MaLHMH).Skip(countOfRows - 1).FirstOrDefault();
+                        int nextId = Convert.ToInt32(lastRow.MaLHMH.Substring(4));
+                        _obj.MaLHMH = "LHMH" + (nextId + 1);
+                        _context.LopHocMonHoc.Add(_obj);
+                    }
                 }
                 _context.SaveChanges();
-                return Json(new { Message = "Lưu dữ liệu thành công!" }, JsonRequestBehavior.AllowGet);
+                return Json(new { Message = "S|Lưu dữ liệu thành công!" }, JsonRequestBehavior.AllowGet);
             }
-            return Json(new { Message = "Đã xãy ra lỗi trong quá trình lưu dữ liệu!" }, JsonRequestBehavior.AllowGet);
+            return Json(new { Message = "E|Đã xãy ra lỗi trong quá trình lưu dữ liệu!" }, JsonRequestBehavior.AllowGet);
+            
+        }
+
+        public ActionResult DeletePhanCongGD(string id)
+        {
+            try
+            {
+                var lhmh = _context.LopHocMonHoc.Find(id);
+                _context.LopHocMonHoc.Remove(lhmh);
+                _context.SaveChanges();
+                return Json(new { Message = "Xóa dữ liệu thành công!" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Message = "Xảy ra lỗi trong quá trình xóa dữ liệu!" }, JsonRequestBehavior.AllowGet);
+            }
+
         }
     }
 

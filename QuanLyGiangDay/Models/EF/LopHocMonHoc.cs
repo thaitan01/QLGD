@@ -25,7 +25,7 @@ namespace QuanLyGiangDay.Models.EF
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> NgayBD { get; set; }
-        public Nullable<bool> NgoaiGio { get; set; }
+        public bool NgoaiGio { get; set; }
         public string MaGV { get; set; }
     
         public virtual GiaoVien GiaoVien { get; set; }

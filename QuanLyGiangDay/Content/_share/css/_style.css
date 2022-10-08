@@ -143,6 +143,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .c-btn-item {
     cursor: pointer !important;
+    margin:0px;
 }
 
 tbody>tr:hover {

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="quanlygiaovienModelStoreContainer" CdmEntityContainer="quanlygiaovienEntities">
-    <EntitySetMapping Name="CTDTs">
+    <EntitySetMapping Name="CTDT">
       <EntityTypeMapping TypeName="quanlygiaovienModel.CTDT">
         <MappingFragment StoreEntitySet="CTDT">
           <ScalarProperty Name="MaCTDT" ColumnName="MaCTDT" />
@@ -10,7 +10,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="GiaoViens">
+    <EntitySetMapping Name="GiaoVien">
       <EntityTypeMapping TypeName="quanlygiaovienModel.GiaoVien">
         <MappingFragment StoreEntitySet="GiaoVien">
           <ScalarProperty Name="MaGV" ColumnName="MaGV" />
@@ -21,7 +21,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="GioHocs">
+    <EntitySetMapping Name="GioHoc">
       <EntityTypeMapping TypeName="quanlygiaovienModel.GioHoc">
         <MappingFragment StoreEntitySet="GioHoc">
           <ScalarProperty Name="MaGio" ColumnName="MaGio" />
@@ -30,7 +30,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="HocKies">
+    <EntitySetMapping Name="HocKy">
       <EntityTypeMapping TypeName="quanlygiaovienModel.HocKy">
         <MappingFragment StoreEntitySet="HocKy">
           <ScalarProperty Name="MaHK" ColumnName="MaHK" />
@@ -38,7 +38,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="LoaiGVs">
+    <EntitySetMapping Name="LoaiGV">
       <EntityTypeMapping TypeName="quanlygiaovienModel.LoaiGV">
         <MappingFragment StoreEntitySet="LoaiGV">
           <ScalarProperty Name="MaLoaiGV" ColumnName="MaLoaiGV" />
@@ -47,7 +47,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Logs">
+    <EntitySetMapping Name="Log">
       <EntityTypeMapping TypeName="quanlygiaovienModel.Log">
         <MappingFragment StoreEntitySet="Log">
           <ScalarProperty Name="MaLog" ColumnName="MaLog" />
@@ -57,7 +57,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="LopHocs">
+    <EntitySetMapping Name="LopHoc">
       <EntityTypeMapping TypeName="quanlygiaovienModel.LopHoc">
         <MappingFragment StoreEntitySet="LopHoc">
           <ScalarProperty Name="MaLop" ColumnName="MaLop" />
@@ -67,7 +67,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="LopHocMonHocs">
+    <EntitySetMapping Name="LopHocMonHoc">
       <EntityTypeMapping TypeName="quanlygiaovienModel.LopHocMonHoc">
         <MappingFragment StoreEntitySet="LopHocMonHoc">
           <ScalarProperty Name="MaLHMH" ColumnName="MaLHMH" />
@@ -75,14 +75,14 @@
           <ScalarProperty Name="MaMH" ColumnName="MaMH" />
           <ScalarProperty Name="MaGio" ColumnName="MaGio" />
           <ScalarProperty Name="MoTa" ColumnName="MoTa" />
-          <ScalarProperty Name="NgayDayDuKien" ColumnName="NgayDayDuKien" />
+          <ScalarProperty Name="NgayKT" ColumnName="NgayKT" />
           <ScalarProperty Name="NgayBD" ColumnName="NgayBD" />
           <ScalarProperty Name="NgoaiGio" ColumnName="NgoaiGio" />
           <ScalarProperty Name="MaGV" ColumnName="MaGV" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="MonHocs">
+    <EntitySetMapping Name="MonHoc">
       <EntityTypeMapping TypeName="quanlygiaovienModel.MonHoc">
         <MappingFragment StoreEntitySet="MonHoc">
           <ScalarProperty Name="MaMH" ColumnName="MaMH" />
@@ -93,7 +93,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="quanlygiaovienModel.sysdiagram">
+      <EntityTypeMapping TypeName="quanlygiaovienModel.sysdiagrams">
         <MappingFragment StoreEntitySet="sysdiagrams">
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -103,7 +103,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TaiKhoans">
+    <EntitySetMapping Name="TaiKhoan">
       <EntityTypeMapping TypeName="quanlygiaovienModel.TaiKhoan">
         <MappingFragment StoreEntitySet="TaiKhoan">
           <ScalarProperty Name="MaTK" ColumnName="MaTK" />
@@ -115,7 +115,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="VaiTroes">
+    <EntitySetMapping Name="VaiTro">
       <EntityTypeMapping TypeName="quanlygiaovienModel.VaiTro">
         <MappingFragment StoreEntitySet="VaiTro">
           <ScalarProperty Name="MaVT" ColumnName="MaVT" />
@@ -124,7 +124,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="MonHocHocKies">
+    <EntitySetMapping Name="MonHocHocKy">
       <EntityTypeMapping TypeName="quanlygiaovienModel.MonHocHocKy">
         <MappingFragment StoreEntitySet="MonHocHocKy">
           <ScalarProperty Name="MaMH" ColumnName="MaMH" />

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<QuanLyGiangDay.Models.EF.HocKy>
+﻿@model IEnumerable<QuanLyGiangDay.Models.EF.CTDT>
 
 @{
     ViewBag.Title = "Index";
@@ -8,19 +8,16 @@
     <link href="@Url.Content("~/Content/_share/css/HocKy/HocKy.css")" rel="stylesheet" type="text/css" />
 }
 
-@*<p>
-        @Html.ActionLink("Create New", "Create")
-    </p>*@
 <div class="hoc-ky">
     <div class="herder-display">
         <p class="tile-dispaly"
            style="font-size:21px">
             <i class="fa fa-angle-right"></i>
-            Quản Lý Học Kỳ
+            Quản Lý Trương Trình Đào Tạo
         </p>
     </div>
     <div class="button-index-qlgiv shadow">
-        <div id="btn-call-add-gv" class="btn btn-primary btn-primary-add" 
+        <div id="btn-call-add-gv" class="btn btn-primary btn-primary-add"
              style="padding-top: 10px;"
              onclick="callModatAdd()">
             <span class="fa fa-plus-circle"></span>
@@ -38,31 +35,38 @@
                             <th>
                                 Tên Học Kỳ
                             </th>
+                            <th></th>
                             <th class="no-sorting"></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.TenHK)
-                                </td>
-                                <td class="c-body-action-item-table">
-                                    <p data-id="@item.MaHK.Trim()"
-                                       class="c-btn-item  button-update-gv">
-                                        <i class="fa fa-edit" style="color:var(--blue)"></i>
-                                    </p>
-                                    <p data-id="@item.MaHK.Trim()"
-                                       class="c-btn-item  button-detail-gv">
-                                        <i class="fas fa-info-circle" style="color:var(--blue)"></i>
-                                    </p>
-                                    <p data-id="@item.MaHK.Trim()"
-                                       class="c-btn-item  button-delete-gv">
-                                        <i class="fas fa-trash" style="color:var(--red)"></i>
-                                    </p>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TenCTDT)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MoTa)
+                            </td>
+                            <td class="c-body-action-item-table">
+                                <p data-id="@item.MaCTDT.Trim()"
+                                   class="c-btn-item  button-update-gv">
+                                    <i class="fa fa-edit" style="color:var(--blue)"></i>
+                                </p>
+                                <p data-id="@item.MaCTDT.Trim()"
+                                   class="c-btn-item  button-detail-gv">
+                                    <i class="fas fa-info-circle" style="color:var(--blue)"></i>
+                                </p>
+                                <p data-id="@item.MaCTDT.Trim()"
+                                   class="c-btn-item  button-delete-gv">
+                                    <i class="fas fa-trash" style="color:var(--red)"></i>
+                                </p>
+                            </td>
+                                @*    @Html.ActionLink("Edit", "Edit", new { id = item.MaCTDT }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.MaCTDT }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.MaCTDT })*@
+                        </tr>
                         }
                     </tbody>
                 </table>

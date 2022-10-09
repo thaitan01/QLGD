@@ -57,10 +57,31 @@ th {
 
 .body-action-item-table {
     position: relative !important;
+    display: flex;
+    justify-content:center;;
 }
 
 .action-item-table {
-    position: absolute;
+    position: relative;
     left: 50%;
     top: 10%;
+    display: flex;
+    font-size: 24px;
+}
+.c-btn-item{
+    margin-left:30px
+}
+.no-sorting::before {
+    content: "";
+    position: absolute !important;
+    bottom: 0.9em !important;
+    display: none !important;
+    opacity: 0.3 !important;
+}
+.no-sorting::after {
+    content: "";
+    position: absolute !important;
+    bottom: 0.9em !important;
+    display: none !important;
+    opacity: 0.3 !important;
 }

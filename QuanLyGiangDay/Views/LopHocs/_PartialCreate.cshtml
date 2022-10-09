@@ -3,13 +3,13 @@
 
 @* model header *@
 <div class="modal-header">
-
+    <h5 class="modal-title">Thêm lớp học</h5>
     <button type="button" class="close" data-dismiss="modal" aria-
             hidden="true">
         ×
     </button>
 
-    <h5 class="modal-title">Thêm lớp học</h5>
+    
 </div>
 
 @using (Html.BeginForm())
@@ -52,10 +52,11 @@
 
         </div>
      </div>
-     <div class="modal-footer">
-            <input type="submit" value="Thêm" class="btn btn-default btn-primary" />
-            <button class="btn btn-default btn-primary" data-dismiss="modal">Đóng</button>
-     </div>
+    <div class="modal-footer">
+        <button class="btn btn-default btn-secondary" data-dismiss="modal">Đóng</button>
+        <input type="submit" value="Thêm" class="btn btn-default btn-primary" />
+
+    </div>
 }
 
        

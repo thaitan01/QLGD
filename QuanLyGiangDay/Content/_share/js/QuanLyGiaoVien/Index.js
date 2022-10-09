@@ -3,13 +3,10 @@ window.onload = function () {
     function changIdForm(e) {
         idForm = e
     }
-
-    document.getElementById("save-t").addEventListener("click", function (e) {
-        document.getElementById(idForm + "_table").submit();
-    })
     document.getElementById("btn-call-add-gv").addEventListener("click", function () {
         callModatAddTT();
     })
+
     // update Tech
     const updateGV = document.getElementsByClassName("button-update-gv")
     for (let index = 0; index < updateGV.length; index++) {
@@ -35,7 +32,7 @@ window.onload = function () {
 
     }
     //
-    const trTableHover = document.getElementsByClassName("c-tr-body");
+    /*const trTableHover = document.getElementsByClassName("c-tr-body");
     for (let i = 0; i < trTableHover.length; i++) {
         trTableHover[i].addEventListener("mouseover", function (e) {
             document.getElementById(trTableHover[i].dataset.id).style.display = "block";
@@ -45,13 +42,7 @@ window.onload = function () {
         trTableHover[i].addEventListener("mouseout", function (e) {
             document.getElementById(trTableHover[i].dataset.id).style.display = "none";
         })
-    }
-    document.getElementById("dataTable_filter").getElementsByTagName("label")[0]
-        .getElementsByTagName("input")[0].placeholder = "Nhập nọi dung  cần tìm";
-    document.getElementById("dataTable_filter").getElementsByTagName("label")[0]
-        .getElementsByTagName("input")[0].style.width = "400px";
-    document.getElementById("dataTable_filter").getElementsByTagName("label")[0]
-        .getElementsByTagName("input")[0].style.height = "40px";
+    }*/
 };
 /**
  * Call and add data madal add

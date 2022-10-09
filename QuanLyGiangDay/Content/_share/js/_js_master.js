@@ -4,10 +4,10 @@
  * @param {object} sseting
  * @return {void}
  */
-function callDisplay(_id, ...seting) {
+async function callDisplay(_id, ...seting) {
     changLoading(true)
     try {
-        $.ajax({
+        await $.ajax({
             url: seting[0].url,
             data: seting[0].data,
             type: seting[0].type,
@@ -16,6 +16,17 @@ function callDisplay(_id, ...seting) {
                 changLoading(false)
                 $('#' + _id).html(data);
                 $('#' + seting[0].modal).modal('show');
+                $('#save-' + seting[0].modal).click(function () {
+                    const from = $("#" + $('#' + _id).find('form')[0].id);
+                    const dataReturn = submitForm(from.attr('method'), from.attr('action'), from.getFormData())
+                    Swal.fire({
+                        position: 'top-end',
+                        title: 'Thành Công',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                    $('#' + seting[0].modal).modal('hide');
+                })
             },
             error: function (e) {
                 changLoading(false)
@@ -27,35 +38,27 @@ function callDisplay(_id, ...seting) {
     }
 }
 /**
- * Chang tab
- * @param {*} param
- * @return {void}
+ * Submit form 
+ * @param  {any} method 
+ * @param  {any} action 
+ * @param  {any} data 
+ * @return {*} 
  */
-function changTab(...param) {
-    // const tab = document.getElementsByClassName("heder-tab").stylpe
-    const tab = document.getElementsByClassName("heder-tab")
-    if (param[0] !== undefined)
-        param[0].prototype.constructor(tab[0].getAttribute("href"))
-    for (let i = 0; i < tab.length; i++) {
-        tab[i].addEventListener('click', function (e) {
-            for (let y = 0; y < tab.length; y++) {
-                if (y === i) {
-                    tab[y].classList.add("heder-tab-active");
-                } else {
-                    tab[y].classList.remove("heder-tab-active");
-                }
-            }
-            const elematBody = document.getElementsByClassName("body-tab");
-            for (const iterator of elematBody) {
-                if (e.target.attributes.href.value !== iterator.id)
-                    iterator.classList.add("none")
-                else
-                    iterator.classList.remove("none")
-            }
-            if (param[0] !== undefined)
-                param[0].prototype.constructor(e.target.attributes.href.value)
-        });
-    }
+async function submitForm(method, action, data) {
+    let status = false
+    await $.ajax({
+        type: method,
+        url: action,
+        data: data,
+        success: function (_data) {
+            console.log(_data);
+            status = true
+        },
+        error: function (_data) {
+            status = _data
+        }
+    });
+    return status
 }
 /**
  * Chang is show loading
@@ -63,14 +66,30 @@ function changTab(...param) {
  * @return {void}
  */
 function changLoading(_isLoading) {
-    console.log(_isLoading);
     const loading = document.getElementById("loading")
     if (_isLoading)
         loading.classList.add("loading")
     else
         loading.classList.remove("loading")
 }
-//tab
-$(document).ready(function () {
-    console.log(document.getElementById("tabs"));
+/**
+ * Get data in from
+ * @param {*} $
+ * @return {object}
+ */
+(function ($) {
+    $.fn.getFormData = function () {
+        var data = {};
+        var dataArray = $(this).serializeArray();
+        for (var i = 0; i < dataArray.length; i++) {
+            data[dataArray[i].name] = dataArray[i].value;
+        }
+        return data;
+    }
+})(jQuery);
+/**
+ * 
+ */
+
+$(document).ready(function onDocumentReady() {
 });

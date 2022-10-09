@@ -1,8 +1,97 @@
-﻿
+﻿@model IEnumerable<QuanLyGiangDay.Models.EF.HocKy>
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section AddToHead{
+    <link href="@Url.Content("~/Content/_share/css/HocKy/HocKy.css")" rel="stylesheet" type="text/css" />
+}
 
-<h2>Index</h2>
-
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<div class="hoc-ky">
+    <div class="herder-display">
+        <p class="tile-dispaly"
+           style="font-size:21px">
+            <i class="fa fa-angle-right"></i>
+            Quản Lý Học Kỳ
+        </p>
+    </div>
+    <div class="button-index-qlgiv shadow">
+        <div id="btn-call-add-gv" class="btn btn-primary btn-primary-add" 
+             style="padding-top: 10px;"
+             onclick="callModatAdd()">
+            <span class="fa fa-plus-circle"></span>
+            Thêm Học Kỳ
+        </div>
+    </div>
+    <div class="c-body-display-index-tag body-display-index-qlgiv shadow" style="background: var(--white)">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-body-display-index-qlgiv"
+                       id="dataTable"
+                       width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                Tên Học Kỳ
+                            </th>
+                            <th class="no-sorting"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TenHK)
+                                </td>
+                                <td class="c-body-action-item-table">
+                                    <p data-id="@item.MaHK.Trim()"
+                                       class="c-btn-item  button-update-gv">
+                                        <i class="fa fa-edit" style="color:var(--blue)"></i>
+                                    </p>
+                                    <p data-id="@item.MaHK.Trim()"
+                                       class="c-btn-item  button-detail-gv">
+                                        <i class="fas fa-info-circle" style="color:var(--blue)"></i>
+                                    </p>
+                                    <p data-id="@item.MaHK.Trim()"
+                                       class="c-btn-item  button-delete-gv">
+                                        <i class="fas fa-trash" style="color:var(--red)"></i>
+                                    </p>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModalCenters" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="body-modal" id="body-modal-qlgv">
+                    jkhasjdks
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" id="save-exampleModalCenter" class="btn btn-primary">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/_custom/datatables.js"></script>
+<script src="~/Content/_share/js/HocKy/index.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

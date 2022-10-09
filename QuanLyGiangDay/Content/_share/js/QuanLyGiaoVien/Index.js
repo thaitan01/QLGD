@@ -1,49 +1,3 @@
-window.onload = function () {
-    let idForm = "";
-    function changIdForm(e) {
-        idForm = e
-    }
-    document.getElementById("btn-call-add-gv").addEventListener("click", function () {
-        callModatAddTT();
-    })
-
-    // update Tech
-    const updateGV = document.getElementsByClassName("button-update-gv")
-    for (let index = 0; index < updateGV.length; index++) {
-        updateGV[index].addEventListener("click", function (e) {
-            callModatUpdateTT(updateGV[index].dataset.id);
-        })
-
-    }
-    // detail Tech
-    const detailGV = document.getElementsByClassName("button-detail-gv")
-    for (let index = 0; index < updateGV.length; index++) {
-        detailGV[index].addEventListener("click", function (e) {
-            callModatDatailTT(detailGV[index].dataset.id);
-        })
-
-    }
-    // delete Tech
-    const deleteleGV = document.getElementsByClassName("button-delete-gv")
-    for (let index = 0; index < updateGV.length; index++) {
-        deleteleGV[index].addEventListener("click", function (e) {
-            callModatDeleteTT(deleteleGV[index].dataset.id);
-        })
-
-    }
-    //
-    /*const trTableHover = document.getElementsByClassName("c-tr-body");
-    for (let i = 0; i < trTableHover.length; i++) {
-        trTableHover[i].addEventListener("mouseover", function (e) {
-            document.getElementById(trTableHover[i].dataset.id).style.display = "block";
-        })
-    }
-    for (let i = 0; i < trTableHover.length; i++) {
-        trTableHover[i].addEventListener("mouseout", function (e) {
-            document.getElementById(trTableHover[i].dataset.id).style.display = "none";
-        })
-    }*/
-};
 /**
  * Call and add data madal add
  * @return {void}
@@ -57,7 +11,7 @@ function callModatAddTT() {
         modal: "exampleModalCenter",
     }
     document.getElementById("exampleModalLongTitle").innerText = "Thêm Mới Giáo Viên";
-    callDisplay("body-modal-qlgv", setting);
+    callDisplays("body-modal-qlgv", setting);
 }
 /**
  * Call and add data madal update
@@ -73,7 +27,7 @@ function callModatUpdateTT(_id) {
         modal: "exampleModalCenter",
     }
     document.getElementById("exampleModalLongTitle").innerText = "Cập Nhật Giáo Viên";
-    callDisplay("body-modal-qlgv", setting);
+    callDisplays("body-modal-qlgv", setting);
 }
 /**
  * Call and add data madal update
@@ -89,7 +43,7 @@ function callModatDatailTT(_id) {
         modal: "exampleModalCenter",
     }
     document.getElementById("exampleModalLongTitle").innerText = "Chi Tiết Giáo Viên";
-    callDisplay("body-modal-qlgv", setting);
+    callDisplays("body-modal-qlgv", setting);
 }
 
 /**
@@ -106,7 +60,35 @@ function callModatDeleteTT(_id) {
         modal: "exampleModalCenter",
     }
     document.getElementById("exampleModalLongTitle").innerText = "Xóa Giáo Viên";
-    callDisplay("body-modal-qlgv", setting);
+    callDisplays("body-modal-qlgv", setting);
+}
+/**
+ * Call display apter find tang id
+ * @param {string} _id 
+ * @param {object} sseting
+ * @return {void}
+ */
+async function callDisplays(_id, ...seting) {
+    changLoading(true)
+    try {
+        await $.ajax({
+            url: seting[0].url,
+            data: seting[0].data,
+            type: seting[0].type,
+            dataType: seting[0].dataType,
+            success: function (data) {
+                changLoading(false)
+                $('#' + _id).html(data);
+                $('#' + seting[0].modal).modal('show');
+            },
+            error: function (e) {
+                changLoading(false)
+                $('#' + _id).html('<p>' + e + '</p>');
+            },
+        });
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 

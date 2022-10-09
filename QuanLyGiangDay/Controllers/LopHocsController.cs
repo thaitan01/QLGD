@@ -57,16 +57,19 @@ namespace QuanLyGiangDay.Controllers
                                         (lh, mhhk) => new { LH = lh, MHHk = mhhk })
                                    .Select(c => new
                                    {
-                                       c.LH.LH.TenLop,
                                        c.MHHk.MonHoc.TenMon,
-                                       c.MHHk.HocKy.TenHK
+                                       c.MHHk.HocKy.TenHK,
+                                       c.LH.LHMH.NgayBD
                                    }).ToList();
             List<MonHocHocKyModel> listMH = new List<MonHocHocKyModel>();
             foreach (var item in result)
             {
-                MonHocHocKyModel m = new MonHocHocKyModel(item.TenLop, item.TenHK, item.TenMon);
+                MonHocHocKyModel m = new MonHocHocKyModel(item.TenHK, item.TenMon, item.NgayBD.Value.ToString("dd/MM/yyyy"));
                 listMH.Add(m);
             }
+
+            LopHoc lopHoc = db.LopHoc.Find(id);
+            ViewBag.LopHoc = lopHoc.TenLop;
             ViewBag.MHHK = listMH;
             return PartialView("_PartialDetail");
         }
@@ -244,15 +247,16 @@ namespace QuanLyGiangDay.Controllers
     public class MonHocHocKyModel
     {
         
-        public string MaLop { get; set; }
         public string MaMH { get; set; }
         public string MaHK { get; set; }
+        public string NgayBD { get; set; }
 
-        public MonHocHocKyModel(string TenLop, string TenHK, string TenMon)
+        public MonHocHocKyModel(string TenHK, string TenMon, string NgayBD)
         {
-            this.MaLop = TenLop;
+            
             this.MaMH = TenMon;
             this.MaHK = TenHK;
+            this.NgayBD = NgayBD;
         }
         
     }

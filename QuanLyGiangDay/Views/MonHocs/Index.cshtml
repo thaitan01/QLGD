@@ -1,0 +1,133 @@
+﻿@model IEnumerable<QuanLyGiangDay.Models.EF.MonHoc>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel-group">
+    <div class="panel panel-primary">
+        <div class="panel-heading"><h4><i class="fa fa-angle-right"></i> Quản lý môn học</h4></div>
+        <div class="panel-body">
+            <div class="float-left" style="margin-left: 30px; z-index: 99; position: relative; ">
+                <div>
+                    <a class="btn btn-primary" data-modal="" href="/MonHocs/_PartialCreate"
+                       id="btnCreate">
+                        <span class="fa fa-plus-circle"></span>
+                        &nbsp;&nbsp;Thêm môn học
+                    </a>
+                </div>
+            </div>
+            <div class="float-right" style="padding-bottom: 10px; padding-right: 28px; z-index: 99; position: relative;">
+
+            </div>
+            <div class="col-md-12">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="danhSachLopHoc" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Mã môn
+                                    </th>
+                                    <th>
+                                        Tên môn
+                                    </th>
+                                    <th>
+                                        Số giờ
+                                    </th>
+                                    <th>
+                                        Mô tả
+                                    </th>
+                                    <th>
+                                        Chi tiết
+                                    </th>
+                                    <th>
+                                        Cập nhật
+                                    </th>
+                                    <th>
+                                        Xóa
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="c-tr-body">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MaMH)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TenMon)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SoGio)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MoTa)
+                                        </td>
+                                        <td>
+                                            @Html.Raw("<a data-modal='' href='/MonHocs/_PartialDetail/" + item.MaMH + "' id='" + item.MaMH + "' title='Chi tiết'> <span class='fa fa-info-circle'> </span>  </a>")
+                                        </td>
+                                        <td>
+                                            @Html.Raw("<a data-modal='' href='/MonHocs/_PartialEdit/" + item.MaMH + "' id='" + item.MaMH + "' title='Cập nhật'> <span class='fa fa-edit'> </span>  </a>")
+
+                                        </td>
+                                        <td>
+                                            @Html.Raw("<a style='color: #e74a3b;' data-modal='' href='/MonHocs/_PartialDelete/" + item.MaMH + "' id='" + item.MaMH + "' title='Xóa'> <span class='fa fa-trash'> </span> </a>")
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/scripts/myScript.js")
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#danhSachLopHoc').DataTable({
+            responsive: true,
+            "language": {
+                "lengthMenu": "Hiển thị _MENU_ dòng dữ liệu trên một trang",
+                "info": "Hiển thị _START_ trong tổng số _TOTAL_ dòng dữ liệu",
+                "infoEmpty": "Dữ liệu rỗng",
+                "emptyTable": "Chưa có dữ liệu nào",
+                "processing": "Đang xử lý...",
+                "search": "Tìm kiếm:",
+                "loadingRecords": "Đang tải dữ liệu...",
+                "zeroRecords": "Không tìm thấy dữ liệu",
+                "infoFiltered": "(Được hiển thị từ tổng số _MAX_ dòng dữ liệu)",
+                "paginate": {
+                    "first": "Trang đầu",
+                    "last": "Trang cuối",
+                    "next": "Trang sau",
+                    "previous": "Trang sau"
+                }
+            },
+            "lengthMenu": [[5, 10, 15, 20, 25, 50, 100, -1], [5, 10, 15, 20, 25, 50,
+                100, "Tất cả"]]
+        });
+    });
+</script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+<link rel="stylesheet"
+      href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">

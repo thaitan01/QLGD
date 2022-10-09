@@ -1,7 +1,8 @@
-﻿@model QuanLyGiangDay.Models.EF.LopHoc
+﻿@model QuanLyGiangDay.Models.EF.TaiKhoan
+
 
 <div class="modal-header">
-    <h5 class="modal-title">Xóa lớp học</h5>
+    <h5 class="modal-title">Xóa tài khoản</h5>
 
     <button type="button" class="close" data-dismiss="modal" aria-
             hidden="true">
@@ -11,36 +12,45 @@
     
 </div>
 <div class="modal-body">
-    <h3>Bạn có chắc muốn xóa lớp học này không?</h3>
+    <h3>Bạn có chắc muốn xóa tài khoản này không</h3>
     <div>
-
+        
         <dl class="dl-horizontal">
             <dt>
-                Tên lớp:
+               Tên đăng nhập
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.TenLop)
+                @Html.DisplayFor(model => model.TenDN)
             </dd>
 
             <dt>
-                Mô tả:
+               Mã giáo viên
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.MoTa)
+                @Html.DisplayFor(model => model.MaGV)
             </dd>
 
             <dt>
-                Chương trình đào tạo:
+               Họ và tên
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.CTDT.TenCTDT)
+                @Html.DisplayFor(model => model.HoTen)
+            </dd>
+
+            <dt>
+               Vai trò
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.VaiTro.TenVT)
             </dd>
 
         </dl>
     </div>
+</div>
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -48,8 +58,6 @@
 <div class="modal-footer">
     <button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
     <input type="submit" value="Xóa" class="btn btn-danger" />
-
 </div>
-
-
     }
+

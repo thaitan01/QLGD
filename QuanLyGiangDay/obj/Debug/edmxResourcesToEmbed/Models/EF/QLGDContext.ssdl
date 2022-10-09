@@ -68,7 +68,7 @@
     <Property Name="MaMH" Type="nchar" MaxLength="10" Nullable="false" />
     <Property Name="MaGio" Type="nchar" MaxLength="10" Nullable="false" />
     <Property Name="MoTa" Type="nvarchar" MaxLength="50" />
-    <Property Name="NgayDayDuKien" Type="datetime" />
+    <Property Name="NgayKT" Type="datetime" />
     <Property Name="NgayBD" Type="datetime" />
     <Property Name="NgoaiGio" Type="bit" />
     <Property Name="MaGV" Type="nchar" MaxLength="10" />

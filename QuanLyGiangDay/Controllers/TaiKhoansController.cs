@@ -89,13 +89,23 @@ namespace QuanLyGiangDay.Controllers
         {
             if (ModelState.IsValid)
             {
-                taiKhoan.MatKhau = Crypto.HashPassword(taiKhoan.MatKhau);
-                db.TaiKhoan.Add(taiKhoan);
-                db.SaveChanges();
-                return Json(new { Success = true });
+                var result = db.TaiKhoan.Where(tk => tk.TenDN == taiKhoan.TenDN).FirstOrDefault();
+                if (result == null)
+                {
+                    taiKhoan.MatKhau = Crypto.Hash(taiKhoan.MatKhau, "MD5");
+                    db.TaiKhoan.Add(taiKhoan);
+                    db.SaveChanges();
+                    return Json(new { Success = true });
+                } else
+                {
+                    return Json(new { Success = false, Message = "Tài khoản đã tồn tại! Không thể thêm mới" });
+                }
+                
+            } else
+            {
+                    return Json(new { Success = false, Message = "Lỗi! Không thể thêm mới" });
             }
-
-            return Json(new { Success = false, Message = "Tài khoản đã tồn tại!không thể thêm mới" });
+           
         }
 
         // GET: TaiKhoans/Edit/5

@@ -1,0 +1,59 @@
+﻿@model QuanLyGiangDay.Models.EF.MonHoc
+
+<div class="modal-header">
+
+    <button type="button" class="close" data-dismiss="modal" aria-
+            hidden="true">
+        ×
+    </button>
+
+    <h5 class="modal-title">Xóa môn học</h5>
+</div>
+<div class="modal-body">
+    <h3>Bạn có chắc muốn xóa môn học này không?</h3>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                Tên môn
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenMon)
+            </dd>
+
+            <dt>
+                Mô tả
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MoTa)
+            </dd>
+
+            <dt>
+               Số giờ
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SoGio)
+            </dd>
+
+        </dl>
+
+    </div>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal-footer">
+        <button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <input type="submit" value="Xóa" class="btn btn-danger" />
+    </div>
+
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

@@ -7,8 +7,7 @@
             hidden="true">
         ×
     </button>
-
-    
+    <h5 class="modal-title">Chi tiết lớp học @ViewBag.TenLop</h5>
 </div>
 
 @using (Html.BeginForm())
@@ -26,22 +25,27 @@
                             <th>
                                 Môn học
                             </th>
-                            
+                            <th>
+                                Ngày bắt đầu
+                            </th>
+
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in ViewBag.MHHK)
                         {
-                            <tr class="c-tr-body">
-                                <td>
-                                   @item.MaHK
-                                </td>
-                                <td>
-                                    @item.MaMH
-                                </td>
-                                
-                                
-                            </tr>
+                        <tr class="c-tr-body">
+                            <td>
+                                @item.MaHK
+                            </td>
+                            <td>
+                                @item.MaMH
+                            </td>
+                            <td>
+                                @item.NgayBD
+                            </td>
+
+                        </tr>
                         }
                     </tbody>
                 </table>

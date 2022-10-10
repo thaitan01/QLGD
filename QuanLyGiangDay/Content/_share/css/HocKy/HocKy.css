@@ -16,9 +16,9 @@
     border: 1px solid rgb(196, 157, 4, 0.7) !important;
 }
 
-.import:hover {
-    background: rgb(196, 157, 4, 1) !important;
-}
+    .import:hover {
+        background: rgb(196, 157, 4, 1) !important;
+    }
 
 .herder-display {
     font-size: 21px;
@@ -26,9 +26,9 @@
     cursor: pointer;
 }
 
-.herder-display:hover {
-    color: #4e73df;
-}
+    .herder-display:hover {
+        color: #4e73df;
+    }
 
 .icon-primary-add {
     width: 20%;
@@ -58,7 +58,7 @@ th {
 .body-action-item-table {
     position: relative !important;
     display: flex;
-    justify-content:center;
+    justify-content: center;
 }
 
 .action-item-table {
@@ -68,9 +68,11 @@ th {
     display: flex;
     font-size: 24px;
 }
-.c-btn-item{
-    margin-left:30px
+
+.c-btn-item {
+    margin-left: 30px
 }
+
 .no-sorting::before {
     content: "";
     position: absolute !important;
@@ -78,6 +80,7 @@ th {
     display: none !important;
     opacity: 0.3 !important;
 }
+
 .no-sorting::after {
     content: "";
     position: absolute !important;

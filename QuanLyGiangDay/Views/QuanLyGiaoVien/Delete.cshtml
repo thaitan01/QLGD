@@ -9,33 +9,38 @@
         background: var(--warning);
     }
 
-    #save-t {
+    #save-exampleModalCenter {
         background: var(--red);
         position: relative;
     }
 
-    #save-t::before {
-        content: "Xóa";
-        width: 100%;
-        height: 100%;
-        left: 0;
-        top: 0;
-        background: var(--red);
-        position: absolute;
-        display: flex;
-        align-items: center;
-        justify-items: center;
-        justify-content: center;
-    }
+        #save-exampleModalCenter::before {
+            content: "Xóa";
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background: var(--red);
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            justify-content: center;
+        }
 
-    #save-t:hover::before {
-        background: red;
-    }
+        #save-exampleModalCenter:hover::before {
+            background: red;
+        }
 </style>
 <div class="delete-gv">
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "body_detale_1_tabl" }))
+    {
+        @Html.AntiForgeryToken()
+    }
     <div class="body-delete-gv c-box-show">
         <div class="c-icon-wanrning"></div>
-        <div class="tile">Xác nhận xóa giáo viên&nbsp;
+        <div class="tile">
+            Xác nhận xóa giáo viên&nbsp;
             <b> @Html.DisplayFor(model => model.TenGV)</b>&nbsp;?
         </div>
     </div>

@@ -16,7 +16,6 @@
         background: var(--blue);
         position: relative;
     }
-
     #save-t::before {
         content: "Thêm Mới";
         width: 100%;
@@ -43,8 +42,9 @@
         </p>
     </div>
     <div class="button-index-qlgiv shadow">
-        <div id="btn-call-add-gv" class="btn btn-primary btn-primary-add">
-            <img class="icon-primary-add" src="~/Assets/icon/_add.png" alt="" /> Thêm Giáo Viên
+        <div id="btn-call-add-gv" class="btn btn-primary btn-primary-add" style="padding-top: 10px;">
+            <span class="fa fa-plus-circle"></span>
+            Thêm Giáo Viên
         </div>
         <div class="btn btn-primary import">
             Import Excel
@@ -69,6 +69,8 @@
                             <th>
                                 Loại Giáo Viên
                             </th>
+                            <th class="no-sorting">
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -84,22 +86,36 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Sdt)
                                 </td>
-                                <td class="body-action-item-table">
-                                    @Html.DisplayFor(modelItem => item.LoaiGV.TenLoaiGV)
-                                    <label id="@item.MaGV.Trim()" class="action-item-table" style="display: none;">
+                                <td>
+                                        @Html.DisplayFor(modelItem => item.LoaiGV.TenLoaiGV)
+                                   @* <label id="@item.MaGV.Trim()" class="action-item-table">
                                         <p data-id="@item.MaGV.Trim()"
-                                           class="c-btn-item btn-success btn-circle button-update-gv">
+                                        class="c-btn-item  button-update-gv">
                                             <i class="fa fa-edit"></i>
                                         </p>
                                         <p data-id="@item.MaGV.Trim()"
-                                           class="c-btn-item btn-info btn-circle button-detail-gv">
+                                        class="c-btn-item  button-detail-gv">
                                             <i class="fas fa-info-circle"></i>
                                         </p>
                                         <p data-id="@item.MaGV.Trim()"
-                                           class="c-btn-item btn-danger btn-circle button-delete-gv">
+                                        class="c-btn-item  button-delete-gv">
                                             <i class="fas fa-trash"></i>
                                         </p>
-                                     </label>
+                                    </label>*@
+                                </td>
+                                <td class="body-action-item-table">
+                                    <p data-id="@item.MaGV.Trim()"
+                                       class="c-btn-item  button-update-gv">
+                                        <i class="fa fa-edit"  style="color:var(--blue)"></i>
+                                    </p>
+                                    <p data-id="@item.MaGV.Trim()"
+                                       class="c-btn-item  button-detail-gv">
+                                        <i class="fas fa-info-circle" style="color:var(--blue)"></i>
+                                    </p>
+                                    <p data-id="@item.MaGV.Trim()"
+                                       class="c-btn-item  button-delete-gv">
+                                        <i class="fas fa-trash"  style="color:var(--red)"></i>
+                                    </p>
                                 </td>
                             </tr>
                         }
@@ -125,7 +141,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button type="button" id="save-t" class="btn btn-primary">Lưu</button>
+                    <button type="button" id="save-exampleModalCenter" class="btn btn-primary">Lưu</button>
                 </div>
             </div>
         </div>
@@ -133,3 +149,5 @@
 </div>
 <script src="~/Content/_share/js/QuanLyGiaoVien/Index.js"></script>
 <script src="~/Content/_custom/datatables.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@* <script src="./script.js"></script> *@

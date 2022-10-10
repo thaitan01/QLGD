@@ -27,7 +27,8 @@
     }
 </style>
 <div class="update-gv c-box-show">
-    @using (Html.BeginForm())
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "body_update_1_tabl" }))
     {
         @Html.AntiForgeryToken()
         <div class="form-horizontal">
@@ -36,7 +37,10 @@
                 <label class="control-label col-md-2">Mã Giáo Viên</label>
                 @* @Html.LabelFor("Mã Giáo Viên", htmlAttributes: new { @class = "control-label col-md-2" }) *@
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.MaGV, new { htmlAttributes = new { @class = "form-control c-form-control " } })
+                    @Html.EditorFor(model => model.MaGV, new { htmlAttributes = new {
+                        @class = "form-control c-form-control ",
+                        @Style = "pointer-events: none;opacity: 0.5;"
+                    } })
                     @Html.ValidationMessageFor(model => model.MaGV, "", new { @class = "text-danger" })
                 </div>
             </div>  

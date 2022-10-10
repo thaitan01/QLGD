@@ -1,4 +1,24 @@
 ﻿/*custom */
+td,
+th {
+    border-left: 0px !important;
+    border-right: 0px !important;
+}
+
+.table-body-display-index-qlgiv {
+    border-left: 0px !important;
+}
+
+.body-action-item-table {
+    position: relative !important;
+}
+
+.action-item-table {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+}
+
 .modal-content {
     border: none !important;
 }
@@ -123,9 +143,11 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .c-btn-item {
     cursor: pointer !important;
+    margin: 0px;
+    margin-left: 30px
 }
 
-.c-tr-body:hover {
+tbody>tr:hover {
     box-shadow: -9px 0px 17px 0px rgb(58 59 69 / 15%);
     font-weight: 700;
     color: var(--blue) !important;
@@ -161,7 +183,15 @@ input[type="number"]::-webkit-inner-spin-button {
     height: 110px;
     position: absolute;
 }
-
+.c-body-action-item-table {
+    position: relative !important;
+    display: flex;
+    justify-content: center;
+}
+c-body-display-index-tag {
+    background: var(--white) !important;
+    background-color: var(--white) !important;
+}
 /* loadding */
 .loading {
     width: 100%;

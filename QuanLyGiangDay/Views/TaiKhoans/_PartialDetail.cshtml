@@ -1,0 +1,57 @@
+﻿@model QuanLyGiangDay.Models.EF.TaiKhoan
+
+<div class="modal-header">
+    <h5 class="modal-title">Chi tiết tài khoản</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-
+            hidden="true">
+        ×
+    </button>
+
+
+</div>
+<div class="modal-body">
+    <div>
+        <table class="table">
+            <tr>
+                <td>
+                    Tên đăng nhập
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.TenDN)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Mã giáo viên
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.MaGV)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Họ và tên
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.HoTen)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Vai trò
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.VaiTro.TenVT)
+                </td>
+            </tr>
+            
+        </table>
+    </div>
+    </div>
+    <div class="modal-footer">
+
+        <button class="btn btn-default btn-secondary" data-dismiss="modal">Đóng</button>
+    </div>

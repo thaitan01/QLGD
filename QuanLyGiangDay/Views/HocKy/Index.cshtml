@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<QuanLyGiangDay.Models.EF.HocKy>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản Lý Học Kỳ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section AddToHead{
@@ -20,7 +20,7 @@
         </p>
     </div>
     <div class="button-index-qlgiv shadow">
-        <div id="btn-call-add-gv" class="btn btn-primary btn-primary-add" 
+        <div id="btn-call-add-gv" class="btn btn-primary btn-primary-add"
              style="padding-top: 10px;"
              onclick="callModatAdd()">
             <span class="fa fa-plus-circle"></span>
@@ -49,15 +49,15 @@
                                     @Html.DisplayFor(modelItem => item.TenHK)
                                 </td>
                                 <td class="c-body-action-item-table">
-                                    <p data-id="@item.MaHK.Trim()"
+                                    <p onclick="callModatUpdate(@item.MaHK.Trim())"
                                        class="c-btn-item  button-update-gv">
                                         <i class="fa fa-edit" style="color:var(--blue)"></i>
                                     </p>
-                                    <p data-id="@item.MaHK.Trim()"
+                                    <p onclick="callModatDetail(@item.MaHK.Trim())"
                                        class="c-btn-item  button-detail-gv">
                                         <i class="fas fa-info-circle" style="color:var(--blue)"></i>
                                     </p>
-                                    <p data-id="@item.MaHK.Trim()"
+                                    <p onclick="callModatDelete(@item.MaHK.Trim())"
                                        class="c-btn-item  button-delete-gv">
                                         <i class="fas fa-trash" style="color:var(--red)"></i>
                                     </p>
@@ -70,24 +70,18 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="exampleModalCenters" tabindex="-1" role="dialog"
-     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="body-modal" id="body-modal-qlgv">
-                    jkhasjdks
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" id="save-exampleModalCenter" class="btn btn-primary">Lưu</button>
+                <div id="exampleModalCenterBody">ss</div>
             </div>
         </div>
     </div>

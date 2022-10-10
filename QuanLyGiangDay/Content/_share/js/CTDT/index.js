@@ -4,13 +4,13 @@
  */
 function callModatAdd() {
     const setting = {
-        url: "/HocKy/Create",
+        url: "/CTDT/Create",
         data: {},
         type: "get",
         dataType: "html",
         modal: "exampleModalCenter",
     }
-    document.getElementById("exampleModalLongTitle").innerText = "Thêm Mới Học Kỳ";
+    document.getElementById("exampleModalLongTitle").innerText = "Thêm Mới";
     callDisplays(1, setting)
 }
 /**
@@ -19,7 +19,7 @@ function callModatAdd() {
  */
 function callModatDetail(_id) {
     const setting = {
-        url: "/HocKy/Details/"+_id,
+        url: "/CTDT/Details/"+_id,
         data: {},
         type: "get",
         dataType: "html",
@@ -34,7 +34,7 @@ function callModatDetail(_id) {
  */
 function callModatUpdate(_id) {
     const setting = {
-        url: "/HocKy/Edit/" + _id,
+        url: "/CTDT/Edit/" + _id,
         data: {},
         type: "get",
         dataType: "html",
@@ -49,7 +49,7 @@ function callModatUpdate(_id) {
  */
 function callModatDelete(_id) {
     const setting = {
-        url: "/HocKy/Delete/" + _id,
+        url: "/CTDT/Delete/" + _id,
         data: {},
         type: "get",
         dataType: "html",

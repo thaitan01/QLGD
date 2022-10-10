@@ -35,10 +35,24 @@ namespace QuanLyGiangDay.Controllers
             }
             return View(giaoVien);
         }
-
+        private string rendumID()
+        {
+            Random RanDom = new Random();
+            String number = "GV" + RanDom.Next(1000, 9999).ToString();
+            if (db.GiaoVien.Find(number) != null)
+            {
+                rendumID();
+            }
+            else
+            {
+                return number;
+            }
+            return "";
+        }
         // GET: QuanLyGiaoVien/Create
         public ActionResult Create()
         {
+            ViewBag.id = rendumID();
             ViewBag.MaLoaiGV = new SelectList(db.LoaiGV, "MaLoaiGV", "TenLoaiGV");
             return View();
         }

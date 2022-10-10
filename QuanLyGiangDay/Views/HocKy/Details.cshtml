@@ -2,17 +2,12 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
-
-<h2>Details</h2>
-
 <div>
-    <h4>HocKy</h4>
-    <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal" style="text-align:center;font-size:20px" >
         <dt>
-            @Html.DisplayNameFor(model => model.TenHK)
+            Mã Học Kỳ
         </dt>
 
         <dd>
@@ -21,7 +16,6 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MaHK }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+</div>

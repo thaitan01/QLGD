@@ -42,7 +42,8 @@
         </p>
     </div>
     <div class="button-index-qlgiv shadow">
-        <div id="btn-call-add-gv" class="btn btn-primary btn-primary-add" style="padding-top: 10px;">
+        <div id="btn-call-add-gv" class="btn btn-primary btn-primary-add" style="padding-top: 10px;"
+             onclick="callModatAddTT()">
             <span class="fa fa-plus-circle"></span>
             Thêm Giáo Viên
         </div>
@@ -87,33 +88,25 @@
                                     @Html.DisplayFor(modelItem => item.Sdt)
                                 </td>
                                 <td>
-                                        @Html.DisplayFor(modelItem => item.LoaiGV.TenLoaiGV)
-                                   @* <label id="@item.MaGV.Trim()" class="action-item-table">
-                                        <p data-id="@item.MaGV.Trim()"
-                                        class="c-btn-item  button-update-gv">
-                                            <i class="fa fa-edit"></i>
-                                        </p>
-                                        <p data-id="@item.MaGV.Trim()"
-                                        class="c-btn-item  button-detail-gv">
-                                            <i class="fas fa-info-circle"></i>
-                                        </p>
-                                        <p data-id="@item.MaGV.Trim()"
-                                        class="c-btn-item  button-delete-gv">
-                                            <i class="fas fa-trash"></i>
-                                        </p>
-                                    </label>*@
+                                     @Html.DisplayFor(modelItem => item.LoaiGV.TenLoaiGV)
                                 </td>
                                 <td class="body-action-item-table">
                                     <p data-id="@item.MaGV.Trim()"
-                                       class="c-btn-item  button-update-gv">
+                                       class="c-btn-item  button-update-gv"
+                                       onclick="callModatUpdateTT(@item.MaGV.ToString().Trim())"
+                                       >
                                         <i class="fa fa-edit"  style="color:var(--blue)"></i>
                                     </p>
                                     <p data-id="@item.MaGV.Trim()"
-                                       class="c-btn-item  button-detail-gv">
+                                       class="c-btn-item  button-detail-gv"
+                                       onclick="callModatDatailTT(@item.MaGV.ToString().Trim())"
+                                       >
                                         <i class="fas fa-info-circle" style="color:var(--blue)"></i>
                                     </p>
                                     <p data-id="@item.MaGV.Trim()"
-                                       class="c-btn-item  button-delete-gv">
+                                       class="c-btn-item  button-delete-gv"
+                                       onclick="callModatDeleteTT(@item.MaGV.ToString().Trim())"
+                                       >
                                         <i class="fas fa-trash"  style="color:var(--red)"></i>
                                     </p>
                                 </td>
@@ -138,10 +131,6 @@
                 <div class="modal-body">
                     <div class="body-modal" id="body-modal-qlgv">
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button type="button" id="save-exampleModalCenter" class="btn btn-primary">Lưu</button>
                 </div>
             </div>
         </div>

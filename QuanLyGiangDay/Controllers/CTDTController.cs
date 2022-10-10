@@ -35,9 +35,24 @@ namespace QuanLyGiangDay.Controllers
             return View(cTDT);
         }
 
+        private string rendumID()
+        {
+            Random RanDom = new Random();
+            String number = "DT" + RanDom.Next(1000, 9999).ToString();
+            if (db.HocKy.Find(number) != null)
+            {
+                rendumID();
+            }
+            else
+            {
+                return number;
+            }
+            return "";
+        }
         // GET: CTDT/Create
         public ActionResult Create()
         {
+            ViewBag.id = rendumID();
             return View();
         }
 

@@ -58,6 +58,12 @@ namespace QuanLyGiangDay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MaGV,TenGV,MaLoaiGV,Email,Sdt")] GiaoVien giaoVien)
         {
+            if((from count in db.GiaoVien where count.Email == giaoVien.Email select count).Count() > 0)
+            {
+                ViewBag.Erro ="Email\t[" + giaoVien.Email + "]\tđã tồn tại, vui lòng không nhập trùng email.";
+                var giaoViens = db.GiaoVien.Include(g => g.LoaiGV);
+                return View("Index", giaoViens);
+            }
             if (ModelState.IsValid)
             {
                 db.GiaoVien.Add(giaoVien);

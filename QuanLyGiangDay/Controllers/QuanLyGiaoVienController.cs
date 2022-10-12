@@ -37,17 +37,9 @@ namespace QuanLyGiangDay.Controllers
         }
         private string rendumID()
         {
-            Random RanDom = new Random();
-            String number = "GV" + RanDom.Next(1000, 9999).ToString();
-            if (db.GiaoVien.Find(number) != null)
-            {
-                rendumID();
-            }
-            else
-            {
-                return number;
-            }
-            return "";
+            String id = "GV";
+            id += ((from count in db.GiaoVien select count).Count()).ToString();
+            return id;
         }
         // GET: QuanLyGiaoVien/Create
         public ActionResult Create()

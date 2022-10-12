@@ -39,19 +39,11 @@ namespace QuanLyGiangDay.Controllers
         //
         private string rendumID()
         {
-            Random RanDom = new Random();
-            String number = "HK" + RanDom.Next(1000, 9999).ToString();
-            if (db.HocKy.Find(number) != null)
-            {
-                rendumID();
-            }
-            else
-            {
-                return number;
-            }
-           return "";
+            String id = "GV";
+            id += ((from count in db.GiaoVien select count).Count()).ToString();
+            return id;
         }
-         
+
         // GET: HocKy/Create
         public ActionResult Create()
         {

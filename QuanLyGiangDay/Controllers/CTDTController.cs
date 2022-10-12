@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -37,17 +38,9 @@ namespace QuanLyGiangDay.Controllers
 
         private string rendumID()
         {
-            Random RanDom = new Random();
-            String number = "DT" + RanDom.Next(1000, 9999).ToString();
-            if (db.HocKy.Find(number) != null)
-            {
-                rendumID();
-            }
-            else
-            {
-                return number;
-            }
-            return "";
+            String id = "DT";
+            id += ((from count in db.CTDT select count).Count()).ToString();
+            return id;
         }
         // GET: CTDT/Create
         public ActionResult Create()

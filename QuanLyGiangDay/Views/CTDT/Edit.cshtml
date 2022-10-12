@@ -10,28 +10,35 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.MaCTDT)
+<div class="form-horizontal" style="width: 988px;">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.MaCTDT)
 
-        <div class="form-group c-form-group">
-           Tên CTDT
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TenCTDT, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TenCTDT, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group c-form-group">
-            Mô tả&nbsp;&nbsp;
-            <div class="col-md-10" style="margin-right:-24px">
-                @Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-            <button type="submit" class="btn btn-primary">Lưu</button>
+    <div class="form-group c-form-group" style="display:flex;justify-content:right">
+        Mã Chương Trình
+        <div class="col-md-10" style="pointer-events:none; opacity:0.5">
+            @Html.EditorFor(model => model.MaCTDT, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenCTDT, "", new { @class = "text-danger" })
         </div>
     </div>
+    <div class="form-group c-form-group">
+        Chương Trình Đào Tạo
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenCTDT, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenCTDT, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group c-form-group" style="display:flex;justify-content:right">
+        Mô tả&nbsp;&nbsp;
+        <div class="col-md-10" >
+            @Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button type="submit" class="btn btn-primary">Lưu</button>
+    </div>
+</div>
 }

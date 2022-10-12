@@ -49,15 +49,15 @@
                                     @Html.DisplayFor(modelItem => item.TenHK)
                                 </td>
                                 <td class="c-body-action-item-table">
-                                    <p onclick="callModatUpdate(@item.MaHK.Trim())"
+                                    <p onclick="callModatUpdate('@item.MaHK.Trim()')"
                                        class="c-btn-item  button-update-gv">
                                         <i class="fa fa-edit" style="color:var(--blue)"></i>
                                     </p>
-                                    <p onclick="callModatDetail(@item.MaHK.Trim())"
+                                    <p onclick="callModatDetail('@item.MaHK.Trim()')"
                                        class="c-btn-item  button-detail-gv">
                                         <i class="fas fa-info-circle" style="color:var(--blue)"></i>
                                     </p>
-                                    <p onclick="callModatDelete(@item.MaHK.Trim())"
+                                    <p onclick="callModatDelete('@item.MaHK.Trim()')"
                                        class="c-btn-item  button-delete-gv">
                                         <i class="fas fa-trash" style="color:var(--red)"></i>
                                     </p>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -24,6 +25,7 @@ namespace QuanLyGiangDay.Controllers
         // GET: QuanLyGiaoVien/Details/5
         public ActionResult Details(string id)
         {
+            Debug.Write("-" + id + "-");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -37,17 +39,9 @@ namespace QuanLyGiangDay.Controllers
         }
         private string rendumID()
         {
-            Random RanDom = new Random();
-            String number = "GV" + RanDom.Next(1000, 9999).ToString();
-            if (db.GiaoVien.Find(number) != null)
-            {
-                rendumID();
-            }
-            else
-            {
-                return number;
-            }
-            return "";
+            String id = "GV";
+            id += ((from count in db.GiaoVien select count).Count()).ToString();
+            return id;
         }
         // GET: QuanLyGiaoVien/Create
         public ActionResult Create()
@@ -64,6 +58,12 @@ namespace QuanLyGiangDay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MaGV,TenGV,MaLoaiGV,Email,Sdt")] GiaoVien giaoVien)
         {
+            if((from count in db.GiaoVien where count.Email == giaoVien.Email select count).Count() > 0)
+            {
+                ViewBag.Erro ="Email\t[" + giaoVien.Email + "]\tđã tồn tại, vui lòng không nhập trùng email.";
+                var giaoViens = db.GiaoVien.Include(g => g.LoaiGV);
+                return View("Index", giaoViens);
+            }
             if (ModelState.IsValid)
             {
                 db.GiaoVien.Add(giaoVien);

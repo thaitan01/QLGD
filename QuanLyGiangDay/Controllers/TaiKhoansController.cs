@@ -74,10 +74,7 @@ namespace QuanLyGiangDay.Controllers
         {
             if (ModelState.IsValid)
             {
-                var countOfRows = db.TaiKhoan.Count();
-                var lastRow = db.TaiKhoan.OrderBy(c => c.MaTK).Skip(countOfRows - 1).FirstOrDefault();
-                int nextId = Convert.ToInt32(lastRow.MaTK.Substring(2));
-                taiKhoan.MaTK = "TK" + (nextId + 1);
+               
                 db.TaiKhoan.Add(taiKhoan);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -96,7 +93,12 @@ namespace QuanLyGiangDay.Controllers
                 var result = db.TaiKhoan.Where(tk => tk.TenDN == taiKhoan.TenDN).FirstOrDefault();
                 if (result == null)
                 {
+                    var countOfRows = db.TaiKhoan.Count();
+                    var lastRow = db.TaiKhoan.OrderBy(c => c.MaTK).Skip(countOfRows - 1).FirstOrDefault();
+                    int nextId = Convert.ToInt32(lastRow.MaTK.Substring(2));
+                    taiKhoan.MaTK = "TK" + (nextId + 1);
                     taiKhoan.MatKhau = Crypto.Hash(taiKhoan.MatKhau, "MD5");
+                    taiKhoan.VaiTro = db.VaiTro.Find(taiKhoan.MaVT);
                     db.TaiKhoan.Add(taiKhoan);
                     db.SaveChanges();
                     return Json(new { Success = true });
@@ -225,7 +227,7 @@ namespace QuanLyGiangDay.Controllers
             TaiKhoan taiKhoan = db.TaiKhoan.Find(id);
             db.TaiKhoan.Remove(taiKhoan);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new { Success = true });
         }
 
 
@@ -250,7 +252,7 @@ namespace QuanLyGiangDay.Controllers
             TaiKhoan taiKhoan = db.TaiKhoan.Find(id);
             taiKhoan.MatKhau = Crypto.Hash("1234567", "MD5");
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new { Success = true });
         }
 
         protected override void Dispose(bool disposing)

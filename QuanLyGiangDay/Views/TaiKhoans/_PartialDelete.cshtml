@@ -4,20 +4,19 @@
 <div class="modal-header">
     <h5 class="modal-title">Xóa tài khoản</h5>
 
-    <button type="button" class="close" data-dismiss="modal" aria-
-            hidden="true">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
         ×
     </button>
 
-    
+
 </div>
 <div class="modal-body">
     <h3>Bạn có chắc muốn xóa tài khoản này không?</h3>
     <div>
-        
+
         <dl class="dl-horizontal">
             <dt>
-               Tên đăng nhập
+                Tên đăng nhập
             </dt>
 
             <dd>
@@ -25,7 +24,7 @@
             </dd>
 
             <dt>
-               Mã giáo viên
+                Mã giáo viên
             </dt>
 
             <dd>
@@ -33,7 +32,7 @@
             </dd>
 
             <dt>
-               Họ và tên
+                Họ và tên
             </dt>
 
             <dd>
@@ -41,7 +40,7 @@
             </dd>
 
             <dt>
-               Vai trò
+                Vai trò
             </dt>
 
             <dd>
@@ -51,13 +50,16 @@
         </dl>
     </div>
 </div>
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-<div class="modal-footer">
-    <button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-    <input type="submit" value="Xóa" class="btn btn-danger" />
-</div>
-    }
+    <div class="modal-footer">
+        <button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <input type="submit" value="Xóa" class="btn btn-danger" />
+    </div>
+}
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

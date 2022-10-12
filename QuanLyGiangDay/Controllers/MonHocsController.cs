@@ -200,7 +200,7 @@ namespace QuanLyGiangDay.Controllers
             MonHoc monHoc = db.MonHoc.Find(id);
             db.MonHoc.Remove(monHoc);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new { Success = true });
         }
 
 

@@ -11,7 +11,7 @@ function callModatAdd() {
         modal: "exampleModalCenter",
     }
     document.getElementById("exampleModalLongTitle").innerText = "Thêm Mới";
-    callDisplays(1, setting)
+    callDisplaysA(1, setting)
 }
 /**
  * Call and add data madal add
@@ -26,7 +26,7 @@ function callModatDetail(_id) {
         modal: "exampleModalCenter",
     }
     document.getElementById("exampleModalLongTitle").innerText = "Chi Tiết";
-    callDisplays(1, setting)
+    callDisplaysA(1, setting)
 }
 /**
  * Call and add data madal add
@@ -41,7 +41,7 @@ function callModatUpdate(_id) {
         modal: "exampleModalCenter",
     }
     document.getElementById("exampleModalLongTitle").innerText = "Cập Nhật";
-    callDisplays(1, setting)
+    callDisplaysA(1, setting)
 }
 /**
  * Call and add data madal add
@@ -56,7 +56,7 @@ function callModatDelete(_id) {
         modal: "exampleModalCenter",
     }
     document.getElementById("exampleModalLongTitle").innerText = "Xóa";
-    callDisplays(1, setting)
+    callDisplaysA(1, setting)
 }
 /**
  * Call display apter find tang id
@@ -64,8 +64,9 @@ function callModatDelete(_id) {
  * @param {object} sseting
  * @return {void}
  */
-async function callDisplays(_id, ...seting) {
+async function callDisplaysA(_id, ...seting) {
     changLoading(true)
+    console.log()
     try {
         await $.ajax({
             url: seting[0].url,

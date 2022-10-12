@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -24,6 +25,7 @@ namespace QuanLyGiangDay.Controllers
         // GET: QuanLyGiaoVien/Details/5
         public ActionResult Details(string id)
         {
+            Debug.Write("-" + id + "-");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

@@ -47,9 +47,6 @@
             <span class="fa fa-plus-circle"></span>
             Thêm Giáo Viên
         </div>
-        <div class="btn btn-primary import">
-            Import Excel
-        </div>
     </div>
     <div class="body-display-index-qlgiv shadow">
         <div class="card-body">
@@ -93,19 +90,19 @@
                                 <td class="body-action-item-table">
                                     <p data-id="@item.MaGV.Trim()"
                                        class="c-btn-item  button-update-gv"
-                                       onclick="callModatUpdateTT(@item.MaGV.ToString().Trim())"
+                                       onclick="callModatUpdateTT('@item.MaGV.ToString().Trim()')"
                                        >
                                         <i class="fa fa-edit"  style="color:var(--blue)"></i>
                                     </p>
                                     <p data-id="@item.MaGV.Trim()"
                                        class="c-btn-item  button-detail-gv"
-                                       onclick="callModatDatailTT(@item.MaGV.ToString().Trim())"
+                                       onclick="callModatDatailTT('@item.MaGV.ToString().Trim()')"
                                        >
                                         <i class="fas fa-info-circle" style="color:var(--blue)"></i>
                                     </p>
                                     <p data-id="@item.MaGV.Trim()"
                                        class="c-btn-item  button-delete-gv"
-                                       onclick="callModatDeleteTT(@item.MaGV.ToString().Trim())"
+                                       onclick="callModatDeleteTT('@item.MaGV.ToString().Trim()')"
                                        >
                                         <i class="fas fa-trash"  style="color:var(--red)"></i>
                                     </p>

@@ -39,8 +39,8 @@ namespace QuanLyGiangDay.Controllers
         //
         private string rendumID()
         {
-            String id = "GV";
-            id += ((from count in db.GiaoVien select count).Count()).ToString();
+            String id = "HK";
+            id += ((from count in db.HocKy select count).Count()).ToString();
             return id;
         }
 

@@ -35,7 +35,7 @@
                             <th>
                                 Tên Học Kỳ
                             </th>
-                            <th></th>
+                            <th>Mô Tả</th>
                             <th class="no-sorting"></th>
                         </tr>
                     </thead>
@@ -50,15 +50,15 @@
                                     @Html.DisplayFor(modelItem => item.MoTa)
                                 </td>
                                 <td class="c-body-action-item-table">
-                                    <p onclick="callModatUpdate(@item.MaCTDT.Trim())"
+                                    <p onclick="callModatUpdate('@item.MaCTDT.Trim()')"
                                        class="c-btn-item  button-update-gv">
                                         <i class="fa fa-edit" style="color:var(--blue)"></i>
                                     </p>
-                                    <p onclick="callModatDetail(@item.MaCTDT.Trim())"
+                                    <p onclick="callModatDetail('@item.MaCTDT.Trim()')"
                                        class="c-btn-item  button-detail-gv">
                                         <i class="fas fa-info-circle" style="color:var(--blue)"></i>
                                     </p>
-                                    <p onclick="callModatDelete(@item.MaCTDT.Trim())"
+                                    <p onclick="callModatDelete('@item.MaCTDT.Trim()')"
                                        class="c-btn-item  button-delete-gv">
                                         <i class="fas fa-trash" style="color:var(--red)"></i>
                                     </p>

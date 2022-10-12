@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -37,8 +38,8 @@ namespace QuanLyGiangDay.Controllers
 
         private string rendumID()
         {
-            String id = "GV";
-            id += ((from count in db.GiaoVien select count).Count()).ToString();
+            String id = "DT";
+            id += ((from count in db.CTDT select count).Count()).ToString();
             return id;
         }
         // GET: CTDT/Create

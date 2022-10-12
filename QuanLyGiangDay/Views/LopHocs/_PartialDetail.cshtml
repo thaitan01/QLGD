@@ -2,12 +2,13 @@
 
 @* model header *@
 <div class="modal-header">
-    <h5 class="modal-title">Chi tiết lớp học</h5>
+    <h5 class="modal-title">Chi tiết lớp học @ViewBag.LopHoc</h5>
+
     <button type="button" class="close" data-dismiss="modal" aria-
             hidden="true">
         ×
     </button>
-    <h5 class="modal-title">Chi tiết lớp học @ViewBag.TenLop</h5>
+    
 </div>
 
 @using (Html.BeginForm())
@@ -32,20 +33,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in ViewBag.MHHK)
+                        @if (ViewBag.EmptyData == true )
                         {
-                        <tr class="c-tr-body">
-                            <td>
-                                @item.MaHK
-                            </td>
-                            <td>
-                                @item.MaMH
-                            </td>
-                            <td>
-                                @item.NgayBD
-                            </td>
+                            <tr class="c-tr-body">
+                                <td colspan="100" class="text-center">Chưa có môn học cho lớp này</td> 
+                            </tr>
+                        }
+                        else
+                        {
 
-                        </tr>
+                            foreach (var item in ViewBag.MHHK)
+                            {
+                                <tr class="c-tr-body">
+                                    <td>
+                                        @item.MaHK
+                                    </td>
+                                    <td>
+                                        @item.MaMH
+                                    </td>
+                                    <td>
+                                        @item.NgayBD
+                                    </td>
+
+                                </tr>
+                            }
                         }
                     </tbody>
                 </table>

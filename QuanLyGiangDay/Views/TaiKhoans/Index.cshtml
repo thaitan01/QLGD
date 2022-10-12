@@ -51,6 +51,9 @@
                                     <th>
                                         Xóa
                                     </th>
+                                    <th>
+                                        Khôi phục mật khẩu
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -81,6 +84,9 @@
                                     </td>
                                     <td>
                                         @Html.Raw("<a style='color: #e74a3b;' data-modal='' href='/TaiKhoans/_PartialDelete/" + item.MaTK + "' id='" + item.MaTK + "' title='Xóa'> <span class='fa fa-trash'> </span> </a>")
+                                    </td>
+                                    <td>
+                                        @Html.Raw("<a data-modal='' href='/TaiKhoans/_PartialReset/" + item.MaTK + "' id='" + item.MaTK + "' title='Khôi phục'> <span class='	fa fa-undo'> </span> </a>")
                                     </td>
                                 </tr>
                                 }
@@ -134,6 +140,5 @@
 </script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
-<link rel="stylesheet"
-      href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 

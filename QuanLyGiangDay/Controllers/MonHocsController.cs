@@ -79,16 +79,20 @@ namespace QuanLyGiangDay.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _PartialCreate([Bind(Include = "MaMH,TenMon,MoTa,SoGio")] MonHoc monHoc)
+        public ActionResult _PartialCreate([Bind(Include = "TenMon,MoTa,SoGio")] MonHoc monHoc)
         {
             if (ModelState.IsValid)
             {
+                var countOfRows = db.MonHoc.Count();
+                var lastRow = db.MonHoc.OrderBy(c => c.MaMH).Skip(countOfRows - 1).FirstOrDefault();
+                int nextId = Convert.ToInt32(lastRow.MaMH.Substring(2));
+                monHoc.MaMH = "MH" + (nextId + 1);
                 db.MonHoc.Add(monHoc);
                 db.SaveChanges();
                 return Json(new { Success = true });
             }
 
-            return Json(new { Success = false, Message = "Mã môn đã tồn tại!không thể thêm mới" });
+            return Json(new { Success = false, Message = "Lỗi! Không thể thêm mới" });
         }
 
         // GET: MonHocs/Edit/5
@@ -196,7 +200,7 @@ namespace QuanLyGiangDay.Controllers
             MonHoc monHoc = db.MonHoc.Find(id);
             db.MonHoc.Remove(monHoc);
             db.SaveChanges();
-            return Json(new { Success = true });
+            return RedirectToAction("Index");
         }
 
 

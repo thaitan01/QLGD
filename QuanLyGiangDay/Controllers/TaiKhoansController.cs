@@ -60,6 +60,7 @@ namespace QuanLyGiangDay.Controllers
 
         public ActionResult _PartialCreate()
         {
+            ViewBag.MaGV = new SelectList(db.GiaoVien, "MaGV", "MaGV");
             ViewBag.MaVT = new SelectList(db.VaiTro, "MaVT", "TenVT");
             return PartialView("_PartialCreate");
         }
@@ -69,16 +70,16 @@ namespace QuanLyGiangDay.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaTK,TenDN,MatKhau,MaGV,MaVT,HoTen")] TaiKhoan taiKhoan)
+        public ActionResult Create([Bind(Include = "TenDN,MatKhau,MaGV,MaVT,HoTen")] TaiKhoan taiKhoan)
         {
             if (ModelState.IsValid)
             {
-                
+               
                 db.TaiKhoan.Add(taiKhoan);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.MaGV = new SelectList(db.GiaoVien, "MaGV", "MaGV", taiKhoan.MaGV);
             ViewBag.MaVT = new SelectList(db.VaiTro, "MaVT", "TenVT", taiKhoan.MaVT);
             return View(taiKhoan);
         }
@@ -92,7 +93,12 @@ namespace QuanLyGiangDay.Controllers
                 var result = db.TaiKhoan.Where(tk => tk.TenDN == taiKhoan.TenDN).FirstOrDefault();
                 if (result == null)
                 {
+                    var countOfRows = db.TaiKhoan.Count();
+                    var lastRow = db.TaiKhoan.OrderBy(c => c.MaTK).Skip(countOfRows - 1).FirstOrDefault();
+                    int nextId = Convert.ToInt32(lastRow.MaTK.Substring(2));
+                    taiKhoan.MaTK = "TK" + (nextId + 1);
                     taiKhoan.MatKhau = Crypto.Hash(taiKhoan.MatKhau, "MD5");
+                    taiKhoan.VaiTro = db.VaiTro.Find(taiKhoan.MaVT);
                     db.TaiKhoan.Add(taiKhoan);
                     db.SaveChanges();
                     return Json(new { Success = true });
@@ -120,6 +126,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return HttpNotFound();
             }
+           
             ViewBag.MaVT = new SelectList(db.VaiTro, "MaVT", "TenVT", taiKhoan.MaVT);
             return View(taiKhoan);
         }
@@ -135,6 +142,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.MaGV = new SelectList(db.GiaoVien, "MaGV", "MaGV", taiKhoan.MaGV);
             ViewBag.MaVT = new SelectList(db.VaiTro, "MaVT", "TenVT", taiKhoan.MaVT);
             return PartialView("_PartialEdit", taiKhoan);
         }
@@ -152,6 +160,7 @@ namespace QuanLyGiangDay.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.MaGV = new SelectList(db.GiaoVien, "MaGV", "MaGV", taiKhoan.MaGV);
             ViewBag.MaVT = new SelectList(db.VaiTro, "MaVT", "TenVT", taiKhoan.MaVT);
             return View(taiKhoan);
         }
@@ -166,6 +175,7 @@ namespace QuanLyGiangDay.Controllers
                 db.SaveChanges();
                 return Json(new { Success = true });
             }
+            ViewBag.MaGV = new SelectList(db.GiaoVien, "MaGV", "MaGV", taiKhoan.MaGV);
             ViewBag.MaVT = new SelectList(db.VaiTro, "MaVT", "TenVT", taiKhoan.MaVT);
             return Json(new { Success = false, Message = "Lỗi! Không thể cập nhật tài khoản này" });
         }
@@ -216,6 +226,31 @@ namespace QuanLyGiangDay.Controllers
         {
             TaiKhoan taiKhoan = db.TaiKhoan.Find(id);
             db.TaiKhoan.Remove(taiKhoan);
+            db.SaveChanges();
+            return Json(new { Success = true });
+        }
+
+
+        public ActionResult _PartialReset(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            TaiKhoan taiKhoan = db.TaiKhoan.Find(id);
+            if (taiKhoan == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("_PartialReset", taiKhoan);
+        }
+
+        [HttpPost, ActionName("_PartialReset")]
+        [ValidateAntiForgeryToken]
+        public ActionResult _PartialResetConfirmed(string id)
+        {
+            TaiKhoan taiKhoan = db.TaiKhoan.Find(id);
+            taiKhoan.MatKhau = Crypto.Hash("1234567", "MD5");
             db.SaveChanges();
             return Json(new { Success = true });
         }

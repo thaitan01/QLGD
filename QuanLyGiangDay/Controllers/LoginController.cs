@@ -15,7 +15,7 @@ namespace QuanLyGiangDay.Controllers
         // GET: Login
         public ActionResult Index()
         {
-            Session["TaiKhoan"] = null;
+            
             return View();
         }
 
@@ -31,7 +31,7 @@ namespace QuanLyGiangDay.Controllers
                 login.MatKhau = Crypto.Hash(login.MatKhau, "MD5");
                 if (result == null)
                 {
-                    Session["TaiKhoan"] = result.HoTen;
+                    
                     ViewBag.Message = "Tên đăng nhập không tồn tại!";
                     return View("Index");
 
@@ -39,7 +39,7 @@ namespace QuanLyGiangDay.Controllers
                 else if (result.MatKhau == login.MatKhau)
                 {
 
-                    Session["TaiKhoan"] = result.HoTen;
+                    
                     return RedirectToAction("Index", "Home");
                 }
                 else

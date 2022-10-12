@@ -3,8 +3,7 @@
 
 <div class="modal-header">
     <h5 class="modal-title">Cập nhật tài khoản</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-
-            hidden="true">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
         ×
     </button>
 
@@ -29,7 +28,7 @@
             <div class="form-group">
                 Mã giáo viên
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.MaGV, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownList("MaGV", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.MaGV, "", new { @class = "text-danger" })
                 </div>
             </div>

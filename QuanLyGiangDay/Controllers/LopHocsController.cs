@@ -71,6 +71,7 @@ namespace QuanLyGiangDay.Controllers
             LopHoc lopHoc = db.LopHoc.Find(id);
             ViewBag.LopHoc = lopHoc.TenLop;
             ViewBag.MHHK = listMH;
+            if (listMH.Count == 0) ViewBag.EmptyData = true;
             return PartialView("_PartialDetail");
         }
 

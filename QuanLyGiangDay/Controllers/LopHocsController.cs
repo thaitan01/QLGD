@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web.Mvc;
 using QuanLyGiangDay.Models.EF;
 
@@ -17,6 +18,7 @@ namespace QuanLyGiangDay.Controllers
         // GET: LopHocs
         public ActionResult Index()
         {
+           
             var lopHocs = db.LopHoc.Include(l => l.CTDT);
             return View(lopHocs.ToList());
         }
@@ -98,6 +100,7 @@ namespace QuanLyGiangDay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MaLop,MaCTDT,TenLop,MoTa")] LopHoc lopHoc)
         {
+           
             if (ModelState.IsValid)
             {
                 db.LopHoc.Add(lopHoc);
@@ -113,14 +116,29 @@ namespace QuanLyGiangDay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult _PartialCreate([Bind(Include = "MaLop,MaCTDT,TenLop,MoTa")] LopHoc lopHoc)
         {
+            
             if (ModelState.IsValid)
             {
                 db.LopHoc.Add(lopHoc);
                 db.SaveChanges();
                 return Json(new { Success = true });
-            }
+            } else {
+                StringBuilder message = new StringBuilder();
 
-            return Json(new { Success = false, Message = "Mã lớp đã tồn tại!không thể thêm mới" });
+                foreach (var item in ModelState)
+                {
+                    var errors = item.Value.Errors;
+
+                    foreach (var error in errors)
+                    {
+                        message.Append(error.ErrorMessage);
+                        message.AppendLine();
+                    }
+                }
+                return Json(new { Success = false, Message = message.ToString() });
+            }
+            
+            
         }
 
 
@@ -181,8 +199,23 @@ namespace QuanLyGiangDay.Controllers
                 db.Entry(lopHoc).State = EntityState.Modified;
                 db.SaveChanges();
                 return Json(new { Success = true });
+            } else
+            {
+                StringBuilder message = new StringBuilder();
+
+                foreach (var item in ModelState)
+                {
+                    var errors = item.Value.Errors;
+
+                    foreach (var error in errors)
+                    {
+                        message.Append(error.ErrorMessage);
+                        message.AppendLine();
+                    }
+                }
+                return Json(new { Success = false, Message = message.ToString() });
             }
-            return Json(new { Success = false, Message = "Lỗi! không thể cập nhật lớp học này" });
+            
         }
 
         // GET: LopHocs/Delete/5
@@ -260,6 +293,23 @@ namespace QuanLyGiangDay.Controllers
             this.NgayBD = NgayBD;
         }
         
+    }
+
+    public class GiaoVienGioDayModel
+    {
+
+        public string MaGV { get; set; }
+        public decimal NgoaiGio { get; set; }
+        public decimal TrongGio { get; set; }
+
+        public GiaoVienGioDayModel(string MaGV, decimal NgoaiGio, decimal TrongGio)
+        {
+
+            this.MaGV = MaGV;
+            this.NgoaiGio = NgoaiGio;
+            this.TrongGio = TrongGio;
+        }
+
     }
 
 }

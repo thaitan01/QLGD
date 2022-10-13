@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using QuanLyGiangDay.Models.EF;
 using System.Web.Helpers;
+using System.Text;
 
 namespace QuanLyGiangDay.Controllers
 {
@@ -78,7 +79,7 @@ namespace QuanLyGiangDay.Controllers
                 db.TaiKhoan.Add(taiKhoan);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+            } 
             ViewBag.MaGV = new SelectList(db.GiaoVien, "MaGV", "MaGV", taiKhoan.MaGV);
             ViewBag.MaVT = new SelectList(db.VaiTro, "MaVT", "TenVT", taiKhoan.MaVT);
             return View(taiKhoan);
@@ -109,7 +110,19 @@ namespace QuanLyGiangDay.Controllers
                 
             } else
             {
-                    return Json(new { Success = false, Message = "Lỗi! Không thể thêm mới" });
+                StringBuilder message = new StringBuilder();
+
+                foreach (var item in ModelState)
+                {
+                    var errors = item.Value.Errors;
+
+                    foreach (var error in errors)
+                    {
+                        message.Append(error.ErrorMessage);
+                        message.AppendLine();
+                    }
+                }
+                return Json(new { Success = false, Message = message.ToString() });
             }
            
         }
@@ -169,15 +182,30 @@ namespace QuanLyGiangDay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult _PartialEdit([Bind(Include = "MaTK,TenDN,MatKhau,MaGV,MaVT,HoTen")] TaiKhoan taiKhoan)
         {
+            ViewBag.MaGV = new SelectList(db.GiaoVien, "MaGV", "MaGV", taiKhoan.MaGV);
+            ViewBag.MaVT = new SelectList(db.VaiTro, "MaVT", "TenVT", taiKhoan.MaVT);
             if (ModelState.IsValid)
             {
                 db.Entry(taiKhoan).State = EntityState.Modified;
                 db.SaveChanges();
                 return Json(new { Success = true });
+            } else
+            {
+                StringBuilder message = new StringBuilder();
+
+                foreach (var item in ModelState)
+                {
+                    var errors = item.Value.Errors;
+
+                    foreach (var error in errors)
+                    {
+                        message.Append(error.ErrorMessage);
+                        message.AppendLine();
+                    }
+                }
+                return Json(new { Success = false, Message = message.ToString() });
             }
-            ViewBag.MaGV = new SelectList(db.GiaoVien, "MaGV", "MaGV", taiKhoan.MaGV);
-            ViewBag.MaVT = new SelectList(db.VaiTro, "MaVT", "TenVT", taiKhoan.MaVT);
-            return Json(new { Success = false, Message = "Lỗi! Không thể cập nhật tài khoản này" });
+           
         }
 
         // GET: TaiKhoans/Delete/5

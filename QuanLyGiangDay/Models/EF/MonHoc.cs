@@ -13,6 +13,7 @@ namespace QuanLyGiangDay.Models.EF
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+
     public partial class MonHoc
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,7 +29,7 @@ namespace QuanLyGiangDay.Models.EF
         [Required(ErrorMessage = "Mô tả không được rỗng")]
         public string MoTa { get; set; }
         [Required(ErrorMessage = "Số giờ học không được rỗng")]
-        [Range(0, int.MaxValue, ErrorMessage = "Giờ học phải là số")]
+        [Range(1, int.MaxValue, ErrorMessage = "Giờ học phải là số lớn hơn 1")]
         public Nullable<decimal> SoGio { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

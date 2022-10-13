@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using QuanLyGiangDay.Models.EF;
@@ -90,9 +91,24 @@ namespace QuanLyGiangDay.Controllers
                 db.MonHoc.Add(monHoc);
                 db.SaveChanges();
                 return Json(new { Success = true });
+            } else
+            {
+                StringBuilder message = new StringBuilder();
+
+                foreach (var item in ModelState)
+                {
+                    var errors = item.Value.Errors;
+
+                    foreach (var error in errors)
+                    {
+                        message.Append(error.ErrorMessage);
+                        message.AppendLine();
+                    }
+                }
+                return Json(new { Success = false, Message = message.ToString() });
             }
 
-            return Json(new { Success = false, Message = "Lỗi! Không thể thêm mới" });
+           
         }
 
         // GET: MonHocs/Edit/5
@@ -149,8 +165,23 @@ namespace QuanLyGiangDay.Controllers
                 db.Entry(monHoc).State = EntityState.Modified;
                 db.SaveChanges();
                 return Json(new { Success = true });
+            } else
+            {
+                StringBuilder message = new StringBuilder();
+
+                foreach (var item in ModelState)
+                {
+                    var errors = item.Value.Errors;
+
+                    foreach (var error in errors)
+                    {
+                        message.Append(error.ErrorMessage);
+                        message.AppendLine();
+                    }
+                }
+                return Json(new { Success = false, Message = message.ToString() });
             }
-            return Json(new { Success = false, Message = "Lỗi! Không thể cập nhật môn học này" });
+            
         }
 
         // GET: MonHocs/Delete/5

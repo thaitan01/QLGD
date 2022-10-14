@@ -168,7 +168,8 @@ namespace QuanLyGiangDay.Controllers
             } else
             {
                 StringBuilder message = new StringBuilder();
-
+                if (ModelState["SoGio"].Errors.Count > 1)
+               
                 foreach (var item in ModelState)
                 {
                     var errors = item.Value.Errors;

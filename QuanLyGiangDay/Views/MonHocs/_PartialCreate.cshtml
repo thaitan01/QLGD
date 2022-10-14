@@ -1,5 +1,6 @@
 ﻿@model QuanLyGiangDay.Models.EF.MonHoc
 
+
 @* model header *@
 <div class="modal-header">
     <h5 class="modal-title">Thêm môn học</h5>
@@ -19,7 +20,7 @@
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-               
+
                 <div class="col-md-10">
                     @Html.HiddenFor(model => model.MaMH, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.MaMH, "", new { @class = "text-danger" })
@@ -27,25 +28,28 @@
             </div>
 
             <div class="form-group">
-                Tên môn học
+
                 <div class="col-md-10">
+                    Tên môn học
                     @Html.EditorFor(model => model.TenMon, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.TenMon, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                Mô tả
+
                 <div class="col-md-10">
+                    Mô tả
                     @Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                Số giờ
+
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.SoGio, new { htmlAttributes = new { @class = "form-control"} })
+                    Số giờ
+                    @Html.EditorFor(model => model.SoGio, new { htmlAttributes = new {@class = "form-control" , @type = "number" } })
                     @Html.ValidationMessageFor(model => model.SoGio, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -59,4 +63,8 @@
         <input type="submit" value="Thêm" class="btn btn-default btn-primary" />
     </div>
 }
+
+<script>
+
+</script>
 

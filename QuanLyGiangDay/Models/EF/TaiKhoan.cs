@@ -21,10 +21,9 @@ namespace QuanLyGiangDay.Models.EF
         public string TenDN { get; set; }
         [Required(ErrorMessage = "Mật khẩu không được rỗng")]
         public string MatKhau { get; set; }
-        [Required(ErrorMessage = "Mã giáo viên không được rỗng")]
         public string MaGV { get; set; }
-        [Required(ErrorMessage = "Vai trò không được rỗng")]
         public string MaVT { get; set; }
+        [MaxLength(10, ErrorMessage = "Họ và tên không dài quá 10 ký tự")]
         public string HoTen { get; set; }
 
         public virtual VaiTro VaiTro { get; set; }

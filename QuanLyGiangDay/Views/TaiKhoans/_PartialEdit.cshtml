@@ -18,14 +18,14 @@
             @Html.HiddenFor(model => model.MaTK)
 
             <div class="form-group">
-                Tên đăng nhập
+               
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.TenDN, new { htmlAttributes = new { @class = "form-control" } })
+                    Tên đăng nhập
+                    @Html.EditorFor(model => model.TenDN, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     @Html.ValidationMessageFor(model => model.TenDN, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
-                
                 <div class="col-md-10">
                     @Html.HiddenFor(model => model.MatKhau, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
@@ -33,24 +33,24 @@
             </div>
 
             <div class="form-group">
-                Mã giáo viên
                 <div class="col-md-10">
+                    Mã giáo viên
                     @Html.DropDownList("MaGV", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.MaGV, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                Vai trò
                 <div class="col-md-10">
+                    Vai trò
                     @Html.DropDownList("MaVT", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.MaVT, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                Họ và tên
                 <div class="col-md-10">
+                    Họ và tên
                     @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
                 </div>

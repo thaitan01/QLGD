@@ -20,24 +20,27 @@
             @Html.HiddenFor(model => model.MaLop)
 
             <div class="form-group">
-                Chương trình đào tạo
+               
                 <div class="col-md-10">
+                    Chương trình đào tạo
                     @Html.DropDownList("MaCTDT", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.MaCTDT, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.MaCTDT, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                Tên lớp
+               
                 <div class="col-md-10">
+                    Tên lớp
                     @Html.EditorFor(model => model.TenLop, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.TenLop, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                Mô tả
+                
                 <div class="col-md-10">
+                    Mô tả
                     @Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
                 </div>

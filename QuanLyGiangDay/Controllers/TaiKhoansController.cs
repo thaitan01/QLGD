@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using QuanLyGiangDay.Models.EF;
 using System.Web.Helpers;
 using System.Text;
+using System.Data.Entity.Validation;
 
 namespace QuanLyGiangDay.Controllers
 {
@@ -87,31 +88,49 @@ namespace QuanLyGiangDay.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _PartialCreate([Bind(Include = "MaTK,TenDN,MatKhau,MaGV,MaVT,HoTen")] TaiKhoan taiKhoan)
+        public ActionResult _PartialCreate([Bind(Include = "TenDN,MatKhau,MaGV,MaVT,HoTen")] TaiKhoan taiKhoan)
         {
             if (ModelState.IsValid)
             {
+              
                 var result = db.TaiKhoan.Where(tk => tk.TenDN == taiKhoan.TenDN).FirstOrDefault();
-                if (result == null)
-                {
-                    var countOfRows = db.TaiKhoan.Count();
-                    var lastRow = db.TaiKhoan.OrderBy(c => c.MaTK).Skip(countOfRows - 1).FirstOrDefault();
-                    int nextId = Convert.ToInt32(lastRow.MaTK.Substring(2));
-                    taiKhoan.MaTK = "TK" + (nextId + 1);
-                    taiKhoan.MatKhau = Crypto.Hash(taiKhoan.MatKhau, "MD5");
-                    taiKhoan.VaiTro = db.VaiTro.Find(taiKhoan.MaVT);
-                    db.TaiKhoan.Add(taiKhoan);
-                    db.SaveChanges();
-                    return Json(new { Success = true });
-                } else
-                {
-                    return Json(new { Success = false, Message = "Tài khoản đã tồn tại! Không thể thêm mới" });
-                }
+                var hasTaiKhoan = db.TaiKhoan.Where(tk => tk.MaGV == taiKhoan.MaGV && tk.MaVT == taiKhoan.MaVT).FirstOrDefault();
+
+                    if ((result == null) && (hasTaiKhoan == null))
+                    {
+                        var countOfRows = db.TaiKhoan.Count();
+                    
+                        if (countOfRows == 0)
+                        {
+                            taiKhoan.MaTK = "TK1";
+                            taiKhoan.MatKhau = Crypto.Hash(taiKhoan.MatKhau, "MD5");
+                            taiKhoan.VaiTro = db.VaiTro.Find(taiKhoan.MaVT);
+                            db.TaiKhoan.Add(taiKhoan);
+                            db.SaveChanges();
+                            return Json(new { Success = true });
+                        } else
+                        {
+                            var lastRow = db.TaiKhoan.OrderBy(c => c.MaTK).Skip(countOfRows - 1).FirstOrDefault();
+                            int nextId = Convert.ToInt32(lastRow.MaTK.Substring(2));
+                            taiKhoan.MaTK = "TK" + (nextId + 1);
+                            taiKhoan.MatKhau = Crypto.Hash(taiKhoan.MatKhau, "MD5");
+                            taiKhoan.VaiTro = db.VaiTro.Find(taiKhoan.MaVT);
+                            db.TaiKhoan.Add(taiKhoan);
+                            db.SaveChanges();
+                            return Json(new { Success = true });
+                        }
+                      
+                    }
+                    else
+                    {
+                        return Json(new { Success = false, Message = "Tên đăng nhập đã tồn tại hoặc giáo viên này đã có tài khoản tương tự! Không thể thêm mới" });
+                    }
+                    
                 
             } else
             {
-                StringBuilder message = new StringBuilder();
 
+                StringBuilder message = new StringBuilder();
                 foreach (var item in ModelState)
                 {
                     var errors = item.Value.Errors;
@@ -186,9 +205,18 @@ namespace QuanLyGiangDay.Controllers
             ViewBag.MaVT = new SelectList(db.VaiTro, "MaVT", "TenVT", taiKhoan.MaVT);
             if (ModelState.IsValid)
             {
-                db.Entry(taiKhoan).State = EntityState.Modified;
-                db.SaveChanges();
-                return Json(new { Success = true });
+                
+                var hasTaiKhoan = db.TaiKhoan.Where(tk => tk.MaGV == taiKhoan.MaGV && tk.MaVT == taiKhoan.MaVT).FirstOrDefault();
+                if ( hasTaiKhoan == null)
+                {
+                    db.Entry(taiKhoan).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { Success = true });
+                } else
+                {
+                    return Json(new { Success = false, Message = "Tên đăng nhập đã tồn tại hoặc giáo viên này đã có tài khoản tương tự! Không thể cập nhật" });
+                }
+                
             } else
             {
                 StringBuilder message = new StringBuilder();

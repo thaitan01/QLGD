@@ -24,7 +24,7 @@
             <div class="col-md-12">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="danhSachLopHoc" width="100%" cellspacing="0">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th>
@@ -112,33 +112,4 @@
 }
 
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#danhSachLopHoc').DataTable({
-            responsive: true,
-            "language": {
-                "lengthMenu": "Hiển thị _MENU_ dòng dữ liệu trên một trang",
-                "info": "Hiển thị _START_ trong tổng số _TOTAL_ dòng dữ liệu",
-                "infoEmpty": "Dữ liệu rỗng",
-                "emptyTable": "Chưa có dữ liệu nào",
-                "processing": "Đang xử lý...",
-                "search": "Tìm kiếm:",
-                "loadingRecords": "Đang tải dữ liệu...",
-                "zeroRecords": "Không tìm thấy dữ liệu",
-                "infoFiltered": "(Được hiển thị từ tổng số _MAX_ dòng dữ liệu)",
-                "paginate": {
-                    "first": "Trang đầu",
-                    "last": "Trang cuối",
-                    "next": "Trang sau",
-                    "previous": "Trang sau"
-                }
-            },
-            "lengthMenu": [[5, 10, 15, 20, 25, 50, 100, -1], [5, 10, 15, 20, 25, 50,
-                100, "Tất cả"]]
-        });
-    });
-</script>
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-
+<script src="~/Content/_custom/datatables.js"></script>

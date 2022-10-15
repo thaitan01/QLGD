@@ -205,9 +205,9 @@ namespace QuanLyGiangDay.Controllers
             ViewBag.MaVT = new SelectList(db.VaiTro, "MaVT", "TenVT", taiKhoan.MaVT);
             if (ModelState.IsValid)
             {
-                
+                var result = db.TaiKhoan.Where(tk => tk.TenDN == taiKhoan.TenDN).FirstOrDefault();
                 var hasTaiKhoan = db.TaiKhoan.Where(tk => tk.MaGV == taiKhoan.MaGV && tk.MaVT == taiKhoan.MaVT).FirstOrDefault();
-                if ( hasTaiKhoan == null)
+                if ( (hasTaiKhoan == null) && (result == null))
                 {
                     db.Entry(taiKhoan).State = EntityState.Modified;
                     db.SaveChanges();

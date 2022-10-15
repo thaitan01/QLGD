@@ -88,6 +88,12 @@ namespace QuanLyGiangDay.Controllers
                 var lastRow = db.MonHoc.OrderBy(c => c.MaMH).Skip(countOfRows - 1).FirstOrDefault();
                 int nextId = Convert.ToInt32(lastRow.MaMH.Substring(2));
                 monHoc.MaMH = "MH" + (nextId + 1);
+                while (db.MonHoc.Find(monHoc.MaMH) != null)
+                {
+                    nextId++;
+                    monHoc.MaMH = "MH" + (nextId + 1);
+                }
+               
                 db.MonHoc.Add(monHoc);
                 db.SaveChanges();
                 return Json(new { Success = true });

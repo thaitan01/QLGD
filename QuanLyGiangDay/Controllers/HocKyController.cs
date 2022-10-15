@@ -40,7 +40,7 @@ namespace QuanLyGiangDay.Controllers
         private string rendumID()
         {
             String id = "HK";
-            id += ((from count in db.HocKy select count).Count()).ToString();
+            id += ((from count in db.HocKy select count).Count()+1).ToString();
             return id;
         }
 

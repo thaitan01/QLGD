@@ -51,7 +51,7 @@
     <div class="body-display-index-qlgiv shadow">
         <div class="card-body">
             <div class="table-responsive">
-                <p style="font-size:30px; color :  red">@ViewBag.Erro</p>
+                <p id="error" style="font-size:30px; color :red; display:none">@ViewBag.Erro</p>
                 <table class="table table-bordered table-hover table-body-display-index-qlgiv" id="dataTable"
                        width="100%" cellspacing="0">
                     <thead>
@@ -134,4 +134,16 @@
 <script src="~/Content/_share/js/QuanLyGiaoVien/Index.js"></script>
 <script src="~/Content/_custom/datatables.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    window.onload = () => {
+        @*console.log("áhdksajh")*@
+        if (document.getElementById("error").innerText.trim() !== "")
+            Swal.fire({
+                position: 'top-end',
+                title: document.getElementById("error").innerText,
+                showConfirmButton: false,
+                timer: 2000
+            })
+    }
+</script>
 @* <script src="./script.js"></script> *@

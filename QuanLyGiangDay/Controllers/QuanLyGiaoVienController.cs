@@ -25,7 +25,6 @@ namespace QuanLyGiangDay.Controllers
         // GET: QuanLyGiaoVien/Details/5
         public ActionResult Details(string id)
         {
-            Debug.Write("-" + id + "-");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -98,6 +97,20 @@ namespace QuanLyGiangDay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "MaGV,TenGV,MaLoaiGV,Email,Sdt")] GiaoVien giaoVien)
         {
+            if (
+                (
+                         from count in db.GiaoVien 
+                         where 
+                          (count.Email.Trim() == giaoVien.Email.Trim())  
+                          && (count.MaGV.Trim() != giaoVien.MaGV)
+                         select count
+                     ).Count() > 0
+                )
+            {
+                ViewBag.Erro = "Email\t[" + giaoVien.Email.Trim() + "]\tđã tồn tại, vui lòng không nhập trùng email.";
+                var giaoViens = db.GiaoVien.Include(g => g.LoaiGV);
+                return View("Index", giaoViens);
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(giaoVien).State = EntityState.Modified;

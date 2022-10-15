@@ -39,7 +39,7 @@ namespace QuanLyGiangDay.Controllers
         private string rendumID()
         {
             String id = "DT";
-            id += ((from count in db.CTDT select count).Count()).ToString();
+            id += ((from count in db.CTDT select count).Count()+1).ToString();
             return id;
         }
         // GET: CTDT/Create

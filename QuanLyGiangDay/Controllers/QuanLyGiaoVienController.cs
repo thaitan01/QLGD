@@ -39,7 +39,7 @@ namespace QuanLyGiangDay.Controllers
         private string rendumID()
         {
             String id = "GV";
-            id += ((from count in db.GiaoVien select count).Count()).ToString();
+            id += ((from count in db.GiaoVien select count).Count()+1).ToString();
             return id;
         }
         // GET: QuanLyGiaoVien/Create

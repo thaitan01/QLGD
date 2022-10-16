@@ -5,6 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section AddToHead{
+    <link href="@Url.Content("~/Content/_share/css/HocKy/HocKy.css")" rel="stylesheet" type="text/css" />
+}
+
 <div class="panel-group">
     <div class="panel panel-primary">
         <div class="panel-heading"><h4><i class="fa fa-angle-right"></i> Quản lý môn học</h4></div>
@@ -12,7 +16,7 @@
             <div class="float-left" style="margin-left: 30px; z-index: 99; position: relative; ">
                 <div>
                     <a class="btn btn-primary" data-modal="" href="/MonHocs/_PartialCreate"
-                       id="btnCreate" >
+                       id="btnCreate">
                         <span class="fa fa-plus-circle"></span>
                         &nbsp;&nbsp;Thêm môn học
                     </a>
@@ -39,13 +43,13 @@
                                     <th>
                                         Mô tả
                                     </th>
-                                    <th>
+                                    <th class="no-sorting">
                                         Chi tiết
                                     </th>
-                                    <th>
+                                    <th class="no-sorting">
                                         Cập nhật
                                     </th>
-                                    <th>
+                                    <th class="no-sorting">
                                         Xóa
                                     </th>
                                 </tr>

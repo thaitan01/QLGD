@@ -62,7 +62,14 @@ namespace QuanLyGiangDay.Controllers
 
         public ActionResult _PartialCreate()
         {
-            ViewBag.MaGV = new SelectList(db.GiaoVien, "MaGV", "MaGV");
+            Dictionary<string, string> listGV = new Dictionary<string, string>();
+            foreach (GiaoVien gv in db.GiaoVien)
+            {
+                string value = gv.MaGV + " - " + gv.TenGV;
+                listGV.Add(gv.MaGV, value);
+            }
+
+            ViewBag.MaGV = new SelectList(listGV, "key", "value");
             ViewBag.MaVT = new SelectList(db.VaiTro, "MaVT", "TenVT");
             return PartialView("_PartialCreate");
         }
@@ -174,7 +181,14 @@ namespace QuanLyGiangDay.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MaGV = new SelectList(db.GiaoVien, "MaGV", "MaGV", taiKhoan.MaGV);
+            Dictionary<string, string> listGV = new Dictionary<string, string>();
+            foreach (GiaoVien gv in db.GiaoVien)
+            {
+                string value = gv.MaGV + " - " + gv.TenGV;
+                listGV.Add(gv.MaGV, value);
+            }
+
+            ViewBag.MaGV = new SelectList(listGV, "key", "value", taiKhoan.MaGV);
             ViewBag.MaVT = new SelectList(db.VaiTro, "MaVT", "TenVT", taiKhoan.MaVT);
             return PartialView("_PartialEdit", taiKhoan);
         }
@@ -205,9 +219,9 @@ namespace QuanLyGiangDay.Controllers
             ViewBag.MaVT = new SelectList(db.VaiTro, "MaVT", "TenVT", taiKhoan.MaVT);
             if (ModelState.IsValid)
             {
-                var result = db.TaiKhoan.Where(tk => tk.TenDN == taiKhoan.TenDN).FirstOrDefault();
+                
                 var hasTaiKhoan = db.TaiKhoan.Where(tk => tk.MaGV == taiKhoan.MaGV && tk.MaVT == taiKhoan.MaVT).FirstOrDefault();
-                if ( (hasTaiKhoan == null) && (result == null))
+                if ( hasTaiKhoan == null)
                 {
                     db.Entry(taiKhoan).State = EntityState.Modified;
                     db.SaveChanges();

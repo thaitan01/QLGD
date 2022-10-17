@@ -17,6 +17,10 @@ namespace QuanLyGiangDay.Controllers
         // GET: CTDT
         public ActionResult Index()
         {
+            if (Session["taikhoan"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             return View(db.CTDT.ToList());
         }
 

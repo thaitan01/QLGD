@@ -10,6 +10,11 @@ namespace QuanLyGiangDay.Controllers
     {
         public ActionResult Index()
         {
+            if (Session["taikhoan"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            ViewBag.taikhoan = Session["taikhoan"];
             return View();
         }
 

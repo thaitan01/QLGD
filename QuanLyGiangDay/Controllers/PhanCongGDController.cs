@@ -15,6 +15,10 @@ namespace QuanLyGiangDay.Controllers
         // GET: PhanCongGD
         public ActionResult Index()
         {
+            if (Session["taikhoan"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             return View();
         }
 

@@ -18,7 +18,11 @@ namespace QuanLyGiangDay.Controllers
         // GET: LopHocs
         public ActionResult Index()
         {
-           
+            if (Session["taikhoan"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             var lopHocs = db.LopHoc.Include(l => l.CTDT);
             return View(lopHocs.ToList());
         }

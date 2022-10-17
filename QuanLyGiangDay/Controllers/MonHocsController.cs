@@ -18,6 +18,10 @@ namespace QuanLyGiangDay.Controllers
         // GET: MonHocs
         public ActionResult Index()
         {
+            if (Session["taikhoan"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             return View(db.MonHoc.ToList());
         }
 

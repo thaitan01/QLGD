@@ -11,6 +11,10 @@ namespace QuanLyGiangDay.Controllers
         // GET: LichGiangDay
         public ActionResult Index()
         {
+            if (Session["taikhoan"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             return View();
         }
     }

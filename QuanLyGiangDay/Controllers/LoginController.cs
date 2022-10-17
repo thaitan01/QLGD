@@ -15,7 +15,10 @@ namespace QuanLyGiangDay.Controllers
         // GET: Login
         public ActionResult Index()
         {
-            
+            if (Session["taikhoan"] != null)
+            {
+               return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -38,8 +41,7 @@ namespace QuanLyGiangDay.Controllers
                 }
                 else if (result.MatKhau == login.MatKhau)
                 {
-
-                    
+                    Session["taikhoan"] = db.GiaoVien.Find(result.MaGV).TenGV;
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -54,6 +56,12 @@ namespace QuanLyGiangDay.Controllers
             }
             
 
+        }
+
+        public ActionResult Logout()
+        {
+            Session["taikhoan"] = null;
+            return RedirectToAction("Index","Login");
         }
     }
 

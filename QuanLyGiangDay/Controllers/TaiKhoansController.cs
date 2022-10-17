@@ -20,6 +20,10 @@ namespace QuanLyGiangDay.Controllers
         // GET: TaiKhoans
         public ActionResult Index()
         {
+            if (Session["taikhoan"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             var taiKhoan = db.TaiKhoan.Include(t => t.VaiTro);
             return View(taiKhoan.ToList());
         }

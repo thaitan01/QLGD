@@ -18,6 +18,10 @@ namespace QuanLyGiangDay.Controllers
         // GET: QuanLyGiaoVien
         public ActionResult Index()
         {
+            if (Session["taikhoan"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             var giaoViens = db.GiaoVien.Include(g => g.LoaiGV);
             return View(giaoViens.ToList());
         }

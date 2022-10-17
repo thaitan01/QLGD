@@ -18,6 +18,10 @@ namespace QuanLyGiangDay.Controllers
         // GET: HocKy
         public ActionResult Index()
         {
+            if (Session["taikhoan"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             return View(db.HocKy.ToList());
         }
 

@@ -5,6 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section AddToHead{
+    <link href="@Url.Content("~/Content/_share/css/HocKy/HocKy.css")" rel="stylesheet" type="text/css" />
+}
+
 <div class="panel-group">
     <div class="panel panel-primary">
         <div class="panel-heading"><h4><i class="fa fa-angle-right"></i> Quản lý tài khoản</h4></div>
@@ -36,20 +40,20 @@
                                     <th>
                                         Mã giáo viên
                                     </th>
-                                   
+
                                     <th>
                                         Vài trò
                                     </th>
-                                    <th>
+                                    <th class="no-sorting">
                                         Chi tiết
                                     </th>
-                                    <th>
+                                    <th class="no-sorting">
                                         Cập nhật
                                     </th>
-                                    <th>
+                                    <th class="no-sorting">
                                         Xóa
                                     </th>
-                                    <th>
+                                    <th class="no-sorting">
                                         Khôi phục mật khẩu
                                     </th>
                                 </tr>
@@ -57,34 +61,34 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                <tr class="c-tr-body">
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.MaTK)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.TenDN)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.MaGV)
-                                    </td>
-                                    
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.VaiTro.TenVT)
-                                    </td>
-                                    <td>
-                                        @Html.Raw("<a data-modal='' href='/TaiKhoans/_PartialDetail/" + item.MaTK + "' id='" + item.MaTK + "' title='Chi tiết'> <span class='fa fa-info-circle'> </span>  </a>")
-                                    </td>
-                                    <td>
-                                        @Html.Raw("<a data-modal='' href='/TaiKhoans/_PartialEdit/" + item.MaTK + "' id='" + item.MaTK + "' title='Cập nhật'> <span class='fa fa-edit'> </span>  </a>")
+                                    <tr class="c-tr-body">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MaTK)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TenDN)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MaGV)
+                                        </td>
 
-                                    </td>
-                                    <td>
-                                        @Html.Raw("<a style='color: #e74a3b;' data-modal='' href='/TaiKhoans/_PartialDelete/" + item.MaTK + "' id='" + item.MaTK + "' title='Xóa'> <span class='fa fa-trash'> </span> </a>")
-                                    </td>
-                                    <td>
-                                        @Html.Raw("<a data-modal='' href='/TaiKhoans/_PartialReset/" + item.MaTK + "' id='" + item.MaTK + "' title='Khôi phục'> <span class='	fa fa-undo'> </span> </a>")
-                                    </td>
-                                </tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.VaiTro.TenVT)
+                                        </td>
+                                        <td>
+                                            @Html.Raw("<a data-modal='' href='/TaiKhoans/_PartialDetail/" + item.MaTK + "' id='" + item.MaTK + "' title='Chi tiết'> <span class='fa fa-info-circle'> </span>  </a>")
+                                        </td>
+                                        <td>
+                                            @Html.Raw("<a data-modal='' href='/TaiKhoans/_PartialEdit/" + item.MaTK + "' id='" + item.MaTK + "' title='Cập nhật'> <span class='fa fa-edit'> </span>  </a>")
+
+                                        </td>
+                                        <td>
+                                            @Html.Raw("<a style='color: #e74a3b;' data-modal='' href='/TaiKhoans/_PartialDelete/" + item.MaTK + "' id='" + item.MaTK + "' title='Xóa'> <span class='fa fa-trash'> </span> </a>")
+                                        </td>
+                                        <td>
+                                            @Html.Raw("<a data-modal='' href='/TaiKhoans/_PartialReset/" + item.MaTK + "' id='" + item.MaTK + "' title='Khôi phục'> <span class='	fa fa-undo'> </span> </a>")
+                                        </td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>

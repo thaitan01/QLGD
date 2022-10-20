@@ -25,6 +25,7 @@ namespace QuanLyGiangDay.Controllers
                 return RedirectToAction("Index", "Login");
             }
             var taiKhoan = db.TaiKhoan.Include(t => t.VaiTro);
+            ViewBag.taikhoan = Session["taikhoan"];
             return View(taiKhoan.ToList());
         }
 

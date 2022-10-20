@@ -24,6 +24,7 @@ namespace QuanLyGiangDay.Controllers
             }
 
             var lopHocs = db.LopHoc.Include(l => l.CTDT);
+            ViewBag.taikhoan = Session["taikhoan"];
             return View(lopHocs.ToList());
         }
 

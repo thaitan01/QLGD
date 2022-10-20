@@ -22,6 +22,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
+            ViewBag.taikhoan = Session["taikhoan"];
             return View(db.HocKy.ToList());
         }
 

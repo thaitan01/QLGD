@@ -25,8 +25,10 @@ namespace QuanLyGiangDay.Models.EF
     
         public string MaMH { get; set; }
         [Required(ErrorMessage = "Tên môn học không được rỗng")]
+        [MaxLength(50, ErrorMessage = "Tên môn học không được nhiều hơn 50 ký tự")]
         public string TenMon { get; set; }
         [Required(ErrorMessage = "Mô tả không được rỗng")]
+        [MaxLength(150, ErrorMessage = "Tên môn học không được nhiều hơn 150 ký tự")]
         public string MoTa { get; set; }
         [Required(ErrorMessage = "Số giờ học không được rỗng")]
         [Range(1, int.MaxValue, ErrorMessage = "Giờ học phải là số lớn hơn 1")]

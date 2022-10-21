@@ -24,12 +24,13 @@
         <div class="form-group c-form-group">
             Tên Chương Trình Dạo Tạo
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TenCTDT, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                <input maxlength="50"/>
+                @Html.EditorFor(model => model.TenCTDT, new { htmlAttributes = new { @class = "form-control", @required = "required", @maxlength =50 } })
                 @Html.ValidationMessageFor(model => model.TenCTDT, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group c-form-group" style="display:flex;justify-content:right">
+        <div class="form-group c-form-group" style="display: flex; justify-content: right; margin-left: 6px; margin-right: -4px;">
             Mô Tả
             <div class="col-md-10" style=" margin-right: 9px;">
                 @Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control", @required = "required" } })

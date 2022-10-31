@@ -1,0 +1,6 @@
+﻿.fc-media-screen {
+    height: 1000px !important;
+}
+.fc-daygrid-block-event .fc-event-time, .fc-daygrid-block-event .fc-event-title {
+    font-size: 10px;
+}

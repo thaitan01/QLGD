@@ -1,0 +1,183 @@
+﻿@model QuanLyGiangDay.Models.EF.LopHocMonHoc
+@{
+    ViewBag.Title = "Báo cáo giảng dạy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="float-right" style="padding-bottom: 10px; padding-right: 28px; z-index: 99; position: relative;">
+    <div>
+        <button type="button" class="btn btn-danger" style="margin: 0px !important" onclick="backToPrevious()">
+            <span class="fa fa-backward"></span>&nbsp;&nbsp;Quay lại
+        </button>&nbsp;
+    </div>
+</div>
+<div class="panel-group">
+    <div class="panel panel-primary">
+        <div class="panel-heading"><h4><i class="fa fa-angle-right"></i> Báo Cáo Giảng Dạy</h4></div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="float-left" style="margin-left: 30px; z-index: 99; position: relative; ">
+                    <div class="input-group">
+                        <input type="text" id="dateTuNgay" class="form-control datepicker" placeholder="Từ Ngày..." aria-label="Search" aria-describedby="basic-addon2">
+                        <input type="text" id="dateDenNgay" class="form-control datepicker" placeholder="Đến Ngày..." aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append" style="margin: 0px">
+                            <button class="btn-primary" type="button" style="width: 110px" onclick="searchData()">
+                                Xuất báo cáo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover" id="danhSachGridView" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Giáo viên</th>
+                                    <th>Trong giờ</th>
+                                    <th>Ngoài giờ</th>
+                                    <th>Tổng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" role="dialog" id="baoCaoGDModal" aria-labelledby="baoCaoGDModalLebel" aria-hidden="true">
+    <div class="modal-dialog" style="overflow-y: initial !important" role="document">
+        <div class="modal-content" id="baoCaoGDModalBody">
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" role="dialog" id="messageModal" aria-labelledby="messageLebel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="messageBody">
+            <div class="modal-header" style="background-color: #4e73df">
+                <h4 class="modal-title">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span id="lblMessage"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        var dataTable;
+        function alertMessage(msg) {
+            $("#lblMessage").html(msg);
+            $("#messageModal").modal("show");
+        }
+        $(document).ready(function () {
+            var date = new Date(), y = date.getFullYear(), m = date.getMonth();
+            var firstDay = new Date(y, m, 1);
+            var lastDay = new Date(y, m + 1, 0);
+
+            $("#dateTuNgay").datepicker();
+            $("#dateDenNgay").datepicker();
+
+            $('#dateTuNgay').datepicker("setDate", firstDay);
+            $('#dateDenNgay').datepicker("setDate", lastDay);
+        });
+
+        function searchData() {
+            var ngayBD = $('#dateTuNgay').val();
+            var ngayKT = $('#dateDenNgay').val();
+            BaoCaoGDDatatable(ngayBD, ngayKT);
+        }
+
+        function BaoCaoGDDatatable(ngayBD, ngayKT) {
+            changLoading(true);
+            $.ajax({
+                type: "GET",
+                url: '/PhanCongGD/PrintPDF',
+                data: { ngayBD: ngayBD, ngayKT: ngayKT },
+                success: successFunc,
+                error: errorFunc
+            });
+
+            function successFunc(data) {
+                changLoading(false);
+            }
+
+            function errorFunc() {
+                alertMessage('error');
+                changLoading(false);
+            }
+        }
+
+        //function BaoCaoGDDatatable(tuNgay, denNgay) {
+        //    dataTable = $("#danhSachGridView").DataTable({
+        //        "processing": true,
+        //        "serverSide": true,
+        //        "filter": true,
+        //        "orderMulti": false,
+        //        "searching": false,
+        //        "destroy": true,
+        //        "ordering": true,
+        //        "responsive": true,
+        //        "lengthChange": true,
+        //        "lengthMenu": [
+        //            [10, 25, 50, -1],
+        //            [10, 25, 50, 'Tất cả'],
+        //        ],
+        //        "ajax": {
+        //            "url": '/PhanCongGD/GetBaoCaoGDTableData',
+        //            "type": "POST",
+        //            "data": { tuNgay: tuNgay, denNgay: denNgay },
+        //            "datatype": "json"
+        //        },
+        //        language: {
+        //            url: '//cdn.datatables.net/plug-ins/1.12.1/i18n/vi.json'
+        //        },
+        //        dom: 'lBfrtip',
+        //        buttons: [
+        //            {
+        //                extend: 'excelHtml5',
+        //                exportOptions: {
+        //                    columns: ':visible'
+        //                }
+        //            },
+        //            {
+        //                extend: 'pdfHtml5',
+        //                exportOptions: {
+        //                    columns: ':visible'
+        //                }
+        //            },
+        //            {
+        //                extend: 'colvis',
+        //                text: 'Ẩn/Hiện Cột'
+        //            },
+        //        ],
+        //        order: [],
+        //        "columns": [
+        //            { "data": "MaGV", "name": "MaGV", "autoWidth": true, "sortable": false },
+        //            { "data": "TrongGio", "name": "TrongGio", "autoWidth": true, "sortable": false },
+        //            { "data": "NgoaiGio", "name": "NgoaiGio", "autoWidth": true, "sortable": false },
+        //            { "data": "Tong", "name": "Tong", "autoWidth": true, "sortable": false },
+        //        ]
+        //    });
+        //}
+
+        function showMsg(id, mesg) {
+            $("#" + id).html(mesg);
+        }
+
+        function backToPrevious() {
+            window.history.back();
+        }
+    </script>
+}
+
+
+

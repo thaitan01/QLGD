@@ -1,0 +1,149 @@
+﻿@model QuanLyGiangDay.Models.EFC.PhanCongModel
+@{
+    ViewBag.Title = "PrintPDF";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/css/htmlPdf.css" />
+    <title>PDF</title>
+</head>
+<body>
+    <div class="body-display-pdf">
+        <div class="display-pdf">
+            <div class="herder-pdf">
+                <div class="tile-pdf">
+                    <div class="tile-cusc tile-pdf-herder">
+                        <label>TRUNG TÂM CÔNG NGHỆ PHẦN MỀM ĐẠI HỌC CẦN THƠ</label>
+                    </div>
+                    <div class="tile-un tile-pdf-herder">
+                        <label>CANTHO UNIVERSITY SOFTWARE CENTER</label>
+                    </div>
+                    <div class="tile-dr tile-pdf-herder">
+                        <label>
+                            Khu III, Đại học Cần Thơ - 01 Lý Tự Trọng, TP. Cần Thơ - Tel: 0292.3731072 &
+                            Fax:0292.3731071
+                            - Email: cusc@ctu.edu.vn
+                        </label>
+                    </div>
+                </div>
+                <div class="logo-pdf">
+                </div>
+            </div>
+            <div class="body-pdf">
+                <div class="tile-table-pdf">
+                    <label>PHÂN CÔNG GIẢNG DẠY THÁNG @Html.Label(Model.NgayPC)  </label>
+                </div>
+                <div class="pdf-information">
+                    <div class="assignment">
+                        <label class="index-table">1. Bảng phân công</label>
+                        <div class="body-table-assignment">
+                            <table class="table-assignment">
+                                <thead style="background: #0070C0 ">
+                                    <tr>
+                                        <td>STT</td>
+                                        <td>Tháng</td>
+                                        <td>Ngày BĐ</td>
+                                        <td>Môn học</td>
+                                        <td>Lớp</td>
+                                        <td>Giờ</td>
+                                        <td>Giáo viên</td>
+                                        <td>Số giờ</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{ int i = 1, total = 0; }
+                                    @foreach (var item in Model.PhanCong)
+                                    {
+                                        <tr class="c-tr-body">
+                                            <td>@i</td>
+                                            <td>@Html.DisplayFor(modelItem => item.NgayKT)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.NgayBD)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.MaMH)</td>
+                                            <td name="subjects">@Html.DisplayFor(modelItem => item.MaLop)</td>
+                                            @{ var a = item.NgoaiGio == "T" ? "#ffc823" : "black"; }
+                                            <td style="color:@a">
+                                                @Html.DisplayFor(modelItem => item.MaGio)
+                                            </td>
+                                            <td>@Html.DisplayFor(modelItem => item.MaGV)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.MaLHMH)</td>
+                                        </tr>
+                                        i++;
+                                        total = total + Convert.ToInt32(item.MaLHMH);
+                                    }
+                                    <tr class="sum-of-pdf">
+                                        <td></td>
+                                        <td colspan="4">Tổng số giờ</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>@total</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="count-h-assignment">
+                        <label class="index-table">2. Tổng hợp giờ giảng</label>
+                        <div class="body-count-table-h">
+                            <table class="body-count-h">
+                                <thead style="background: #00B0F0; color: white">
+                                    <tr>
+                                        <td>STT</td>
+                                        <td>Giáo viên</td>
+                                        <td>Tổng</td>
+                                        <td>Ngoài giờ</td>
+                                        <td>Trong giờ</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{ int cnt = 1, totalTong = 0, totalNgoaiGio = 0, totalTrongGio = 0; }
+                                    @foreach (var item in Model.TongHop)
+                                    {
+                                        <tr class="c-tr-body">
+                                            <td>@cnt</td>
+                                            <td>@Html.DisplayFor(modelItem => item.MaGV)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Tong)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.NgoaiGio)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.TrongGio)</td>
+                                        </tr>
+                                        cnt++;
+                                        totalTong = totalTong + Convert.ToInt32(item.Tong);
+                                        totalNgoaiGio = totalNgoaiGio + Convert.ToInt32(item.NgoaiGio);
+                                        totalTrongGio = totalTrongGio + Convert.ToInt32(item.TrongGio);
+                                    }
+                                    <tr class="sum-of-pdf">
+                                        <td colspan="2">Tổng cộng</td>
+                                        <td>@totalTong</td>
+                                        <td>@totalNgoaiGio</td>
+                                        <td>@totalTrongGio</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="tile-pl">
+                    <label class="item-tile-node item-tile-node-l">
+                        <div>@Html.Label(Model.NgayXuatBC) </div>
+                        <div><b>Phó Giám Đốc</b></div>
+                    </label>
+                    <label class="item-tile-node item-tile-node-r">
+                        <div>@Html.Label(Model.NgayXuatBC) </div>
+                        <div><b>GIÁM ĐỐC TRƯỞNG BỘ MÔN</b></div>
+                    </label>
+                </div>
+            </div>
+            <div class="foder-pdf">
+                <label>BM06.44/DT/CUSC 1/0 2/3</label>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

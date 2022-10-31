@@ -1,0 +1,151 @@
+.body-display-pdf {
+    display: flex;
+    justify-content: center;
+    background: #f8f9fa;
+}
+
+.display-pdf {
+    padding: 20px;
+    font-family: "Times New Roman";
+    background: white;
+    width: 830px;
+    min-height: 1123px;
+    position: relative;
+}
+
+.herder-pdf {
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.tile-pdf {
+    text-align: center;
+}
+
+.logo-pdf {
+    background-image: url(./img/logoc.png);
+    position: absolute;
+    background-size: 82px;
+    width: 82px;
+    height: 50px;
+    left: 27px;
+}
+
+.tile-cusc {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.tile-un {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.tile-dr {
+    font-size: 9.9px;
+}
+
+.tile-pdf-herder {
+    margin: 1px;
+}
+
+/* // */
+.body-pdf {
+    margin: 20px;
+}
+
+.tile-table-pdf {
+    font-size: 17px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.pdf-information {
+    margin: 10px;
+}
+
+.assignment {
+    margin: 20px 10px 10px 10px;
+}
+
+.index-table {
+    margin: 0px 0px 0px 10px;
+    font-size: 12.9px;
+    font-weight: 700;
+}
+
+.body-table-assignment {
+    display: flex;
+    justify-content: center;
+}
+
+.table-assignment {
+    width: 100%;
+    text-align: center;
+}
+
+td[name="subjects"] {
+    text-align: left;
+    padding-left: 8px;
+}
+
+.sum-of-pdf {
+    font-weight: 700;
+}
+
+.count-h-assignment {
+    margin: 20px 10px 10px 10px;
+}
+
+.body-count-table-h {
+    display: flex;
+    justify-content: center;
+}
+
+.body-count-h {
+    width: 50%;
+    text-align: center;
+}
+
+.tile-pl {
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    margin: 30px 0px 0px 0px;
+    position: relative;
+}
+
+/* ss */
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+td {
+    min-height: 100px;
+}
+
+.foder-pdf {
+    position: absolute;
+    font-size: 9px;
+    bottom: 0px;
+}
+
+.item-tile-node {
+    text-align: center;
+}
+
+.item-tile-node-l {
+    position: absolute;
+    left: 100px;
+}
+
+.item-tile-node-r {
+    position: absolute;
+    right: 100px;
+}

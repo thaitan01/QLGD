@@ -56,7 +56,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label class="control-label">Ngày bắt đầu giảng dạy</label>
                             </div>
                             <div class="col-md-12">
@@ -67,7 +67,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label class="control-label">Ngày kết thúc giảng dạy</label>
                             </div>
                             <div class="col-md-12">
@@ -86,13 +86,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <div class="col-md-4">
-                                <label class="control-label">Là ngoài giờ</label>
-                            </div>
+                    <div class="col-md-4">
+                        <div class="form-group" title="Chọn nếu là lịch dạy ngoài giờ" style="background-color: #747171; color: white; margin-left: 12px; border-radius: 3px;">
                             <div class="col-md-12">
-                                <input type="checkbox" id="cbxNgoaiGio" name="cbxNgoaiGio" value="T">
+                                <input type="checkbox" id="cbxNgoaiGio" name="cbxNgoaiGio" value="T">&nbsp;&nbsp;Ngoài Giờ
                             </div>
                         </div>
                     </div>
@@ -209,7 +206,7 @@
         }
 
         function getGiaoVien(lopHoc, monHoc, gioHoc, ngayBD, ngayKT) {
-            $("#divLoader").show();
+            changLoading(true);
             $.ajax({
                 type: "GET",
                 url: '/PhanCongGD/GetGiaoVienByLopHocMonHoc',
@@ -240,17 +237,17 @@
                 $("#divGV").empty();
                 $("#divGV").append(lstGv);
                 $("#trGiaoVien").show();
-                $("#divLoader").hide();
+                changLoading(false);
             }
 
             function errorFunc() {
                 alertMessage('error');
-                $("#divLoader").hide();
+                changLoading(false);
             }
         }
 
         function savePhanCongGD() {
-            $("#divLoader").show();
+            changLoading(true);
             var _obj = {};
             _obj.MaLop = $('#maLopHoc').val();
             _obj.MaMH = $('#maMonHoc').val();
@@ -283,7 +280,7 @@
                     });
                 }
             }
-            $("#divLoader").hide();
+            changLoading(false);
         }
 
         function backToPrevious() {

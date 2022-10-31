@@ -46,18 +46,50 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.95.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.95.0\lib\net46\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML.Report, Version=0.2.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.Report.0.2.4\lib\net46\ClosedXML.Report.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.10.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.10\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MoreLinq, Version=2.10.21623.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.2.10.0\lib\net40\MoreLinq.dll</HintPath>
+    </Reference>
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq.Dynamic.Core, Version=1.2.10.0, Culture=neutral, PublicKeyToken=0f07ec44de6ac832, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.Core.1.2.10\lib\net46\System.Linq.Dynamic.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -119,6 +151,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
@@ -129,15 +162,20 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CTDTController.cs" />
     <Compile Include="Controllers\HocKyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LichGiangDayController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LopHocsController.cs" />
+    <Compile Include="Controllers\MonHocsController.cs" />
     <Compile Include="Controllers\PhanCongGDController.cs" />
     <Compile Include="Controllers\QuanLyGiaoVienController.cs" />
+    <Compile Include="Controllers\TaiKhoansController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\EFC\PhanCongGD.cs" />
     <Compile Include="Models\EF\CTDT.cs">
       <DependentUpon>QLGDContext.tt</DependentUpon>
     </Compile>
@@ -205,6 +243,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\common.css" />
+    <Content Include="Content\css\htmlPdf.css" />
     <Content Include="Content\css\sb-admin-2.css" />
     <Content Include="Content\css\sb-admin-2.min.css" />
     <Content Include="Content\demo\chart-area-demo.js" />
@@ -231,6 +270,9 @@
     <Content Include="Content\vendor\chart.js\Chart.bundle.min.js" />
     <Content Include="Content\vendor\chart.js\Chart.js" />
     <Content Include="Content\vendor\chart.js\Chart.min.js" />
+    <Content Include="Content\vendor\datatables\buttons.colVis.js" />
+    <Content Include="Content\vendor\datatables\buttons.html5.js" />
+    <Content Include="Content\vendor\datatables\buttons.print.js" />
     <Content Include="Content\vendor\datatables\dataTables.bootstrap4.css" />
     <Content Include="Content\vendor\datatables\dataTables.bootstrap4.js" />
     <Content Include="Content\vendor\datatables\dataTables.bootstrap4.min.css" />
@@ -1892,11 +1934,21 @@
     <Content Include="Content\vendor\jquery\jquery.min.js" />
     <Content Include="Content\vendor\jquery\jquery.slim.js" />
     <Content Include="Content\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="Content\_custom\chart-area.js" />
+    <Content Include="Content\_custom\chart-bar.js" />
+    <Content Include="Content\_custom\chart-pie.js" />
+    <Content Include="Content\_custom\datatables.js" />
+    <Content Include="Content\_share\css\CTDT\CTDT.css" />
+    <Content Include="Content\_share\css\HocKy\HocKy.css" />
     <Content Include="Content\_share\css\QuanLyGiaoVien\Create.css" />
     <Content Include="Content\_share\css\QuanLyGiaoVien\Index.css" />
     <Content Include="Content\_share\css\QuanLyGiaoVien\Update.css" />
     <Content Include="Content\_share\css\_style.css" />
+    <Content Include="Content\_share\js\CTDT\index.js" />
+    <Content Include="Content\_share\js\HocKy\index.js" />
+    <Content Include="Content\_share\css\LGD\LGD.css" />
     <Content Include="Content\_share\js\QuanLyGiaoVien\Create.js" />
+    <Content Include="Content\_share\js\QuanLyGiaoVien\Details.js" />
     <Content Include="Content\_share\js\QuanLyGiaoVien\Index.js" />
     <Content Include="Content\_share\js\_js_master.js" />
     <Content Include="favicon.ico" />
@@ -1913,6 +1965,10 @@
       <DependentUpon>QLGDContext.edmx</DependentUpon>
       <LastGenOutput>QLGDContext.cs</LastGenOutput>
     </Content>
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\vendor\bootstrap\js\bootstrap.bundle.js.map" />
@@ -2095,6 +2151,7 @@
     <Content Include="Models\EF\QLGDContext.edmx.diagram">
       <DependentUpon>QLGDContext.edmx</DependentUpon>
     </Content>
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2141,6 +2198,37 @@
     <Content Include="Views\PhanCongGD\PhanCongGDView.cshtml" />
     <Content Include="Views\LichGiangDay\Index.cshtml" />
     <Content Include="Views\HocKy\Index.cshtml" />
+    <Content Include="Views\CTDT\Create.cshtml" />
+    <Content Include="Views\CTDT\Delete.cshtml" />
+    <Content Include="Views\CTDT\Details.cshtml" />
+    <Content Include="Views\CTDT\Edit.cshtml" />
+    <Content Include="Views\CTDT\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\MonHocs\Create.cshtml" />
+    <Content Include="Views\MonHocs\Delete.cshtml" />
+    <Content Include="Views\MonHocs\Details.cshtml" />
+    <Content Include="Views\MonHocs\Edit.cshtml" />
+    <Content Include="Views\MonHocs\Index.cshtml" />
+    <Content Include="Views\MonHocs\_PartialCreate.cshtml" />
+    <Content Include="Views\MonHocs\_PartialDelete.cshtml" />
+    <Content Include="Views\MonHocs\_PartialDetail.cshtml" />
+    <Content Include="Views\MonHocs\_PartialEdit.cshtml" />
+    <Content Include="Views\TaiKhoans\Create.cshtml" />
+    <Content Include="Views\TaiKhoans\Delete.cshtml" />
+    <Content Include="Views\TaiKhoans\Details.cshtml" />
+    <Content Include="Views\TaiKhoans\Edit.cshtml" />
+    <Content Include="Views\TaiKhoans\Index.cshtml" />
+    <Content Include="Views\TaiKhoans\_PartialCreate.cshtml" />
+    <Content Include="Views\TaiKhoans\_PartialDelete.cshtml" />
+    <Content Include="Views\TaiKhoans\_PartialDetail.cshtml" />
+    <Content Include="Views\TaiKhoans\_PartialEdit.cshtml" />
+    <Content Include="Views\PhanCongGD\BaoCaoGDView.cshtml" />
+    <Content Include="Views\HocKy\Create.cshtml" />
+    <Content Include="Views\HocKy\Delete.cshtml" />
+    <Content Include="Views\HocKy\Details.cshtml" />
+    <Content Include="Views\HocKy\Edit.cshtml" />
+    <Content Include="Views\TaiKhoans\_PartialReset.cshtml" />
+    <Content Include="Views\PhanCongGD\PrintPdf.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

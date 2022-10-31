@@ -24,6 +24,7 @@ namespace QuanLyGiangDay.Controllers
             }
 
             var lopHocs = db.LopHoc.Include(l => l.CTDT);
+            ViewBag.taikhoan = Session["taikhoan"];
             return View(lopHocs.ToList());
         }
 
@@ -120,7 +121,11 @@ namespace QuanLyGiangDay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult _PartialCreate([Bind(Include = "MaLop,MaCTDT,TenLop,MoTa")] LopHoc lopHoc)
         {
-            
+            var result = db.LopHoc.Find(lopHoc.MaLop);
+            if (result != null)
+            {
+                return Json(new { Success = false, Message = "Mã lớp học này đã tồn tại." });
+            }
             if (ModelState.IsValid)
             {
                 db.LopHoc.Add(lopHoc);

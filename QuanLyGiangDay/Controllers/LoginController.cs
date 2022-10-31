@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Helpers;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace QuanLyGiangDay.Controllers
 {
@@ -51,7 +53,7 @@ namespace QuanLyGiangDay.Controllers
                 }
             } else
             {
-                ViewBag.Message = "Lỗi! Không đăng nhập được!";
+
                 return View("Index");
             }
             
@@ -67,7 +69,9 @@ namespace QuanLyGiangDay.Controllers
 
     public class LoginModel
     {
+        [Required(ErrorMessage = "Tên đăng nhập không được rỗng")]
         public string TenDN { get; set; }
+        [Required(ErrorMessage = "Mật khẩu không được rỗng")]
         public string MatKhau { get; set; }
     }
 

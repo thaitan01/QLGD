@@ -18,8 +18,10 @@ namespace QuanLyGiangDay.Models.EF
 
         public string MaTK { get; set; }
         [Required(ErrorMessage = "Tên đăng nhập không được rỗng")]
+        [MaxLength(10, ErrorMessage = "Tên đăng nhập không được nhiều hơn 10 ký tự")]
         public string TenDN { get; set; }
         [Required(ErrorMessage = "Mật khẩu không được rỗng")]
+        [MaxLength(150, ErrorMessage = "Mật khẩu không được nhiều hơn 150 ký tự")]
         public string MatKhau { get; set; }
         public string MaGV { get; set; }
         public string MaVT { get; set; }

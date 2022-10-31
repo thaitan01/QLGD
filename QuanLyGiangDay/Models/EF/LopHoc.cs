@@ -24,8 +24,10 @@ namespace QuanLyGiangDay.Models.EF
         public string MaLop { get; set; }
         public string MaCTDT { get; set; }
         [Required(ErrorMessage = "Tên lớp học không được rỗng")]
+        [MaxLength(50, ErrorMessage = "Tên lớp học không được nhiều hơn 50 ký tự")]
         public string TenLop { get; set; }
         [Required(ErrorMessage = "Mô tả không được rỗng")]
+        [MaxLength(50, ErrorMessage = "Mô tả không được nhiều hơn 50 ký tự")]
         public string MoTa { get; set; }
     
         public virtual CTDT CTDT { get; set; }

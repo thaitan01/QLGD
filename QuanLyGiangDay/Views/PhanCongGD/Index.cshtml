@@ -125,7 +125,7 @@
             var denNgay = $("#dateDenNgay").val() != "" ? $("#dateDenNgay").val().trim() : $("#dateDenNgay").val();
             var ngoaiGio = $('#cbxNgoaiGio').is(":checked") ? "T" : "";
             var tatCa = $('#cbxTatCa').is(":checked") ? "T" : "F";
-            setTimeout(hideLoading, 2000);
+            setTimeout(hideLoading, 3500);
             var actionUrl = '@Url.Action("PrintPDF", "PhanCongGD")?lopHoc=' + lopHoc + '&monHoc=' + monHoc + '&gioHoc=' + gioHoc
                             + '&tuNgay=' + tuNgay + '&denNgay=' + denNgay + '&ngoaiGio=' + ngoaiGio + '&tatCa=' + tatCa;
             window.location.href = actionUrl;

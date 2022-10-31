@@ -17,6 +17,8 @@ namespace QuanLyGiangDay.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
+            SelectList giaoviens = new SelectList(_context.GiaoVien.ToList(), "MaGV", "TenGV");
+            ViewData["GiaoVienDropdown"] = giaoviens;
             return View();
         }
     }

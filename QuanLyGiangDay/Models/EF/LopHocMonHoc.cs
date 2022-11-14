@@ -10,8 +10,8 @@
 namespace QuanLyGiangDay.Models.EF
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
-
+    using System.Collections.Generic;
+    
     public partial class LopHocMonHoc
     {
         public string MaLHMH { get; set; }
@@ -19,11 +19,7 @@ namespace QuanLyGiangDay.Models.EF
         public string MaMH { get; set; }
         public string MaGio { get; set; }
         public string MoTa { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> NgayKT { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> NgayBD { get; set; }
         public bool NgoaiGio { get; set; }
         public string MaGV { get; set; }

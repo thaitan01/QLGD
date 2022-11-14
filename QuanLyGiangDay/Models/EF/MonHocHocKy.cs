@@ -17,7 +17,9 @@ namespace QuanLyGiangDay.Models.EF
         public string MaMH { get; set; }
         public string MaHK { get; set; }
         public string MoTa { get; set; }
+        public string MaCTDT { get; set; }
     
+        public virtual CTDT CTDT { get; set; }
         public virtual HocKy HocKy { get; set; }
         public virtual MonHoc MonHoc { get; set; }
     }

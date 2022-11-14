@@ -31,7 +31,7 @@ namespace QuanLyGiangDay.Controllers
 
             if (ModelState.IsValid)
             {
-                var result = db.TaiKhoan.Where(tk => tk.TenDN == login.TenDN).FirstOrDefault();
+                var result = db.TaiKhoans.Where(tk => tk.TenDN == login.TenDN).FirstOrDefault();
 
                 login.MatKhau = Crypto.Hash(login.MatKhau, "MD5");
                 if (result == null)
@@ -43,7 +43,7 @@ namespace QuanLyGiangDay.Controllers
                 }
                 else if (result.MatKhau == login.MatKhau)
                 {
-                    Session["taikhoan"] = db.GiaoVien.Find(result.MaGV).TenGV;
+                    Session["taikhoan"] = db.GiaoViens.Find(result.MaGV).TenGV;
                     return RedirectToAction("Index", "LichGiangDay");
                 }
                 else

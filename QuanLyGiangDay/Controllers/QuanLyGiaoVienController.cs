@@ -23,7 +23,7 @@ namespace QuanLyGiangDay.Controllers
                 return RedirectToAction("Index", "Login");
             }
             ViewBag.taikhoan = Session["taikhoan"];
-            var giaoViens = db.GiaoVien.Include(g => g.LoaiGV);
+            var giaoViens = db.GiaoViens.Include(g => g.LoaiGV);
             return View(giaoViens.ToList());
         }
 
@@ -34,7 +34,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GiaoVien giaoVien = db.GiaoVien.Find(id);
+            GiaoVien giaoVien = db.GiaoViens.Find(id);
             if (giaoVien == null)
             {
                 return HttpNotFound();
@@ -44,14 +44,14 @@ namespace QuanLyGiangDay.Controllers
         private string rendumID()
         {
             String id = "GV";
-            id += ((from count in db.GiaoVien select count).Count()+1).ToString();
+            id += ((from count in db.GiaoViens select count).Count()+1).ToString();
             return id;
         }
         // GET: QuanLyGiaoVien/Create
         public ActionResult Create()
         {
             ViewBag.id = rendumID();
-            ViewBag.MaLoaiGV = new SelectList(db.LoaiGV, "MaLoaiGV", "TenLoaiGV");
+            ViewBag.MaLoaiGV = new SelectList(db.LoaiGVs, "MaLoaiGV", "TenLoaiGV");
             return View();
         }
 
@@ -62,20 +62,20 @@ namespace QuanLyGiangDay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MaGV,TenGV,MaLoaiGV,Email,Sdt")] GiaoVien giaoVien)
         {
-            if((from count in db.GiaoVien where count.Email == giaoVien.Email select count).Count() > 0)
+            if((from count in db.GiaoViens where count.Email == giaoVien.Email select count).Count() > 0)
             {
                 ViewBag.Erro ="Email\t[" + giaoVien.Email + "]\tđã tồn tại, vui lòng không nhập trùng email.";
-                var giaoViens = db.GiaoVien.Include(g => g.LoaiGV);
+                var giaoViens = db.GiaoViens.Include(g => g.LoaiGV);
                 return View("Index", giaoViens);
             }
             if (ModelState.IsValid)
             {
-                db.GiaoVien.Add(giaoVien);
+                db.GiaoViens.Add(giaoVien);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MaLoaiGV = new SelectList(db.LoaiGV, "MaLoaiGV", "TenLoaiGV", giaoVien.MaLoaiGV);
+            ViewBag.MaLoaiGV = new SelectList(db.LoaiGVs, "MaLoaiGV", "TenLoaiGV", giaoVien.MaLoaiGV);
             return View(giaoVien);
         }
 
@@ -86,12 +86,12 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GiaoVien giaoVien = db.GiaoVien.Find(id);
+            GiaoVien giaoVien = db.GiaoViens.Find(id);
             if (giaoVien == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.MaLoaiGV = new SelectList(db.LoaiGV, "MaLoaiGV", "TenLoaiGV", giaoVien.MaLoaiGV);
+            ViewBag.MaLoaiGV = new SelectList(db.LoaiGVs, "MaLoaiGV", "TenLoaiGV", giaoVien.MaLoaiGV);
             return View(giaoVien);
         }
 
@@ -104,7 +104,7 @@ namespace QuanLyGiangDay.Controllers
         {
             if (
                 (
-                         from count in db.GiaoVien 
+                         from count in db.GiaoViens 
                          where 
                           (count.Email.Trim() == giaoVien.Email.Trim())  
                           && (count.MaGV.Trim() != giaoVien.MaGV)
@@ -113,7 +113,7 @@ namespace QuanLyGiangDay.Controllers
                 )
             {
                 ViewBag.Erro = "Email\t[" + giaoVien.Email.Trim() + "]\tđã tồn tại, vui lòng không nhập trùng email.";
-                var giaoViens = db.GiaoVien.Include(g => g.LoaiGV);
+                var giaoViens = db.GiaoViens.Include(g => g.LoaiGV);
                 return View("Index", giaoViens);
             }
             if (ModelState.IsValid)
@@ -122,7 +122,7 @@ namespace QuanLyGiangDay.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.MaLoaiGV = new SelectList(db.LoaiGV, "MaLoaiGV", "TenLoaiGV", giaoVien.MaLoaiGV);
+            ViewBag.MaLoaiGV = new SelectList(db.LoaiGVs, "MaLoaiGV", "TenLoaiGV", giaoVien.MaLoaiGV);
             return View(giaoVien);
         }
 
@@ -133,7 +133,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GiaoVien giaoVien = db.GiaoVien.Find(id);
+            GiaoVien giaoVien = db.GiaoViens.Find(id);
             if (giaoVien == null)
             {
                 return HttpNotFound();
@@ -146,8 +146,8 @@ namespace QuanLyGiangDay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            GiaoVien giaoVien = db.GiaoVien.Find(id);
-            db.GiaoVien.Remove(giaoVien);
+            GiaoVien giaoVien = db.GiaoViens.Find(id);
+            db.GiaoViens.Remove(giaoVien);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

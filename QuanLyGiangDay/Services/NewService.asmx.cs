@@ -29,7 +29,7 @@ namespace QuanLyGiangDay.Services
             DateTime bd = ngayBD == "" ? DateTime.MinValue : Convert.ToDateTime(ngayBD);
             DateTime kt = ngayKT == "" ? DateTime.MaxValue : Convert.ToDateTime(ngayKT);
             //Get data LophocMonHoc
-            var data = _context.LopHocMonHoc
+            var data = _context.LopHocMonHocs
                 .Where(x => x.NgayBD >= bd)
                 .Where(x => x.NgayBD <= kt).ToList();
 
@@ -58,7 +58,7 @@ namespace QuanLyGiangDay.Services
                             title += " - ";
                             title += item.MonHoc != null ? item.MonHoc.TenMon : "Chưa có dữ liệu Môn học";
                             title += " - ";
-                            title += item.MonHoc != null ? item.MonHoc.LopHocMonHoc.ElementAt(0).LopHoc.MaLop : "Chưa có dữ liệu Lớp học";
+                            title += item.MonHoc != null ? item.MonHoc.LopHocMonHocs.ElementAt(0).LopHoc.MaLop : "Chưa có dữ liệu Lớp học";
                             title += " - ";
                             title += "Từ ngày " + item.NgayBD.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture) 
                                 + " Đến ngày " + item.NgayKT.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
@@ -89,7 +89,7 @@ namespace QuanLyGiangDay.Services
                         title += " - ";
                         title += item.MonHoc != null ? item.MonHoc.TenMon : "Chưa có dữ liệu Môn học";
                         title += " - ";
-                        title += item.MonHoc != null ? item.MonHoc.LopHocMonHoc.ElementAt(0).LopHoc.MaLop : "Chưa có dữ liệu Lớp học";
+                        title += item.MonHoc != null ? item.MonHoc.LopHocMonHocs.ElementAt(0).LopHoc.MaLop : "Chưa có dữ liệu Lớp học";
                         title += " - ";
                         title += "Từ ngày " + item.NgayBD.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)
                                 + " Đến ngày " + item.NgayKT.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);

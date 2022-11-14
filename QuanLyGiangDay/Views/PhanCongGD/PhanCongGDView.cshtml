@@ -35,11 +35,21 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <div class="col-md-4">
+                                <label class="control-label">Học kỳ</label>
+                            </div>
+                            <div class="col-md-12">
+                                @Html.DropDownList("MaHK", (IEnumerable<SelectListItem>)ViewData["HocKyDropdown"], "--Chọn học kỳ--", new { @class = "form-control", @id = "maHocKy" })
+                                <span id="msgMaHocKy" style="font-style: italic; color: red"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="col-md-4">
                                 <label class="control-label">Môn học</label>
                             </div>
                             <div class="col-md-12">
-                                @Html.DropDownList("MaMH", (IEnumerable<SelectListItem>)ViewData["MonHocDropdown"], "--Chọn môn học--", new { @class = "form-control", @id = "maMonHoc" })
-                                <span id="msgMaMonHoc" style="font-style: italic; color: red"></span>
+                                <select id="maMonHoc" class="form-control"></select>
                             </div>
                         </div>
                     </div>
@@ -100,9 +110,9 @@
                             <div class="col-md-12">
                                 <label class="control-label">Phân công cho Giáo viên<br /><span style="color:red">*</span>Danh sách giáo viên có thể giảng dạy trong thời gian đã chọn</label>
                             </div>
-                            <div class="col-md-12" id="divGV" style="overflow-y: scroll; height: 350px;">
+                            <div class="col-md-12" id="divGV" style="overflow-y: scroll; height: 250px;">
                                 @*@Html.DropDownListFor(m => m.MaGV, new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"), "--Chọn giáo viên--", new { id = "maGV", @class = "form-control" })
-                        @Html.ValidationMessageFor(x => x.MaGV, "", new { @class = "text-danger" })*@
+                    @Html.ValidationMessageFor(x => x.MaGV, "", new { @class = "text-danger" })*@
                             </div>
                         </div>
                     </div>
@@ -143,16 +153,27 @@
         $(document).ready(function () {
             $("#dateBD").datepicker();
             $("#dateKT").datepicker();
-
-            $("#maMonHoc, #maLopHoc, #maGioHoc, #dateBD, #dateKT").change(function () {
+            $("#maLopHoc, #maHocKy").change(function () {
                 var lopHoc = $('#maLopHoc').val();
+                var hocKy = $('#maHocKy').val();
+                if (lopHoc == "") {
+                    showMsg("msgMaLopHoc", "Mời bạn chọn lớp học.");
+                } else if (hocKy == "") {
+                    hideMsg("msgMaLopHoc");
+                    showMsg("msgMaHocKy", "Mời bạn chọn học kỳ.");
+                } else { 
+                    hideMsg("msgMaLopHoc,msgMaHocKy");
+                    getMonHoc(lopHoc, hocKy);
+                }
+            });
+            $("#maMonHoc, #maGioHoc, #dateBD, #dateKT").change(function () {
                 var monHoc = $('#maMonHoc').val();
                 var gioHoc = $('#maGioHoc').val();
                 var ngayBD = $('#dateBD').val();
                 var ngayKT = $('#dateKT').val();
-                var msg = validateFilter(lopHoc, monHoc, gioHoc, ngayBD, ngayKT);
+                var msg = validateFilter(monHoc, gioHoc, ngayBD, ngayKT);
                 if (msg == "") {
-                    hideMsg("msgMaLopHoc,msgMaMonHoc,msgMaGioHoc,msgNgayBD,msgNgayKT");
+                    hideMsg("msgMaMonHoc,msgMaGioHoc,msgNgayBD,msgNgayKT");
                     getGiaoVien(lopHoc, monHoc, gioHoc, ngayBD, ngayKT);
                 }
             });
@@ -237,6 +258,38 @@
                 $("#divGV").empty();
                 $("#divGV").append(lstGv);
                 $("#trGiaoVien").show();
+                changLoading(false);
+            }
+
+            function errorFunc() {
+                alertMessage('error');
+                changLoading(false);
+            }
+        }
+
+        function getMonHoc(lopHoc, hocKy) {
+            changLoading(true);
+            $.ajax({
+                type: "GET",
+                url: '/PhanCongGD/GetMonHocByLopHocHocKy',
+                data: { lopHoc: lopHoc, hocKy: hocKy },
+                success: successFunc,
+                error: errorFunc
+            });
+
+            function successFunc(data) {
+                var select = $("#maMonHoc");
+                select.empty();
+                select.append($('<option/>', {
+                    value: 0,
+                    text: "--Chọn môn học--"
+                }));
+                $.each(data, function (index, itemData) {
+                    select.append($('<option/>', {
+                        value: itemData.Value,
+                        text: itemData.Text
+                    }));
+                });
                 changLoading(false);
             }
 

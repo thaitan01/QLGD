@@ -17,13 +17,13 @@ namespace QuanLyGiangDay.Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public HocKy()
         {
-            this.MonHocHocKy = new HashSet<MonHocHocKy>();
+            this.MonHocHocKies = new HashSet<MonHocHocKy>();
         }
     
         public string MaHK { get; set; }
         public string TenHK { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MonHocHocKy> MonHocHocKy { get; set; }
+        public virtual ICollection<MonHocHocKy> MonHocHocKies { get; set; }
     }
 }

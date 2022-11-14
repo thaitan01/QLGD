@@ -23,7 +23,7 @@ namespace QuanLyGiangDay.Controllers
                 return RedirectToAction("Index", "Login");
             }
             ViewBag.taikhoan = Session["taikhoan"];
-            return View(db.MonHoc.ToList());
+            return View(db.MonHocs.ToList());
         }
 
         // GET: MonHocs/Details/5
@@ -33,7 +33,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MonHoc monHoc = db.MonHoc.Find(id);
+            MonHoc monHoc = db.MonHocs.Find(id);
             if (monHoc == null)
             {
                 return HttpNotFound();
@@ -47,7 +47,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MonHoc monHoc = db.MonHoc.Find(id);
+            MonHoc monHoc = db.MonHocs.Find(id);
             if (monHoc == null)
             {
                 return HttpNotFound();
@@ -75,7 +75,7 @@ namespace QuanLyGiangDay.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.MonHoc.Add(monHoc);
+                db.MonHocs.Add(monHoc);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -89,17 +89,17 @@ namespace QuanLyGiangDay.Controllers
         {
             if (ModelState.IsValid)
             {
-                var countOfRows = db.MonHoc.Count();
-                var lastRow = db.MonHoc.OrderBy(c => c.MaMH).Skip(countOfRows - 1).FirstOrDefault();
+                var countOfRows = db.MonHocs.Count();
+                var lastRow = db.MonHocs.OrderBy(c => c.MaMH).Skip(countOfRows - 1).FirstOrDefault();
                 int nextId = Convert.ToInt32(lastRow.MaMH.Substring(2));
                 monHoc.MaMH = "MH" + (nextId + 1);
-                while (db.MonHoc.Find(monHoc.MaMH) != null)
+                while (db.MonHocs.Find(monHoc.MaMH) != null)
                 {
                     nextId++;
                     monHoc.MaMH = "MH" + (nextId + 1);
                 }
                
-                db.MonHoc.Add(monHoc);
+                db.MonHocs.Add(monHoc);
                 db.SaveChanges();
                 return Json(new { Success = true });
             } else
@@ -129,7 +129,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MonHoc monHoc = db.MonHoc.Find(id);
+            MonHoc monHoc = db.MonHocs.Find(id);
             if (monHoc == null)
             {
                 return HttpNotFound();
@@ -143,7 +143,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MonHoc monHoc = db.MonHoc.Find(id);
+            MonHoc monHoc = db.MonHocs.Find(id);
             if (monHoc == null)
             {
                 return HttpNotFound();
@@ -203,7 +203,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MonHoc monHoc = db.MonHoc.Find(id);
+            MonHoc monHoc = db.MonHocs.Find(id);
             if (monHoc == null)
             {
                 return HttpNotFound();
@@ -217,7 +217,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MonHoc monHoc = db.MonHoc.Find(id);
+            MonHoc monHoc = db.MonHocs.Find(id);
             if (monHoc == null)
             {
                 return HttpNotFound();
@@ -230,8 +230,8 @@ namespace QuanLyGiangDay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            MonHoc monHoc = db.MonHoc.Find(id);
-            db.MonHoc.Remove(monHoc);
+            MonHoc monHoc = db.MonHocs.Find(id);
+            db.MonHocs.Remove(monHoc);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -240,8 +240,8 @@ namespace QuanLyGiangDay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult _PartialDeleteConfirmed(string id)
         {
-            MonHoc monHoc = db.MonHoc.Find(id);
-            db.MonHoc.Remove(monHoc);
+            MonHoc monHoc = db.MonHocs.Find(id);
+            db.MonHocs.Remove(monHoc);
             db.SaveChanges();
             return Json(new { Success = true });
         }

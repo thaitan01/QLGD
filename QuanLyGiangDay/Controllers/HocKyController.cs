@@ -23,7 +23,7 @@ namespace QuanLyGiangDay.Controllers
                 return RedirectToAction("Index", "Login");
             }
             ViewBag.taikhoan = Session["taikhoan"];
-            return View(db.HocKy.ToList());
+            return View(db.HocKies.ToList());
         }
 
         // GET: HocKy/Details/5
@@ -33,7 +33,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HocKy hocKy = db.HocKy.Find(id);
+            HocKy hocKy = db.HocKies.Find(id);
             if (hocKy == null)
             {
                 return HttpNotFound();
@@ -45,7 +45,7 @@ namespace QuanLyGiangDay.Controllers
         private string rendumID()
         {
             String id = "HK";
-            id += ((from count in db.HocKy select count).Count()+1).ToString();
+            id += ((from count in db.HocKies select count).Count()+1).ToString();
             return id;
         }
 
@@ -65,7 +65,7 @@ namespace QuanLyGiangDay.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.HocKy.Add(hocKy);
+                db.HocKies.Add(hocKy);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -80,7 +80,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HocKy hocKy = db.HocKy.Find(id);
+            HocKy hocKy = db.HocKies.Find(id);
             if (hocKy == null)
             {
                 return HttpNotFound();
@@ -111,7 +111,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HocKy hocKy = db.HocKy.Find(id);
+            HocKy hocKy = db.HocKies.Find(id);
             if (hocKy == null)
             {
                 return HttpNotFound();
@@ -124,8 +124,8 @@ namespace QuanLyGiangDay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            HocKy hocKy = db.HocKy.Find(id);
-            db.HocKy.Remove(hocKy);
+            HocKy hocKy = db.HocKies.Find(id);
+            db.HocKies.Remove(hocKy);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

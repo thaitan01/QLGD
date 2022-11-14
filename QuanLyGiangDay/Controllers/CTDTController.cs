@@ -23,7 +23,7 @@ namespace QuanLyGiangDay.Controllers
                 return RedirectToAction("Index", "Login");
             }
             ViewBag.taikhoan = Session["taikhoan"];
-            return View(db.CTDT.ToList());
+            return View(db.CTDTs.ToList());
         }
 
         // GET: CTDT/Details/5
@@ -33,7 +33,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CTDT cTDT = db.CTDT.Find(id);
+            CTDT cTDT = db.CTDTs.Find(id);
             if (cTDT == null)
             {
                 return HttpNotFound();
@@ -44,7 +44,7 @@ namespace QuanLyGiangDay.Controllers
         private string rendumID()
         {
             String id = "DT";
-            id += ((from count in db.CTDT select count).Count()+1).ToString();
+            id += ((from count in db.CTDTs select count).Count()+1).ToString();
             return id;
         }
         // GET: CTDT/Create
@@ -63,7 +63,7 @@ namespace QuanLyGiangDay.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.CTDT.Add(cTDT);
+                db.CTDTs.Add(cTDT);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -78,7 +78,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CTDT cTDT = db.CTDT.Find(id);
+            CTDT cTDT = db.CTDTs.Find(id);
             if (cTDT == null)
             {
                 return HttpNotFound();
@@ -109,7 +109,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CTDT cTDT = db.CTDT.Find(id);
+            CTDT cTDT = db.CTDTs.Find(id);
             if (cTDT == null)
             {
                 return HttpNotFound();
@@ -122,8 +122,8 @@ namespace QuanLyGiangDay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            CTDT cTDT = db.CTDT.Find(id);
-            db.CTDT.Remove(cTDT);
+            CTDT cTDT = db.CTDTs.Find(id);
+            db.CTDTs.Remove(cTDT);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

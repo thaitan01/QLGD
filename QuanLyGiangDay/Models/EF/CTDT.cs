@@ -17,7 +17,8 @@ namespace QuanLyGiangDay.Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CTDT()
         {
-            this.LopHoc = new HashSet<LopHoc>();
+            this.LopHocs = new HashSet<LopHoc>();
+            this.MonHocHocKies = new HashSet<MonHocHocKy>();
         }
     
         public string MaCTDT { get; set; }
@@ -25,6 +26,8 @@ namespace QuanLyGiangDay.Models.EF
         public string MoTa { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LopHoc> LopHoc { get; set; }
+        public virtual ICollection<LopHoc> LopHocs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MonHocHocKy> MonHocHocKies { get; set; }
     }
 }

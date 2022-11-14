@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c2fc9a3f448e47ee8bb567e43574337f" Name="Diagram1">
+        <EntityTypeShape EntityType="quanlygiaovienModel.CTDT" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlygiaovienModel.GiaoVien" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlygiaovienModel.GiaoVienMonHoc" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlygiaovienModel.GioHoc" Width="1.5" PointX="3.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlygiaovienModel.HocKy" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlygiaovienModel.LoaiGV" Width="1.5" PointX="1.5" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlygiaovienModel.LopHoc" Width="1.5" PointX="3.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlygiaovienModel.LopHocMonHoc" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlygiaovienModel.MonHoc" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlygiaovienModel.MonHocHocKy" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlygiaovienModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlygiaovienModel.TaiKhoan" Width="1.5" PointX="11" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlygiaovienModel.VaiTro" Width="1.5" PointX="8.75" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="quanlygiaovienModel.FK_LopHoc_CTDT" ManuallyRouted="false" />
+        <AssociationConnector Association="quanlygiaovienModel.FK_MonHocHocKy_CTDT" ManuallyRouted="false" />
+        <AssociationConnector Association="quanlygiaovienModel.FK_GiaoVien_LoaiGV" ManuallyRouted="false" />
+        <AssociationConnector Association="quanlygiaovienModel.FK_GiaoVienMonHoc_GiaoVien" ManuallyRouted="false" />
+        <AssociationConnector Association="quanlygiaovienModel.FK_LopHocMonHoc_GiaoVien" ManuallyRouted="false" />
+        <AssociationConnector Association="quanlygiaovienModel.FK_GiaoVienMonHoc_MonHoc" ManuallyRouted="false" />
+        <AssociationConnector Association="quanlygiaovienModel.FK_LopHocMonHoc_GioHoc" ManuallyRouted="false" />
+        <AssociationConnector Association="quanlygiaovienModel.FK_MonHocHocKy_HocKy" ManuallyRouted="false" />
+        <AssociationConnector Association="quanlygiaovienModel.FK_LopHocMonHoc_LopHoc" ManuallyRouted="false" />
+        <AssociationConnector Association="quanlygiaovienModel.FK_LopHocMonHoc_MonHoc" ManuallyRouted="false" />
+        <AssociationConnector Association="quanlygiaovienModel.FK_MonHocHocKy_MonHoc" ManuallyRouted="false" />
+        <AssociationConnector Association="quanlygiaovienModel.FK_TaiKhoan_VaiTro" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

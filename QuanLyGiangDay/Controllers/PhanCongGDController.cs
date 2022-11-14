@@ -44,14 +44,14 @@ namespace QuanLyGiangDay.Controllers
                 string orderDir = Request.Form.GetValues("order[0][dir]")[0];
                 int startRec = Convert.ToInt32(Request.Form.GetValues("start")[0]);
                 int pageSize = Convert.ToInt32(Request.Form.GetValues("length")[0]);
-                var data = _context.LopHocMonHoc
+                var data = _context.LopHocMonHocs
                             .Join(
-                                _context.GiaoVien,
+                                _context.GiaoViens,
                                 lhmh => lhmh.MaGV,
                                 gv => gv.MaGV,
                                 (lhmh, gv) => new { LHMH = lhmh, GV = gv })
                             .Join(
-                                _context.MonHoc,
+                                _context.MonHocs,
                                 lhmh => lhmh.LHMH.MaMH,
                                 mh => mh.MaMH,
                                 (lhmh, mh) => new { LHMH = lhmh, MH = mh })
@@ -180,33 +180,33 @@ namespace QuanLyGiangDay.Controllers
 
         public ActionResult GetPhanCongGDPartial(string id)
         {
-            var lhmh = id != null ? _context.LopHocMonHoc.Find(id.Trim()) : new LopHocMonHoc();
+            var lhmh = id != null ? _context.LopHocMonHocs.Find(id.Trim()) : new LopHocMonHoc();
             SelectList lophocs;
             if (id != "")
-                lophocs = new SelectList(_context.LopHoc.ToList(), "MaLop", "TenLop", lhmh.MaLop);
+                lophocs = new SelectList(_context.LopHocs.ToList(), "MaLop", "TenLop", lhmh.MaLop);
             else
-                lophocs = new SelectList(_context.LopHoc.ToList(), "MaLop", "TenLop");
+                lophocs = new SelectList(_context.LopHocs.ToList(), "MaLop", "TenLop");
             ViewData["LopDropdown"] = lophocs;
 
             SelectList monhocs;
             if (id != "")
-                monhocs = new SelectList(_context.MonHoc.ToList(), "MaMH", "TenMon", lhmh.MaLop);
+                monhocs = new SelectList(_context.MonHocs.ToList(), "MaMH", "TenMon", lhmh.MaLop);
             else
-                monhocs = new SelectList(_context.MonHoc.ToList(), "MaMH", "TenMon");
+                monhocs = new SelectList(_context.MonHocs.ToList(), "MaMH", "TenMon");
             ViewData["MonHocDropdown"] = monhocs;
 
             SelectList giaoviens;
             if (id != "")
-                giaoviens = new SelectList(_context.GiaoVien.ToList(), "MaGV", "TenGV", lhmh.MaGV);
+                giaoviens = new SelectList(_context.GiaoViens.ToList(), "MaGV", "TenGV", lhmh.MaGV);
             else
-                giaoviens = new SelectList(_context.GiaoVien.ToList(), "MaGV", "TenGV");
+                giaoviens = new SelectList(_context.GiaoViens.ToList(), "MaGV", "TenGV");
             ViewData["GiaoVienDropdown"] = giaoviens;
 
             SelectList giohocs;
             if (id != "")
-                giohocs = new SelectList(_context.GioHoc.ToList(), "MaGio", "TenGio", lhmh.MaGio);
+                giohocs = new SelectList(_context.GioHocs.ToList(), "MaGio", "TenGio", lhmh.MaGio);
             else
-                giohocs = new SelectList(_context.GioHoc.ToList(), "MaGio", "TenGio");
+                giohocs = new SelectList(_context.GioHocs.ToList(), "MaGio", "TenGio");
             ViewData["GioHocDropdown"] = giohocs;
 
             return PartialView("PhanCongGDPartialView", lhmh);
@@ -214,13 +214,16 @@ namespace QuanLyGiangDay.Controllers
 
         public ActionResult GetPhanCongGD()
         {
-            SelectList lophocs = new SelectList(_context.LopHoc.ToList(), "MaLop", "TenLop");
+            SelectList lophocs = new SelectList(_context.LopHocs.ToList(), "MaLop", "TenLop");
             ViewData["LopDropdown"] = lophocs;
 
-            SelectList monhocs = new SelectList(_context.MonHoc.ToList(), "MaMH", "TenMon");
-            ViewData["MonHocDropdown"] = monhocs;
+            SelectList hockies = new SelectList(_context.HocKies.ToList(), "MaHK", "TenHK");
+            ViewData["HocKyDropdown"] = hockies;
 
-            SelectList giohocs = new SelectList(_context.GioHoc.ToList(), "MaGio", "TenGio");
+            //SelectList monhocs = new SelectList(_context.MonHocs.ToList(), "MaMH", "TenMon");
+            //ViewData["MonHocDropdown"] = monhocs;
+
+            SelectList giohocs = new SelectList(_context.GioHocs.ToList(), "MaGio", "TenGio");
             ViewData["GioHocDropdown"] = giohocs;
 
             return View("PhanCongGDView");
@@ -246,14 +249,14 @@ namespace QuanLyGiangDay.Controllers
 
                 DateTime cTuNgay = Convert.ToDateTime(tuNgay);
                 DateTime cDenNgay = Convert.ToDateTime(denNgay);
-                var data = _context.LopHocMonHoc
+                var data = _context.LopHocMonHocs
                             .Join(
-                                _context.GiaoVien,
+                                _context.GiaoViens,
                                 lhmh => lhmh.MaGV,
                                 gv => gv.MaGV,
                                 (lhmh, gv) => new { LHMH = lhmh, GV = gv })
                             .Join(
-                                _context.MonHoc,
+                                _context.MonHocs,
                                 lhmh => lhmh.LHMH.MaMH,
                                 mh => mh.MaMH,
                                 (lhmh, mh) => new { LHMH = lhmh, MH = mh })
@@ -266,15 +269,15 @@ namespace QuanLyGiangDay.Controllers
                 for (int i = 0; i < data.Count; i++)
                 {
                     var model = new PhanCongGD();
-                    model.MaGV = _context.GiaoVien.Find(data[i].maGV).TenGV;
-                    var trongGio = _context.LopHocMonHoc
+                    model.MaGV = _context.GiaoViens.Find(data[i].maGV).TenGV;
+                    var trongGio = _context.LopHocMonHocs
                             .Join(
-                                _context.GiaoVien,
+                                _context.GiaoViens,
                                 lhmh => lhmh.MaGV,
                                 gv => gv.MaGV,
                                 (lhmh, gv) => new { LHMH = lhmh, GV = gv })
                             .Join(
-                                _context.MonHoc,
+                                _context.MonHocs,
                                 lhmh => lhmh.LHMH.MaMH,
                                 mh => mh.MaMH,
                                 (lhmh, mh) => new { LHMH = lhmh, MH = mh }).AsEnumerable()
@@ -284,14 +287,14 @@ namespace QuanLyGiangDay.Controllers
                             .Select(a => new { sum = a.Sum(b => b.LHMH.LHMH.MonHoc.SoGio), maGV = a.Key })
                             .ToList();
                     model.TrongGio = trongGio.Count > 0 ? trongGio[0].sum.ToString() : "0";
-                    var ngoaiGio = _context.LopHocMonHoc
+                    var ngoaiGio = _context.LopHocMonHocs
                             .Join(
-                                _context.GiaoVien,
+                                _context.GiaoViens,
                                 lhmh => lhmh.MaGV,
                                 gv => gv.MaGV,
                                 (lhmh, gv) => new { LHMH = lhmh, GV = gv })
                             .Join(
-                                _context.MonHoc,
+                                _context.MonHocs,
                                 lhmh => lhmh.LHMH.MaMH,
                                 mh => mh.MaMH,
                                 (lhmh, mh) => new { LHMH = lhmh, MH = mh }).AsEnumerable()
@@ -330,6 +333,13 @@ namespace QuanLyGiangDay.Controllers
             return Json(giaoviens, JsonRequestBehavior.AllowGet);
         }
 
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult GetMonHocByLopHocHocKy(string lopHoc, string hocKy)
+        {
+            var hockies = GetAllMonHocByLopHocHocKy(lopHoc, hocKy);
+            return Json(hockies, JsonRequestBehavior.AllowGet);
+        }
+
         [NonAction]
         public IEnumerable<SelectListItem> GetAllGiaoVienByLopMon(string lopHoc, string monHoc, string gioHoc, string ngayBD, string ngayKT)
         {
@@ -339,14 +349,14 @@ namespace QuanLyGiangDay.Controllers
             DateTime bd = Convert.ToDateTime(ngayBD);
             DateTime kt = Convert.ToDateTime(ngayKT);
 
-            var listOfLHMH = _context.LopHocMonHoc.Where(x => x.MaLop.Trim().Equals(lopHoc.Trim()))
+            var listOfLHMH = _context.LopHocMonHocs.Where(x => x.MaLop.Trim().Equals(lopHoc.Trim()))
                 .Where(x => x.MaMH.Trim().Equals(monHoc.Trim()))
                 .Where(x => x.MaGio.Trim().Equals(gioHoc.Trim()))
                 .Where(x => x.NgayBD >= bd)
                 .Where(x => x.NgayBD <= kt)
                 .Select(x => x.MaGV).ToList();
 
-            var giaoViens = _context.GiaoVien.Where(r => !listOfLHMH.Contains(r.MaGV))
+            var giaoViens = _context.GiaoViens.Where(r => !listOfLHMH.Contains(r.MaGV))
                 .Select(c => new {
                     c.MaGV,
                     c.TenGV
@@ -364,6 +374,33 @@ namespace QuanLyGiangDay.Controllers
             return selectList;
         }
 
+        [NonAction]
+        public IEnumerable<SelectListItem> GetAllMonHocByLopHocHocKy(string lopHoc, string hocKy)
+        {
+            //generate empty list
+            var selectList = new List<SelectListItem>();
+            
+            var ctdt = _context.LopHocs.Where(x => x.MaLop.Trim().Equals(lopHoc.Trim()))
+                .Select(x => x.MaCTDT).FirstOrDefault();
+
+            var listOfMonHoc = _context.MonHocHocKies.Where(x => x.MaCTDT.Trim().Equals(ctdt.Trim()))
+               .Select(c => new {
+                   c.MaMH,
+                   c.MonHoc.TenMon
+               }).ToList();
+
+            foreach (var mh in listOfMonHoc)
+            {
+                //add elements in dropdown
+                selectList.Add(new SelectListItem
+                {
+                    Value = mh.MaMH.ToString(),
+                    Text = mh.TenMon.ToString()
+                });
+            }
+            return selectList;
+        }
+
         public ActionResult SavePhanCongGD(LopHocMonHoc _obj)
         {
             if (ModelState.IsValid)
@@ -374,7 +411,7 @@ namespace QuanLyGiangDay.Controllers
                 }
                 else
                 {
-                    var isExist = _context.LopHocMonHoc.Where(x => x.MaLop == _obj.MaLop)
+                    var isExist = _context.LopHocMonHocs.Where(x => x.MaLop == _obj.MaLop)
                        .Where(x => x.MaMH == _obj.MaMH)
                        .Where(x => x.MaGio == _obj.MaGio).ToList();
                     if (isExist.Count > 0)
@@ -383,11 +420,11 @@ namespace QuanLyGiangDay.Controllers
                     }
                     else
                     {
-                        var countOfRows = _context.LopHocMonHoc.Count();
-                        var lastRow = _context.LopHocMonHoc.OrderBy(c => c.MaLHMH).Skip(countOfRows - 1).FirstOrDefault();
+                        var countOfRows = _context.LopHocMonHocs.Count();
+                        var lastRow = _context.LopHocMonHocs.OrderBy(c => c.MaLHMH).Skip(countOfRows - 1).FirstOrDefault();
                         int nextId = Convert.ToInt32(lastRow.MaLHMH.Substring(4));
                         _obj.MaLHMH = "LHMH" + (nextId + 1);
-                        _context.LopHocMonHoc.Add(_obj);
+                        _context.LopHocMonHocs.Add(_obj);
                     }
                 }
                 _context.SaveChanges();
@@ -401,8 +438,8 @@ namespace QuanLyGiangDay.Controllers
         {
             try
             {
-                var lhmh = _context.LopHocMonHoc.Find(id);
-                _context.LopHocMonHoc.Remove(lhmh);
+                var lhmh = _context.LopHocMonHocs.Find(id);
+                _context.LopHocMonHocs.Remove(lhmh);
                 _context.SaveChanges();
                 return Json(new { Message = "Xóa dữ liệu thành công!" }, JsonRequestBehavior.AllowGet);
             }
@@ -427,14 +464,14 @@ namespace QuanLyGiangDay.Controllers
             else
                 cDenNgay = DateTime.MaxValue;
 
-            var data = _context.LopHocMonHoc
+            var data = _context.LopHocMonHocs
                             .Join(
-                                _context.GiaoVien,
+                                _context.GiaoViens,
                                 lhmh => lhmh.MaGV,
                                 gv => gv.MaGV,
                                 (lhmh, gv) => new { LHMH = lhmh, GV = gv })
                             .Join(
-                                _context.MonHoc,
+                                _context.MonHocs,
                                 lhmh => lhmh.LHMH.MaMH,
                                 mh => mh.MaMH,
                                 (lhmh, mh) => new { LHMH = lhmh, MH = mh })
@@ -494,14 +531,14 @@ namespace QuanLyGiangDay.Controllers
             }).ToList();
 
             //Tong hop gio giang
-            var data2 = _context.LopHocMonHoc
+            var data2 = _context.LopHocMonHocs
                         .Join(
-                            _context.GiaoVien,
+                            _context.GiaoViens,
                             lhmh => lhmh.MaGV,
                             gv => gv.MaGV,
                             (lhmh, gv) => new { LHMH = lhmh, GV = gv })
                         .Join(
-                            _context.MonHoc,
+                            _context.MonHocs,
                             lhmh => lhmh.LHMH.MaMH,
                             mh => mh.MaMH,
                             (lhmh, mh) => new { LHMH = lhmh, MH = mh })
@@ -514,15 +551,15 @@ namespace QuanLyGiangDay.Controllers
             for (int i = 0; i < data2.Count; i++)
             {
                 var model = new PhanCongGD();
-                model.MaGV = _context.GiaoVien.Find(data2[i].maGV).TenGV;
-                var trongGio = _context.LopHocMonHoc
+                model.MaGV = _context.GiaoViens.Find(data2[i].maGV).TenGV;
+                var trongGio = _context.LopHocMonHocs
                         .Join(
-                            _context.GiaoVien,
+                            _context.GiaoViens,
                             lhmh => lhmh.MaGV,
                             gv => gv.MaGV,
                             (lhmh, gv) => new { LHMH = lhmh, GV = gv })
                         .Join(
-                            _context.MonHoc,
+                            _context.MonHocs,
                             lhmh => lhmh.LHMH.MaMH,
                             mh => mh.MaMH,
                             (lhmh, mh) => new { LHMH = lhmh, MH = mh }).AsEnumerable()
@@ -532,14 +569,14 @@ namespace QuanLyGiangDay.Controllers
                         .Select(a => new { sum = a.Sum(b => b.LHMH.LHMH.MonHoc.SoGio), maGV = a.Key })
                         .ToList();
                 model.TrongGio = trongGio.Count > 0 ? trongGio[0].sum.ToString() : "0";
-                var ngoaiGio2 = _context.LopHocMonHoc
+                var ngoaiGio2 = _context.LopHocMonHocs
                         .Join(
-                            _context.GiaoVien,
+                            _context.GiaoViens,
                             lhmh => lhmh.MaGV,
                             gv => gv.MaGV,
                             (lhmh, gv) => new { LHMH = lhmh, GV = gv })
                         .Join(
-                            _context.MonHoc,
+                            _context.MonHocs,
                             lhmh => lhmh.LHMH.MaMH,
                             mh => mh.MaMH,
                             (lhmh, mh) => new { LHMH = lhmh, MH = mh }).AsEnumerable()
@@ -594,14 +631,14 @@ namespace QuanLyGiangDay.Controllers
             else
                 cDenNgay = DateTime.MaxValue;
 
-            var data = _context.LopHocMonHoc
+            var data = _context.LopHocMonHocs
                             .Join(
-                                _context.GiaoVien,
+                                _context.GiaoViens,
                                 lhmh => lhmh.MaGV,
                                 gv => gv.MaGV,
                                 (lhmh, gv) => new { LHMH = lhmh, GV = gv })
                             .Join(
-                                _context.MonHoc,
+                                _context.MonHocs,
                                 lhmh => lhmh.LHMH.MaMH,
                                 mh => mh.MaMH,
                                 (lhmh, mh) => new { LHMH = lhmh, MH = mh })
@@ -618,7 +655,7 @@ namespace QuanLyGiangDay.Controllers
                                 c.LHMH.LHMH.NgayBD,
                                 c.LHMH.LHMH.NgoaiGio,
                                 c.LHMH.GV.TenGV,
-                                c.MH.MonHocHocKy.FirstOrDefault().HocKy.TenHK
+                                c.MH.MonHocHocKies.FirstOrDefault().HocKy.TenHK
                             }).ToList();
 
             if (!string.IsNullOrEmpty(lopHoc))

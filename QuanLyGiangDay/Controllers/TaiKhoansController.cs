@@ -24,7 +24,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            var taiKhoan = db.TaiKhoan.Include(t => t.VaiTro);
+            var taiKhoan = db.TaiKhoans.Include(t => t.VaiTro);
             ViewBag.taikhoan = Session["taikhoan"];
             return View(taiKhoan.ToList());
         }
@@ -36,7 +36,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TaiKhoan taiKhoan = db.TaiKhoan.Find(id);
+            TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
             if (taiKhoan == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TaiKhoan taiKhoan = db.TaiKhoan.Find(id);
+            TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
             if (taiKhoan == null)
             {
                 return HttpNotFound();
@@ -61,21 +61,21 @@ namespace QuanLyGiangDay.Controllers
         // GET: TaiKhoans/Create
         public ActionResult Create()
         {
-            ViewBag.MaVT = new SelectList(db.VaiTro, "MaVT", "TenVT");
+            ViewBag.MaVT = new SelectList(db.VaiTroes, "MaVT", "TenVT");
             return View();
         }
 
         public ActionResult _PartialCreate()
         {
             Dictionary<string, string> listGV = new Dictionary<string, string>();
-            foreach (GiaoVien gv in db.GiaoVien)
+            foreach (GiaoVien gv in db.GiaoViens)
             {
                 string value = gv.MaGV + " - " + gv.TenGV;
                 listGV.Add(gv.MaGV, value);
             }
 
             ViewBag.MaGV = new SelectList(listGV, "key", "value");
-            ViewBag.MaVT = new SelectList(db.VaiTro, "MaVT", "TenVT");
+            ViewBag.MaVT = new SelectList(db.VaiTroes, "MaVT", "TenVT");
             return PartialView("_PartialCreate");
         }
 
@@ -89,12 +89,12 @@ namespace QuanLyGiangDay.Controllers
             if (ModelState.IsValid)
             {
                
-                db.TaiKhoan.Add(taiKhoan);
+                db.TaiKhoans.Add(taiKhoan);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             } 
-            ViewBag.MaGV = new SelectList(db.GiaoVien, "MaGV", "MaGV", taiKhoan.MaGV);
-            ViewBag.MaVT = new SelectList(db.VaiTro, "MaVT", "TenVT", taiKhoan.MaVT);
+            ViewBag.MaGV = new SelectList(db.GiaoViens, "MaGV", "MaGV", taiKhoan.MaGV);
+            ViewBag.MaVT = new SelectList(db.VaiTroes, "MaVT", "TenVT", taiKhoan.MaVT);
             return View(taiKhoan);
         }
 
@@ -105,29 +105,29 @@ namespace QuanLyGiangDay.Controllers
             if (ModelState.IsValid)
             {
               
-                var result = db.TaiKhoan.Where(tk => tk.TenDN == taiKhoan.TenDN).FirstOrDefault();
-                var hasTaiKhoan = db.TaiKhoan.Where(tk => tk.MaGV == taiKhoan.MaGV && tk.MaVT == taiKhoan.MaVT).FirstOrDefault();
+                var result = db.TaiKhoans.Where(tk => tk.TenDN == taiKhoan.TenDN).FirstOrDefault();
+                var hasTaiKhoan = db.TaiKhoans.Where(tk => tk.MaGV == taiKhoan.MaGV && tk.MaVT == taiKhoan.MaVT).FirstOrDefault();
 
                     if ((result == null) && (hasTaiKhoan == null))
                     {
-                        var countOfRows = db.TaiKhoan.Count();
+                        var countOfRows = db.TaiKhoans.Count();
                     
                         if (countOfRows == 0)
                         {
                             taiKhoan.MaTK = "TK1";
                             taiKhoan.MatKhau = Crypto.Hash(taiKhoan.MatKhau, "MD5");
-                            taiKhoan.VaiTro = db.VaiTro.Find(taiKhoan.MaVT);
-                            db.TaiKhoan.Add(taiKhoan);
+                            taiKhoan.VaiTro = db.VaiTroes.Find(taiKhoan.MaVT);
+                            db.TaiKhoans.Add(taiKhoan);
                             db.SaveChanges();
                             return Json(new { Success = true });
                         } else
                         {
-                            var lastRow = db.TaiKhoan.OrderBy(c => c.MaTK).Skip(countOfRows - 1).FirstOrDefault();
+                            var lastRow = db.TaiKhoans.OrderBy(c => c.MaTK).Skip(countOfRows - 1).FirstOrDefault();
                             int nextId = Convert.ToInt32(lastRow.MaTK.Substring(2));
                             taiKhoan.MaTK = "TK" + (nextId + 1);
                             taiKhoan.MatKhau = Crypto.Hash(taiKhoan.MatKhau, "MD5");
-                            taiKhoan.VaiTro = db.VaiTro.Find(taiKhoan.MaVT);
-                            db.TaiKhoan.Add(taiKhoan);
+                            taiKhoan.VaiTro = db.VaiTroes.Find(taiKhoan.MaVT);
+                            db.TaiKhoans.Add(taiKhoan);
                             db.SaveChanges();
                             return Json(new { Success = true });
                         }
@@ -165,13 +165,13 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TaiKhoan taiKhoan = db.TaiKhoan.Find(id);
+            TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
             if (taiKhoan == null)
             {
                 return HttpNotFound();
             }
            
-            ViewBag.MaVT = new SelectList(db.VaiTro, "MaVT", "TenVT", taiKhoan.MaVT);
+            ViewBag.MaVT = new SelectList(db.VaiTroes, "MaVT", "TenVT", taiKhoan.MaVT);
             return View(taiKhoan);
         }
 
@@ -181,20 +181,20 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TaiKhoan taiKhoan = db.TaiKhoan.Find(id);
+            TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
             if (taiKhoan == null)
             {
                 return HttpNotFound();
             }
             Dictionary<string, string> listGV = new Dictionary<string, string>();
-            foreach (GiaoVien gv in db.GiaoVien)
+            foreach (GiaoVien gv in db.GiaoViens)
             {
                 string value = gv.MaGV + " - " + gv.TenGV;
                 listGV.Add(gv.MaGV, value);
             }
 
             ViewBag.MaGV = new SelectList(listGV, "key", "value", taiKhoan.MaGV);
-            ViewBag.MaVT = new SelectList(db.VaiTro, "MaVT", "TenVT", taiKhoan.MaVT);
+            ViewBag.MaVT = new SelectList(db.VaiTroes, "MaVT", "TenVT", taiKhoan.MaVT);
             return PartialView("_PartialEdit", taiKhoan);
         }
 
@@ -211,8 +211,8 @@ namespace QuanLyGiangDay.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.MaGV = new SelectList(db.GiaoVien, "MaGV", "MaGV", taiKhoan.MaGV);
-            ViewBag.MaVT = new SelectList(db.VaiTro, "MaVT", "TenVT", taiKhoan.MaVT);
+            ViewBag.MaGV = new SelectList(db.GiaoViens, "MaGV", "MaGV", taiKhoan.MaGV);
+            ViewBag.MaVT = new SelectList(db.VaiTroes, "MaVT", "TenVT", taiKhoan.MaVT);
             return View(taiKhoan);
         }
 
@@ -220,12 +220,12 @@ namespace QuanLyGiangDay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult _PartialEdit([Bind(Include = "MaTK,TenDN,MatKhau,MaGV,MaVT,HoTen")] TaiKhoan taiKhoan)
         {
-            ViewBag.MaGV = new SelectList(db.GiaoVien, "MaGV", "MaGV", taiKhoan.MaGV);
-            ViewBag.MaVT = new SelectList(db.VaiTro, "MaVT", "TenVT", taiKhoan.MaVT);
+            ViewBag.MaGV = new SelectList(db.GiaoViens, "MaGV", "MaGV", taiKhoan.MaGV);
+            ViewBag.MaVT = new SelectList(db.VaiTroes, "MaVT", "TenVT", taiKhoan.MaVT);
             if (ModelState.IsValid)
             {
                 
-                var hasTaiKhoan = db.TaiKhoan.Where(tk => tk.MaGV == taiKhoan.MaGV && tk.MaVT == taiKhoan.MaVT).FirstOrDefault();
+                var hasTaiKhoan = db.TaiKhoans.Where(tk => tk.MaGV == taiKhoan.MaGV && tk.MaVT == taiKhoan.MaVT).FirstOrDefault();
                 if ( hasTaiKhoan == null)
                 {
                     db.Entry(taiKhoan).State = EntityState.Modified;
@@ -262,7 +262,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TaiKhoan taiKhoan = db.TaiKhoan.Find(id);
+            TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
             if (taiKhoan == null)
             {
                 return HttpNotFound();
@@ -276,7 +276,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TaiKhoan taiKhoan = db.TaiKhoan.Find(id);
+            TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
             if (taiKhoan == null)
             {
                 return HttpNotFound();
@@ -289,8 +289,8 @@ namespace QuanLyGiangDay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            TaiKhoan taiKhoan = db.TaiKhoan.Find(id);
-            db.TaiKhoan.Remove(taiKhoan);
+            TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
+            db.TaiKhoans.Remove(taiKhoan);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -299,8 +299,8 @@ namespace QuanLyGiangDay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult _PartialDeleteConfirmed(string id)
         {
-            TaiKhoan taiKhoan = db.TaiKhoan.Find(id);
-            db.TaiKhoan.Remove(taiKhoan);
+            TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
+            db.TaiKhoans.Remove(taiKhoan);
             db.SaveChanges();
             return Json(new { Success = true });
         }
@@ -312,7 +312,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TaiKhoan taiKhoan = db.TaiKhoan.Find(id);
+            TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
             if (taiKhoan == null)
             {
                 return HttpNotFound();
@@ -324,7 +324,7 @@ namespace QuanLyGiangDay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult _PartialResetConfirmed(string id)
         {
-            TaiKhoan taiKhoan = db.TaiKhoan.Find(id);
+            TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
             taiKhoan.MatKhau = Crypto.Hash("1234567", "MD5");
             db.SaveChanges();
             return Json(new { Success = true });

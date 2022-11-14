@@ -180,58 +180,58 @@
     </Compile>
     <Compile Include="Models\EFC\PhanCongGD.cs" />
     <Compile Include="Models\EF\CTDT.cs">
-      <DependentUpon>QLGDContext.tt</DependentUpon>
+      <DependentUpon>QuanLyGiaoVienContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EF\GiaoVien.cs">
-      <DependentUpon>QLGDContext.tt</DependentUpon>
+      <DependentUpon>QuanLyGiaoVienContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\GiaoVienMonHoc.cs">
+      <DependentUpon>QuanLyGiaoVienContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EF\GioHoc.cs">
-      <DependentUpon>QLGDContext.tt</DependentUpon>
+      <DependentUpon>QuanLyGiaoVienContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EF\HocKy.cs">
-      <DependentUpon>QLGDContext.tt</DependentUpon>
+      <DependentUpon>QuanLyGiaoVienContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EF\LoaiGV.cs">
-      <DependentUpon>QLGDContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EF\Log.cs">
-      <DependentUpon>QLGDContext.tt</DependentUpon>
+      <DependentUpon>QuanLyGiaoVienContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EF\LopHoc.cs">
-      <DependentUpon>QLGDContext.tt</DependentUpon>
+      <DependentUpon>QuanLyGiaoVienContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EF\LopHocMonHoc.cs">
-      <DependentUpon>QLGDContext.tt</DependentUpon>
+      <DependentUpon>QuanLyGiaoVienContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EF\MonHoc.cs">
-      <DependentUpon>QLGDContext.tt</DependentUpon>
+      <DependentUpon>QuanLyGiaoVienContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EF\MonHocHocKy.cs">
-      <DependentUpon>QLGDContext.tt</DependentUpon>
+      <DependentUpon>QuanLyGiaoVienContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EF\QLGDContext.Context.cs">
+    <Compile Include="Models\EF\QuanLyGiaoVienContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>QLGDContext.Context.tt</DependentUpon>
+      <DependentUpon>QuanLyGiaoVienContext.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EF\QLGDContext.cs">
+    <Compile Include="Models\EF\QuanLyGiaoVienContext.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>QLGDContext.tt</DependentUpon>
+      <DependentUpon>QuanLyGiaoVienContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EF\QLGDContext.Designer.cs">
+    <Compile Include="Models\EF\QuanLyGiaoVienContext.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>QLGDContext.edmx</DependentUpon>
+      <DependentUpon>QuanLyGiaoVienContext.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\EF\sysdiagrams.cs">
-      <DependentUpon>QLGDContext.tt</DependentUpon>
+    <Compile Include="Models\EF\sysdiagram.cs">
+      <DependentUpon>QuanLyGiaoVienContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EF\TaiKhoan.cs">
-      <DependentUpon>QLGDContext.tt</DependentUpon>
+      <DependentUpon>QuanLyGiaoVienContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EF\VaiTro.cs">
-      <DependentUpon>QLGDContext.tt</DependentUpon>
+      <DependentUpon>QuanLyGiaoVienContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\NewService.asmx.cs">
@@ -1958,15 +1958,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\EF\QLGDContext.Context.tt">
+    <Content Include="Models\EF\QuanLyGiaoVienContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>QLGDContext.edmx</DependentUpon>
-      <LastGenOutput>QLGDContext.Context.cs</LastGenOutput>
+      <DependentUpon>QuanLyGiaoVienContext.edmx</DependentUpon>
+      <LastGenOutput>QuanLyGiaoVienContext.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\EF\QLGDContext.tt">
+    <Content Include="Models\EF\QuanLyGiaoVienContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>QLGDContext.edmx</DependentUpon>
-      <LastGenOutput>QLGDContext.cs</LastGenOutput>
+      <DependentUpon>QuanLyGiaoVienContext.edmx</DependentUpon>
+      <LastGenOutput>QuanLyGiaoVienContext.cs</LastGenOutput>
     </Content>
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />
@@ -2147,14 +2147,14 @@
     <Content Include="Content\scss\_utilities.scss" />
     <Content Include="Content\scss\_variables.scss" />
     <Content Include="Content\_share\scss\IndexQLGV.scss" />
-    <EntityDeploy Include="Models\EF\QLGDContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>QLGDContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\EF\QLGDContext.edmx.diagram">
-      <DependentUpon>QLGDContext.edmx</DependentUpon>
-    </Content>
     <Content Include="App_Browsers\qt.browser" />
+    <EntityDeploy Include="Models\EF\QuanLyGiaoVienContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QuanLyGiaoVienContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\EF\QuanLyGiaoVienContext.edmx.diagram">
+      <DependentUpon>QuanLyGiaoVienContext.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

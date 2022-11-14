@@ -18,6 +18,15 @@
     <Property Name="Email" Type="nchar" MaxLength="50" />
     <Property Name="Sdt" Type="nchar" MaxLength="20" />
   </EntityType>
+  <EntityType Name="GiaoVienMonHoc">
+    <Key>
+      <PropertyRef Name="MaGV" />
+      <PropertyRef Name="MaMH" />
+    </Key>
+    <Property Name="MaGV" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="MaMH" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="MoTa" Type="nvarchar" MaxLength="100" />
+  </EntityType>
   <EntityType Name="GioHoc">
     <Key>
       <PropertyRef Name="MaGio" />
@@ -41,15 +50,6 @@
     <Property Name="TenLoaiGV" Type="nvarchar" MaxLength="100" />
     <Property Name="MoTa" Type="nvarchar" MaxLength="150" />
   </EntityType>
-  <EntityType Name="Log">
-    <Key>
-      <PropertyRef Name="MaLog" />
-    </Key>
-    <Property Name="MaLog" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="ThoiGianCN" Type="datetime" Nullable="false" />
-    <Property Name="TaiKhoanCN" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="ThongTinCN" Type="nvarchar" MaxLength="100" />
-  </EntityType>
   <EntityType Name="LopHoc">
     <Key>
       <PropertyRef Name="MaLop" />
@@ -70,7 +70,7 @@
     <Property Name="MoTa" Type="nvarchar" MaxLength="50" />
     <Property Name="NgayKT" Type="datetime" />
     <Property Name="NgayBD" Type="datetime" />
-    <Property Name="NgoaiGio" Type="bit" />
+    <Property Name="NgoaiGio" Type="bit" Nullable="false" />
     <Property Name="MaGV" Type="nchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="MonHoc">
@@ -131,6 +131,30 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
       </Principal>
       <Dependent Role="GiaoVien">
         <PropertyRef Name="MaLoaiGV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GiaoVienMonHoc_GiaoVien">
+    <End Role="GiaoVien" Type="Self.GiaoVien" Multiplicity="1" />
+    <End Role="GiaoVienMonHoc" Type="Self.GiaoVienMonHoc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GiaoVien">
+        <PropertyRef Name="MaGV" />
+      </Principal>
+      <Dependent Role="GiaoVienMonHoc">
+        <PropertyRef Name="MaGV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GiaoVienMonHoc_MonHoc">
+    <End Role="MonHoc" Type="Self.MonHoc" Multiplicity="1" />
+    <End Role="GiaoVienMonHoc" Type="Self.GiaoVienMonHoc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MonHoc">
+        <PropertyRef Name="MaMH" />
+      </Principal>
+      <Dependent Role="GiaoVienMonHoc">
+        <PropertyRef Name="MaMH" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -233,10 +257,10 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
   <EntityContainer Name="quanlygiaovienModelStoreContainer">
     <EntitySet Name="CTDT" EntityType="Self.CTDT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GiaoVien" EntityType="Self.GiaoVien" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GiaoVienMonHoc" EntityType="Self.GiaoVienMonHoc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GioHoc" EntityType="Self.GioHoc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HocKy" EntityType="Self.HocKy" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LoaiGV" EntityType="Self.LoaiGV" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LopHoc" EntityType="Self.LopHoc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LopHocMonHoc" EntityType="Self.LopHocMonHoc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MonHoc" EntityType="Self.MonHoc" Schema="dbo" store:Type="Tables" />
@@ -253,6 +277,14 @@ warning 6002: The table/view 'quanlygiaovien.dbo.MonHocHocKy' does not have a pr
     <AssociationSet Name="FK_GiaoVien_LoaiGV" Association="Self.FK_GiaoVien_LoaiGV">
       <End Role="LoaiGV" EntitySet="LoaiGV" />
       <End Role="GiaoVien" EntitySet="GiaoVien" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GiaoVienMonHoc_GiaoVien" Association="Self.FK_GiaoVienMonHoc_GiaoVien">
+      <End Role="GiaoVien" EntitySet="GiaoVien" />
+      <End Role="GiaoVienMonHoc" EntitySet="GiaoVienMonHoc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GiaoVienMonHoc_MonHoc" Association="Self.FK_GiaoVienMonHoc_MonHoc">
+      <End Role="MonHoc" EntitySet="MonHoc" />
+      <End Role="GiaoVienMonHoc" EntitySet="GiaoVienMonHoc" />
     </AssociationSet>
     <AssociationSet Name="FK_LopHoc_CTDT" Association="Self.FK_LopHoc_CTDT">
       <End Role="CTDT" EntitySet="CTDT" />

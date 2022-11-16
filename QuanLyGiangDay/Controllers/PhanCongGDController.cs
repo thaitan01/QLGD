@@ -434,6 +434,18 @@ namespace QuanLyGiangDay.Controllers
 
         }
 
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult CheckGiaoVienHasChungChi(string giaovien, string monHoc)
+        {
+            var listOfChungChi = _context.GiaoVienMonHocs.Where(x => x.MaGV.Trim().Equals(giaovien.Trim()))
+                .Where(x => x.MaMH.Trim().Equals(monHoc.Trim()))
+                .Select(x => x.MaMH).ToList();
+            if(listOfChungChi.Count > 0)
+                return Json("T", JsonRequestBehavior.AllowGet);
+            else
+                return Json("F", JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult DeletePhanCongGD(string id)
         {
             try

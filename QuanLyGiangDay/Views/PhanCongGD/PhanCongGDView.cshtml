@@ -143,6 +143,24 @@
         </div>
     </div>
 </div>
+<div class="modal fade" role="dialog" id="messageModalOk" aria-labelledby="messageLebel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="messageBodyOk">
+            <div class="modal-header" style="background-color: #4e73df">
+                <h4 class="modal-title">
+                    <
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span id="lblMessageOk"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="No">Hủy</button>
+                <button type="button" class="btn btn-primary" onclick="savePCGD()" data-dismiss="modal" aria-label="No">Tiếp tục</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section scripts {
     <script type="text/javascript">
@@ -294,7 +312,35 @@
             }
         }
 
-        function savePhanCongGD() {
+        function savePhanCongGD(giaovien, monHoc) {
+            var giaovien = $('input[name="radGV"]:checked').val();
+            var monHoc = $('#maMonHoc').val();
+            changLoading(true);
+            $.ajax({
+                type: "GET",
+                url: '/PhanCongGD/CheckGiaoVienHasChungChi',
+                data: { giaovien: giaovien, monHoc: monHoc },
+                success: successFunc,
+                error: errorFunc
+            });
+
+            function successFunc(data) {
+                if (data == "F") {
+                    $("#lblMessageOk").html("Giáo viên này chưa có chứng chỉ của môn học. Bạn vẫn muốn tiếp tục phân công?");
+                    $("#messageModalOk").modal("show");
+                } else {
+                    savePCGD();
+                }
+                changLoading(false);
+            }
+
+            function errorFunc() {
+                alertMessage('error');
+                changLoading(false);
+            }
+        }
+
+        function savePCGD() {
             changLoading(true);
             var _obj = {};
             _obj.MaLop = $('#maLopHoc').val();

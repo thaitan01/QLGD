@@ -50,6 +50,7 @@
                             </div>
                             <div class="col-md-12">
                                 <select id="maMonHoc" class="form-control"></select>
+                                <span id="msgMaMonHoc" style="font-style: italic; color: red"></span>
                             </div>
                         </div>
                     </div>
@@ -174,21 +175,15 @@
                 var msg = validateFilter(monHoc, gioHoc, ngayBD, ngayKT);
                 if (msg == "") {
                     hideMsg("msgMaMonHoc,msgMaGioHoc,msgNgayBD,msgNgayKT");
-                    getGiaoVien(lopHoc, monHoc, gioHoc, ngayBD, ngayKT);
+                    getGiaoVien($('#maLopHoc').val(), monHoc, gioHoc, ngayBD, ngayKT);
                 }
             });
             showMsg("msgMaLopHoc", "Mời bạn chọn lớp học.");
         });
 
-        function validateFilter(lopHoc, monHoc, gioHoc, ngayBD, ngayKT) {
+        function validateFilter(monHoc, gioHoc, ngayBD, ngayKT) {
             var msg = "";
-            if (lopHoc == "") {
-                msg = "Mời bạn chọn lớp học.";
-                if (msg != "") {
-                    showMsg("msgMaLopHoc", msg);
-                    hideMsg("msgMaMonHoc,msgMaGioHoc,msgNgayBD,msgNgayKT");
-                }
-            } else if (monHoc == "") {
+            if (monHoc == "") {
                 msg = "Mời bạn chọn môn học.";
                 if (msg != "") {
                     showMsg("msgMaMonHoc", msg);
@@ -314,23 +309,32 @@
             if (_obj.MaGV == "" || _obj.MaGV == undefined) {
                 alertMessage("Mời bạn chọn Giáo viên giảng dạy.");
             } else {
-                var msg = validateFilter(_obj.MaLop, _obj.MaMH, _obj.MaGio, _obj.NgayBD, _obj.NgayKT);
-                if (msg == "" && _obj.MaGV != "") {
-                    hideMsg("msgMaLopHoc,msgMaMonHoc,msgMaGioHoc,msgNgayBD,msgNgayKT");
-                    $.ajax({
-                        type: "POST",
-                        url: "/PhanCongGD/SavePhanCongGD",
-                        data: JSON.stringify(_obj),
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (r) {
-                            var res = r.Message.split("|");
-                            $("#lblMessage").html(res[1]);
-                            $("#messageModal").modal("show");
-                            if (res[0] == "S")
-                                backToPrevious();
-                        }
-                    });
+                var lopHoc = $('#maLopHoc').val();
+                var hocKy = $('#maHocKy').val();
+                if (lopHoc == "") {
+                    showMsg("msgMaLopHoc", "Mời bạn chọn lớp học.");
+                } else if (hocKy == "") {
+                    hideMsg("msgMaLopHoc");
+                    showMsg("msgMaHocKy", "Mời bạn chọn học kỳ.");
+                } else {
+                    var msg = validateFilter(_obj.MaMH, _obj.MaGio, _obj.NgayBD, _obj.NgayKT);
+                    if (msg == "" && _obj.MaGV != "") {
+                        hideMsg("msgMaLopHoc,msgMaMonHoc,msgMaGioHoc,msgNgayBD,msgNgayKT");
+                        $.ajax({
+                            type: "POST",
+                            url: "/PhanCongGD/SavePhanCongGD",
+                            data: JSON.stringify(_obj),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (r) {
+                                var res = r.Message.split("|");
+                                $("#lblMessage").html(res[1]);
+                                $("#messageModal").modal("show");
+                                if (res[0] == "S")
+                                    backToPrevious();
+                            }
+                        });
+                    }
                 }
             }
             changLoading(false);

@@ -89,6 +89,11 @@
                                     @Html.DisplayFor(modelItem => item.LoaiGV.TenLoaiGV)
                                 </td>
                                 <td class="body-action-item-table">
+                                    <p>
+                                        <a href="@Url.Action("Certificate", "Certificate", new {id = item.MaGV.Trim()})">
+                                            <i class="fas fa-id-card" style="color:var(--blue)"></i>
+                                        </a>
+                                    </p>
                                     <p data-id="@item.MaGV.Trim()"
                                        class="c-btn-item  button-update-gv"
                                        onclick="callModatUpdateTT('@item.MaGV.ToString().Trim()')">

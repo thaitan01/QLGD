@@ -27,6 +27,10 @@ namespace QuanLyGiangDay.Controllers
             return View(giaoViens.ToList());
         }
 
+      
+
+
+
         // GET: QuanLyGiaoVien/Details/5
         public ActionResult Details(string id)
         {

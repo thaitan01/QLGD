@@ -1,0 +1,26 @@
+﻿@model QuanLyGiangDay.Models.EF.GiaoVienMonHoc
+<div class="modal-header">
+    <h5 class="modal-title">Xóa chứng chỉ</h5>
+
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+        ×
+    </button>
+
+
+</div>
+<div class="modal-body">
+    Bạn cho chắc muốn xóa chứng chỉ @Html.DisplayFor(model => model.MonHoc.TenMon) của giáo viên  @Html.DisplayFor(model => model.GiaoVien.TenGV) không?
+    
+</div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+<div class="modal-footer">
+    <button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+    <input type="submit" value="Xóa" class="btn btn-danger" />
+
+</div>
+        }
+

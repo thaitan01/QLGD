@@ -1,0 +1,42 @@
+﻿@model QuanLyGiangDay.Models.EF.GiaoVienMonHoc
+<div class="modal-header">
+    <h5 class="modal-title">Thêm chứng chỉ</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+        ×
+    </button>
+</div>
+@using (Html.BeginForm())
+{
+<div class="modal-body">
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MaGV)
+        <div class="form-group">
+            <div class="col-md-10">
+                Mã môn học
+                @Html.DropDownList("MaMH", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MaMH, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                Mô tả
+                @Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default btn-secondary" data-dismiss="modal">Đóng</button>
+    <input type="submit" value="Thêm" class="btn btn-default btn-primary" />
+
+</div>
+        }
+

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace QuanLyGiangDay.Controllers
                 return RedirectToAction("Index", "Login");
             }
             ViewBag.taikhoan = Session["taikhoan"];
+
             return View(db.MonHocs.ToList());
         }
 
@@ -63,6 +65,8 @@ namespace QuanLyGiangDay.Controllers
 
         public ActionResult _PartialCreate()
         {
+            ViewBag.MaCTDT = new SelectList(db.CTDTs, "MaCTDT", "TenCTDT");
+            ViewBag.MaHK = new SelectList(db.HocKies, "MaHK", "TenHK");
             return PartialView("_PartialCreate");
         }
 
@@ -92,18 +96,26 @@ namespace QuanLyGiangDay.Controllers
                 var countOfRows = db.MonHocs.Count();
                 var lastRow = db.MonHocs.OrderBy(c => c.MaMH).Skip(countOfRows - 1).FirstOrDefault();
                 int nextId = Convert.ToInt32(lastRow.MaMH.Substring(2));
+                
                 monHoc.MaMH = "MH" + (nextId + 1);
                 while (db.MonHocs.Find(monHoc.MaMH) != null)
                 {
                     nextId++;
                     monHoc.MaMH = "MH" + (nextId + 1);
                 }
-               
                 db.MonHocs.Add(monHoc);
+                MonHocHocKy monHocHocKy = new MonHocHocKy();
+                monHocHocKy.MaMH = monHoc.MaMH;
+                monHocHocKy.MaHK = Request.Form["MaHK"].ToString();
+                monHocHocKy.MaCTDT = Request.Form["MaCTDT"].ToString();
+                monHocHocKy.MoTa = "Môn học " + monHoc.MaMH.ToString().Trim() + " " + Request.Form["MaHK"].ToString().Trim();
+                db.MonHocHocKies.Add(monHocHocKy);
                 db.SaveChanges();
                 return Json(new { Success = true });
             } else
             {
+                ViewBag.MaCTDT = new SelectList(db.CTDTs, "MaCTDT", "TenCTDT");
+                ViewBag.MaHK = new SelectList(db.HocKies, "MaHK", "TenHK");
                 StringBuilder message = new StringBuilder();
 
                 foreach (var item in ModelState)
@@ -119,7 +131,7 @@ namespace QuanLyGiangDay.Controllers
                 return Json(new { Success = false, Message = message.ToString() });
             }
 
-           
+
         }
 
         // GET: MonHocs/Edit/5
@@ -134,6 +146,7 @@ namespace QuanLyGiangDay.Controllers
             {
                 return HttpNotFound();
             }
+           
             return View(monHoc);
         }
 
@@ -148,6 +161,17 @@ namespace QuanLyGiangDay.Controllers
             {
                 return HttpNotFound();
             }
+            var monHocHocKy = db.MonHocHocKies.Where(m => m.MaMH == id).FirstOrDefault();
+            if (monHocHocKy == null)
+            {
+                ViewBag.MaCTDT = new SelectList(db.CTDTs, "MaCTDT", "TenCTDT");
+                ViewBag.MaHK = new SelectList(db.HocKies, "MaHK", "TenHK");
+            } else
+            {
+                ViewBag.MaCTDT = new SelectList(db.CTDTs, "MaCTDT", "TenCTDT", monHocHocKy.MaCTDT);
+                ViewBag.MaHK = new SelectList(db.HocKies, "MaHK", "TenHK", monHocHocKy.MaHK);
+            }
+           
             return PartialView("_PartialEdit", monHoc);
         }
 
@@ -174,26 +198,48 @@ namespace QuanLyGiangDay.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(monHoc).State = EntityState.Modified;
+                var monHocHocKy = db.MonHocHocKies.Where(m => m.MaMH == monHoc.MaMH).FirstOrDefault();
+                if (monHocHocKy == null)
+                {
+                    MonHocHocKy monHocHocKyNew = new MonHocHocKy();
+                    monHocHocKyNew.MaMH = monHoc.MaMH;
+                    monHocHocKyNew.MaHK = Request.Form["MaHK"].ToString();
+                    monHocHocKyNew.MaCTDT = Request.Form["MaCTDT"].ToString();
+                    monHocHocKyNew.MoTa = "Môn học " + monHoc.MaMH.ToString().Trim() + " " + Request.Form["MaHK"].ToString().Trim();
+                    db.MonHocHocKies.Add(monHocHocKyNew);
+                }
+                
                 db.SaveChanges();
                 return Json(new { Success = true });
             } else
             {
+                var monHocHocKy = db.MonHocHocKies.Where(m => m.MaMH == monHoc.MaMH).FirstOrDefault();
+                if (monHocHocKy == null)
+                {
+                    ViewBag.MaCTDT = new SelectList(db.CTDTs, "MaCTDT", "TenCTDT");
+                    ViewBag.MaHK = new SelectList(db.HocKies, "MaHK", "TenHK");
+                }
+                else
+                {
+                    ViewBag.MaCTDT = new SelectList(db.CTDTs, "MaCTDT", "TenCTDT", monHocHocKy.MaCTDT);
+                    ViewBag.MaHK = new SelectList(db.HocKies, "MaHK", "TenHK", monHocHocKy.MaHK);
+                }
                 StringBuilder message = new StringBuilder();
                 if (ModelState["SoGio"].Errors.Count > 1)
-               
-                foreach (var item in ModelState)
-                {
-                    var errors = item.Value.Errors;
 
-                    foreach (var error in errors)
+                    foreach (var item in ModelState)
                     {
-                        message.Append(error.ErrorMessage);
-                        message.AppendLine();
+                        var errors = item.Value.Errors;
+
+                        foreach (var error in errors)
+                        {
+                            message.Append(error.ErrorMessage);
+                            message.AppendLine();
+                        }
                     }
-                }
                 return Json(new { Success = false, Message = message.ToString() });
             }
-            
+
         }
 
         // GET: MonHocs/Delete/5
@@ -241,6 +287,11 @@ namespace QuanLyGiangDay.Controllers
         public ActionResult _PartialDeleteConfirmed(string id)
         {
             MonHoc monHoc = db.MonHocs.Find(id);
+            var monHocHocKy = db.MonHocHocKies.Where(m => m.MaMH == monHoc.MaMH).FirstOrDefault();
+            if (monHocHocKy != null)
+            {
+               db.MonHocHocKies.Remove(monHocHocKy);
+            }
             db.MonHocs.Remove(monHoc);
             db.SaveChanges();
             return Json(new { Success = true });
@@ -257,4 +308,6 @@ namespace QuanLyGiangDay.Controllers
             base.Dispose(disposing);
         }
     }
+
+   
 }

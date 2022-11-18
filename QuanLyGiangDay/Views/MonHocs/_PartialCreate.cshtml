@@ -35,6 +35,20 @@
                     @Html.ValidationMessageFor(model => model.TenMon, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="form-group">
+
+                <div class="col-md-10">
+                    Chương trình đào tạo
+                    @Html.DropDownList("MaCTDT", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+
+                <div class="col-md-10">
+                    Học kỳ
+                    @Html.DropDownList("MaHK", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
 
             <div class="form-group">
 
@@ -49,7 +63,7 @@
 
                 <div class="col-md-10">
                     Số giờ
-                    @Html.EditorFor(model => model.SoGio, new { htmlAttributes = new {@class = "form-control" , @type = "number" } })
+                    @Html.EditorFor(model => model.SoGio, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
                     @Html.ValidationMessageFor(model => model.SoGio, "", new { @class = "text-danger" })
                 </div>
             </div>

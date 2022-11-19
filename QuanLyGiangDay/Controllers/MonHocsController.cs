@@ -24,8 +24,7 @@ namespace QuanLyGiangDay.Controllers
                 return RedirectToAction("Index", "Login");
             }
             ViewBag.taikhoan = Session["taikhoan"];
-
-            return View(db.MonHocs.ToList());
+            return View(db.MonHocHocKies.ToList());
         }
 
         // GET: MonHocs/Details/5

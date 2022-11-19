@@ -44,6 +44,8 @@ namespace QuanLyGiangDay.Controllers
                 else if (result.MatKhau == login.MatKhau)
                 {
                     Session["taikhoan"] = db.GiaoViens.Find(result.MaGV).TenGV;
+                    Session["loaiGV"] = result.MaVT;
+                    Session["maGT"] = result.MaGV;
                     return RedirectToAction("Index", "LichGiangDay");
                 }
                 else

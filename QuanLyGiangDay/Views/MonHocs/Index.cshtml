@@ -1,4 +1,4 @@
-﻿@model IEnumerable<QuanLyGiangDay.Models.EF.MonHoc>
+﻿@model IEnumerable<QuanLyGiangDay.Models.EF.MonHocHocKy>
 
 @{
     ViewBag.Title = "Index";
@@ -38,6 +38,12 @@
                                         Tên môn
                                     </th>
                                     <th>
+                                        Học kỳ
+                                    </th>
+                                    <th>
+                                        Chương trình đào tạo
+                                    </th>
+                                    <th>
                                         Số giờ
                                     </th>
                                     <th>
@@ -59,17 +65,22 @@
                                 {
                                     <tr class="c-tr-body">
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.MaMH)
+                                           @item.MaMH
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.TenMon)
-                                        </td>
-
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.SoGio)
+                                            @item.MonHoc.TenMon
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.MoTa)
+                                            @item.HocKy.TenHK
+                                        </td>
+                                        <td>
+                                            @item.CTDT.TenCTDT
+                                        </td>
+                                        <td>
+                                            @item.MonHoc.SoGio
+                                        </td>
+                                        <td>
+                                            @item.MonHoc.MoTa
                                         </td>
                                         <td>
                                             @Html.Raw("<a data-modal='' href='/MonHocs/_PartialDetail/" + item.MaMH + "' id='" + item.MaMH + "' title='Chi tiết'> <span class='fa fa-info-circle'> </span>  </a>")

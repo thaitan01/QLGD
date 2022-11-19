@@ -10,12 +10,25 @@
 
 <div class="panel-group">
     <div class="panel panel-primary">
-        <div class="panel-heading"><h4><i class="fa fa-angle-right"></i> Lịch Giảng Dạy</h4></div>
+        <div class="panel-heading"><h4><i class="fa fa-angle-right"></i>Lịch Giảng Dạy</h4></div>
         <div class="panel-body">
             <div class="row">
                 <div class="float-left" style="margin-left: 30px; z-index: 99; position: relative; ">
                     <div class="input-group">
-                        @Html.DropDownList("MaGV", (IEnumerable<SelectListItem>)ViewData["GiaoVienDropdown"], "--Tất cả--", new { @class = "form-control", @id = "maGiaoVien" })
+                        @{
+                            if (!Session["loaiGV"].ToString().Trim().Equals("VT01"))
+                            {
+                                @Html.DropDownList("MaGV", (IEnumerable<SelectListItem>)ViewData["GiaoVienDropdown"],
+                                          "--Tất cả--"
+                                         , new { @class = "form-control", @id = "maGiaoVien", @disabled = "enabled" })
+                            }
+                            else
+                            {
+                                @Html.DropDownList("MaGV", (IEnumerable<SelectListItem>)ViewData["GiaoVienDropdown"],
+                                         "--Tất cả--"
+                                        , new { @class = "form-control", @id = "maGiaoVien" })
+                            }
+                        }
                         <input type="text" id="dateTuNgay" class="form-control datepicker" placeholder="Từ Ngày..." aria-label="Search" aria-describedby="basic-addon2">
                         <input type="text" id="dateDenNgay" class="form-control datepicker" placeholder="Đến Ngày..." aria-label="Search" aria-describedby="basic-addon2">
                         <div class="input-group-append" style="margin: 0px">

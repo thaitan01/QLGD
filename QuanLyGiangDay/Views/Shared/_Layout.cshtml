@@ -23,7 +23,6 @@
     @Styles.Render("~/Content/theme/css")
 </head>
 <body id="page-top">
-
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -45,80 +44,94 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="@Url.Action("Index", "LichGiangDay")" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Trang chủ</span>
+                    @if (Session["loaiGV"].ToString().Trim().Equals("VT01"))
+                    {
+                        <span>
+                            Trang chủ
+                        </span>
+                    }
+                    else
+                    {
+                        <span>
+                            Lịch Giảng Dạy
+                        </span>
+                    }
                 </a>
             </li>
+            @if (Session["loaiGV"].ToString().Trim().Equals("VT01"))
+            {
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+                <!-- Divider -->
+                <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Giảng Dạy
-            </div>
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Giảng Dạy
+                </div>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="@Url.Action("Index", "PhanCongGD")" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Phân công giảng dạy</span>
-                </a>
-            </li>
+                <!-- Nav Item - Utilities Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="@Url.Action("Index", "PhanCongGD")" aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Phân công giảng dạy</span>
+                    </a>
+                </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+                <!-- Divider -->
+                <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Giáo viên
-            </div>
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Giáo viên
+                </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <!--Tuấn Start -->
-                <a class="nav-link collapsed" href="@Url.Action("Index", "QuanLyGiaoVien")" 
-                   aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Quản lý giáo viên</span>
-                </a>
-                <!--Tuấn End-->
-            </li>
-            <div class="sidebar-heading">
-                Đào tạo
-            </div>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="@Url.Action("Index", "LopHocs")"
-                   aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Quản lý lớp học</span>
-                </a>
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <!--Tuấn Start -->
+                    <a class="nav-link collapsed" href="@Url.Action("Index", "QuanLyGiaoVien")"
+                       aria-expanded="true" aria-controls="collapsePages">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Quản lý giáo viên</span>
+                    </a>
+                    <!--Tuấn End-->
+                </li>
+                <div class="sidebar-heading">
+                    Đào tạo
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="@Url.Action("Index", "LopHocs")"
+                       aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Quản lý lớp học</span>
+                    </a>
 
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="@Url.Action("Index", "CTDT")">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Quản lý CTĐT</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="@Url.Action("Index", "MonHocs")"
-                   aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Quản lý môn học</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="@Url.Action("Index", "HocKy")">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Quản lý học kỳ</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="@Url.Action("Index", "TaiKhoans")">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Quản lý tài khoản</span>
-                </a>
-            </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="@Url.Action("Index", "CTDT")">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Quản lý CTĐT</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="@Url.Action("Index", "MonHocs")"
+                       aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Quản lý môn học</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="@Url.Action("Index", "HocKy")">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Quản lý học kỳ</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="@Url.Action("Index", "TaiKhoans")">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Quản lý tài khoản</span>
+                    </a>
+                </li>
+            }
 
         </ul>
         <!-- End of Sidebar -->
@@ -171,7 +184,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> @ViewBag.taikhoan</span> 
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> @Session["taikhoan"]</span> 
                                 <img class="img-profile rounded-circle"
                                      src="~/Content/img/undraw_profile.svg">
                             </a>

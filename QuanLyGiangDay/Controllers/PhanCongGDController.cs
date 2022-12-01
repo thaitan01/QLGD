@@ -384,6 +384,7 @@ namespace QuanLyGiangDay.Controllers
                 .Select(x => x.MaCTDT).FirstOrDefault();
 
             var listOfMonHoc = _context.MonHocHocKies.Where(x => x.MaCTDT.Trim().Equals(ctdt.Trim()))
+                .Where(y => y.MaHK.Trim().Equals(hocKy.Trim()))
                .Select(c => new {
                    c.MaMH,
                    c.MonHoc.TenMon

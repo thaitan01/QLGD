@@ -37,7 +37,7 @@
                     </label>
                     <label for="" class="form-control">
                         Tất cả
-                        <input type="checkbox" id="cbxTatCa" aria-label="Search" aria-describedby="basic-addon2" style="margin-left: 4px;margin-top: 5px;">
+                        <input type="checkbox" id="cbxTatCa" aria-label="Search" checked aria-describedby="basic-addon2" style="margin-left: 4px;margin-top: 5px;">
                     </label>
                     <div class="input-group-append" style="margin: 0px">
                         <button class="btn-primary" type="button" style="width: 41px" onclick="searchData()">
@@ -107,6 +107,15 @@
                 var tatCa = $('#cbxTatCa').is(":checked") ? "T" : "F";
                 if (tatCa == "T")
                     $("#cbxNgoaiGio").prop("checked", false);
+                else
+                    $("#cbxNgoaiGio").prop("checked", true);
+            });
+            $("#cbxNgoaiGio").change(function () {
+                var ngoaigio = $('#cbxNgoaiGio').is(":checked") ? "T" : "F";
+                if (ngoaigio == "T")
+                    $("#cbxTatCa").prop("checked", false);
+                else
+                    $("#cbxTatCa").prop("checked", true);
             });
             PhanCongGDDatatable("", "", "", "", "", "");
         });

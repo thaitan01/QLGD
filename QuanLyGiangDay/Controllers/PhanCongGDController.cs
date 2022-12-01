@@ -71,7 +71,7 @@ namespace QuanLyGiangDay.Controllers
 
                 if (!string.IsNullOrEmpty(lopHoc))
                 {
-                    data = data.Where(x => x.TenLop.Contains(lopHoc)).ToList();
+                    data = data.Where(x => x.MaLop.Contains(lopHoc)).ToList();
                 }
                 if (!string.IsNullOrEmpty(monHoc))
                 {

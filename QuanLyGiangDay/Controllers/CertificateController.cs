@@ -12,7 +12,7 @@ namespace QuanLyGiangDay.Controllers
     public class CertificateController : Controller
     {
         private quanlygiaovienEntities db = new quanlygiaovienEntities();
-        private string MaGV;
+        public static string MaGV { get; set; }
         // GET: Certificate
         public ActionResult Certificate(string id)
         {
@@ -22,7 +22,8 @@ namespace QuanLyGiangDay.Controllers
             {
                 listChungChi.Add(item);
             }
-            TempData["MaGV"] = db.GiaoViens.Find(id).MaGV;
+            // TempData["MaGV"] = db.GiaoViens.Find(id).MaGV;
+            MaGV = db.GiaoViens.Find(id).MaGV.ToString();
             ViewBag.TenGiaoVien = db.GiaoViens.Find(id).TenGV;
             ViewBag.ChungChi = listChungChi;
             ViewBag.SoChungChi = chungChi.Count();
@@ -33,7 +34,7 @@ namespace QuanLyGiangDay.Controllers
         {
             ViewBag.MaMH = new SelectList(db.MonHocs, "MaMH", "TenMon");
             GiaoVienMonHoc giaoVienMonHoc = new GiaoVienMonHoc();
-            giaoVienMonHoc.MaGV = TempData["MaGV"].ToString();
+            giaoVienMonHoc.MaGV = MaGV;
             return PartialView("_PartialCreate", giaoVienMonHoc);
         }
 
@@ -42,29 +43,42 @@ namespace QuanLyGiangDay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult _PartialCreate([Bind(Include = "MaGV, MaMH, MoTa")] GiaoVienMonHoc giaoVienMonHoc)
         {
-            if (ModelState.IsValid)
+            var result = db.GiaoVienMonHocs.Where(gv => gv.MaGV == giaoVienMonHoc.MaGV).Where(gv => gv.MaMH == giaoVienMonHoc.MaMH).FirstOrDefault();
+            if (result == null)
             {
-                db.GiaoVienMonHocs.Add(giaoVienMonHoc);
-                db.SaveChanges();
-                return Json(new { Success = true });
-            }
-            else
-            {
-                StringBuilder message = new StringBuilder();
-
-                foreach (var item in ModelState)
+                if (ModelState.IsValid)
                 {
-                    var errors = item.Value.Errors;
-
-                    foreach (var error in errors)
+                    if (giaoVienMonHoc.MoTa == "" || giaoVienMonHoc.MoTa == null)
                     {
-                        message.Append(error.ErrorMessage);
-                        message.AppendLine();
-                    }
+                        giaoVienMonHoc.MoTa = "Đạt";
+                    } else
+                    {
+                        giaoVienMonHoc.MoTa = "Đạt (" + giaoVienMonHoc.MoTa.ToString() + ")";
+                    }      
+                    db.GiaoVienMonHocs.Add(giaoVienMonHoc);
+                    db.SaveChanges();
+                    return Json(new { Success = true });
                 }
-                return Json(new { Success = false, Message = message.ToString() });
-            }
+                else
+                {
+                    StringBuilder message = new StringBuilder();
 
+                    foreach (var item in ModelState)
+                    {
+                        var errors = item.Value.Errors;
+
+                        foreach (var error in errors)
+                        {
+                            message.Append(error.ErrorMessage);
+                            message.AppendLine();
+                        }
+                    }
+                    return Json(new { Success = false, Message = message.ToString() });
+                }
+            } else
+            {
+                return Json(new { Success = false, Message = "Giáo viên này đã có chứng chỉ môn học vừa chọn. Không thể thêm mới!" });
+            }
             
         }
 

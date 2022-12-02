@@ -11,13 +11,13 @@ namespace QuanLyGiangDay.Models.EF
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public partial class GiaoVienMonHoc
     {
         public string MaGV { get; set; }
         public string MaMH { get; set; }
-        [Required(ErrorMessage = "Mô tả không được rỗng")]
         [MaxLength(50, ErrorMessage = "Mô tả không được nhiều hơn 50 ký tự")]
         public string MoTa { get; set; }
     

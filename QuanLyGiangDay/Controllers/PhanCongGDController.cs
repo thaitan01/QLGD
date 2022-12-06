@@ -422,7 +422,7 @@ namespace QuanLyGiangDay.Controllers
                     else
                     {
                         var countOfRows = _context.LopHocMonHocs.Count();
-                        var lastRow = _context.LopHocMonHocs.OrderBy(c => c.MaLHMH).Skip(countOfRows - 1).FirstOrDefault();
+                        var lastRow = _context.LopHocMonHocs.OrderBy(c => c.MaLHMH.Length).ThenBy(c => c.MaLHMH).Skip(countOfRows - 1).FirstOrDefault();
                         int nextId = Convert.ToInt32(lastRow.MaLHMH.Substring(4));
                         _obj.MaLHMH = "LHMH" + (nextId + 1);
                         _context.LopHocMonHocs.Add(_obj);

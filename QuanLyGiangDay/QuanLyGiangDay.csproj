@@ -165,7 +165,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CertificateController.cs" />
     <Compile Include="Controllers\CTDTController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HocKyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LichGiangDayController.cs" />
@@ -2232,6 +2234,11 @@
     <Content Include="Views\HocKy\Edit.cshtml" />
     <Content Include="Views\TaiKhoans\_PartialReset.cshtml" />
     <Content Include="Views\PhanCongGD\PrintPdf.cshtml" />
+    <Content Include="Views\Certificate\Certificate.cshtml" />
+    <Content Include="Views\Certificate\_PartialCreate.cshtml" />
+    <Content Include="Views\Certificate\_PartialDelete.cshtml" />
+    <Content Include="Views\Certificate\_PartialEdit.cshtml" />
+    <Content Include="Views\Error\Error404.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -280,7 +280,7 @@
                     $("#messageModal").modal("show");
                     if (result[0] == "S") {
                         modal.modal("hide");
-                        dataTable.ajax.reload();
+                        location.reload();
                     }
                 });
             }
@@ -291,7 +291,7 @@
                 $.get("/PhanCongGD/DeletePhanCongGD", { id: id }, function (res) {
                     $("#lblMessage").html(res.Message);
                     $("#messageModal").modal("show");
-                    dataTable.ajax.reload();
+                    location.reload();
                 });
             }
         }

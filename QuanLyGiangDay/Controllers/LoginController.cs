@@ -64,7 +64,8 @@ namespace QuanLyGiangDay.Controllers
 
         public ActionResult Logout()
         {
-            Session["taikhoan"] = null;
+            Session.RemoveAll();
+            //Session["taikhoan"] = null;
             return RedirectToAction("Index","Login");
         }
     }

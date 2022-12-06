@@ -32,6 +32,9 @@
                         <span class="fa fa-plus-circle"></span>
                         &nbsp;&nbsp;Thêm chứng chỉ
                     </a>
+                    <button type="button" class="btn btn-danger" style="margin: 0px !important" onclick="backToPrevious()">
+                        <span class="fa fa-backward"></span>&nbsp;&nbsp;Quay lại
+                    </button>
                 </div>
             </div>
             <div class="col-md-12">
@@ -58,22 +61,22 @@
                             <tbody>
                                 @foreach (var item in ViewBag.ChungChi)
                                 {
-                                <tr class="c-tr-body">
-                                    <td>
-                                        @item.MonHoc.TenMon
-                                    </td>
-                                    <td>
-                                        @item.MoTa
-                                    </td>
-                                    <td>
-                                        <a data-modal='' href='@Url.Action("_PartialEdit", "Certificate", new { MaGV=item.MaGV, MaMH = item.MaMH}) ' title='Cập nhật'> <span class='fa fa-edit'> </span>  </a>
-                                       
-                                    </td>
-                                    <td>
-                                        <a style='color: #e74a3b;' data-modal='' href='@Url.Action("_PartialDelete", "Certificate", new { MaGV=item.MaGV, MaMH = item.MaMH})' title='Xóa'> <span class='fa fa-trash'> </span> </a>
-                                        
-                                    </td>
-                                </tr>
+                                    <tr class="c-tr-body">
+                                        <td>
+                                            @item.MonHoc.TenMon
+                                        </td>
+                                        <td>
+                                             @item.MoTa
+                                        </td>
+                                        <td>
+                                            <a data-modal='' href='@Url.Action("_PartialEdit", "Certificate", new { MaGV=item.MaGV, MaMH = item.MaMH}) ' title='Cập nhật'> <span class='fa fa-edit'> </span>  </a>
+
+                                        </td>
+                                        <td>
+                                            <a style='color: #e74a3b;' data-modal='' href='@Url.Action("_PartialDelete", "Certificate", new { MaGV=item.MaGV, MaMH = item.MaMH})' title='Xóa'> <span class='fa fa-trash'> </span> </a>
+
+                                        </td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>
@@ -95,14 +98,16 @@
 
 @section scripts{
     @Scripts.Render("~/scripts/myScript.js")
+    <script type="text/javascript">
+        function backToPrevious() {
+            window.history.back();
+        }
+    </script>
 }
 
 
 <script src="~/Content/_custom/datatables.js"></script>
-<script>
-@*    window.onload = function () {
-        changLoading(true);
-    }*@
-</script>
+
+
 
 

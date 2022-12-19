@@ -578,6 +578,8 @@ namespace QuanLyGiangDay.Controllers
                             (lhmh, mh) => new { LHMH = lhmh, MH = mh }).AsEnumerable()
                         .Where(c => c.LHMH.LHMH.MaGV == data2[i].maGV)
                         .Where(c => c.LHMH.LHMH.NgoaiGio == false)
+                        .Where(c => c.LHMH.LHMH.NgayBD >= cTuNgay)
+                        .Where(c => c.LHMH.LHMH.NgayBD <= cDenNgay)
                         .GroupBy(c => c.LHMH.LHMH.MaGV)
                         .Select(a => new { sum = a.Sum(b => b.LHMH.LHMH.MonHoc.SoGio), maGV = a.Key })
                         .ToList();
@@ -595,6 +597,8 @@ namespace QuanLyGiangDay.Controllers
                             (lhmh, mh) => new { LHMH = lhmh, MH = mh }).AsEnumerable()
                         .Where(c => c.LHMH.LHMH.MaGV == data2[i].maGV)
                         .Where(c => c.LHMH.LHMH.NgoaiGio)
+                        .Where(c => c.LHMH.LHMH.NgayBD >= cTuNgay)
+                        .Where(c => c.LHMH.LHMH.NgayBD <= cDenNgay)
                         .GroupBy(c => c.LHMH.LHMH.MaGV)
                         .Select(a => new { sum = a.Sum(b => b.LHMH.LHMH.MonHoc.SoGio), maGV = a.Key })
                         .ToList();
